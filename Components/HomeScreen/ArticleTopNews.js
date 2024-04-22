@@ -5,14 +5,15 @@ import { SimpleLineIcons, Fontisto } from '@expo/vector-icons';
 const ArticleTopNews = ({ item }) => {
     return (
         <View
-            key={item.id}
+
             style={{
-                width: 200,
+                width: 180,
                 height: 400,
                 marginTop: 60,
                 alignItems: "center",
                 borderWidth: 2,
                 borderColor: "gray"
+                
             }}>
 
             <View
