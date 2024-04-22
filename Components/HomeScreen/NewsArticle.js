@@ -1,11 +1,19 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const NewsArticle = () => {
+    const navigation = useNavigation()
+
+
+    const handleGoToNew = () => {
+        navigation.navigate("NewArticles")
+    }
     return (
 
 
-        <View
+        <Pressable
+            onPress={handleGoToNew}
             style={{
                 width: '100%',
                 height: 400,
@@ -38,7 +46,7 @@ const NewsArticle = () => {
                 }}>
                 NEW IN
             </Text>
-        </View >
+        </Pressable >
 
     )
 }

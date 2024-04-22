@@ -56,12 +56,13 @@ const TopNews = () => {
                     flexDirection: 'row',
                     flexWrap: 'wrap'
                 }}>
-                    {mockData.map((item, index) => (
-                        <ArticleTopNews
-                            key={index}
-                            item={item}
-                        />
-                    ))}
+                    {
+                        mockData.map((item, index) => (
+                            <ArticleTopNews
+                                key={index}
+                                item={item}
+                            />
+                        ))}
                 </View>
 
 

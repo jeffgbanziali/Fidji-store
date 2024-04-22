@@ -16,13 +16,19 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const HomeScreen = () => {
+
+
     const bottomTabHeight = useBottomTabBarHeight();
+
+
     return (
-        <SafeAreaView style={{
-            backgroundColor: "#f5e1ce",
-            width: windowWidth,
-            height: windowHeight - bottomTabHeight,
-        }}>
+        <SafeAreaView
+            style={{
+                flex: 1,
+                backgroundColor: "#f5e1ce",
+                width: windowWidth,
+                height: windowHeight
+            }}>
             <ScrollView
                 style={{
                     width: '100%',
@@ -38,8 +44,9 @@ const HomeScreen = () => {
                 <Tshirts />
                 <TopNews />
                 <LastTrend />
+
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
 
 
     )

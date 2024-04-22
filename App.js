@@ -3,11 +3,12 @@ import { StyleSheet, SafeAreaView, View } from 'react-native';
 import StackNavigation from './Navigation/StackNavigation';
 import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
       <NavigationContainer>
         <StackNavigation />
+
       </NavigationContainer>
     </View>
   );
@@ -19,3 +20,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5e1ce"
   },
 });
+
+export default App;

@@ -7,7 +7,7 @@ const LastTrend = () => {
         <View
             style={{
                 width: '100%',
-                height: 1100,
+                height: 1200,
                 alignItems: "center",
                 justifyContent: "center",
             }}>
@@ -116,13 +116,12 @@ const LastTrend = () => {
                         style={{
                             width: 300,
                             height: 50,
-                            marginTop: 20,
                             alignItems: "center",
                             justifyContent: "center",
                             borderRadius: 15,
                             backgroundColor: "black",
-                            flexDirection: "row"
-
+                            flexDirection: "row",
+                            marginTop: 10,
                         }}>
                         <Text
                             style={{

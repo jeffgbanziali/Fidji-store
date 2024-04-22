@@ -5,6 +5,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import Profile from '../Screens/ProfileScreen';
 import SignInScreen from '../Screens/SignInScreen';
 import TabNavigation from './TabNavigation';
+import NewsArticlesScreen from '../Screens/NewsArticlesScreen';
 
 
 
@@ -24,9 +25,10 @@ const StackNavigation = () => {
                 headerShown: false,
             }}
         >
-            <Stack.Screen name="TabNavigation" component={TabNavigation} />
             <Stack.Screen name="Signin" component={SignInScreen} />
+            <Stack.Screen name="TabNavigation" component={TabNavigation} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="NewArticles" component={NewsArticlesScreen} />
         </Stack.Navigator>
 
     )

@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, Pressable, } from 'react-native'
+import { View, Text, ImageBackground, Pressable, SafeAreaView, } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -19,21 +19,47 @@ const SignInScreen = () => {
                 height: "100%"
             }}
         >
-            <View
+            <SafeAreaView
                 style={{
                     width: "100%",
                     height: "100%",
                     alignItems: "center",
                     justifyContent: "flex-end",
                 }}>
+                <View
+                    style={{
+                        width: "98%",
+                        height: 150,
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}>
+
+                    <Text
+                        style={{
+                            fontSize: 30,
+                            fontWeight: "700",
+                            color: "white"
+                        }}>
+                        NOUVELLE COLLECTION
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            paddingTop: 10,
+                            fontWeight: "600",
+                            color: "white"
+                        }}>
+                        Découvrir les nouveautés
+                    </Text>
+
+                </View>
 
                 <View
                     style={{
                         width: "98%",
-                        height: 200,
-                        //backgroundColor: "red",
+                        height: 150,
                         alignItems: "center",
-                        justifyContent: "center",
+                        justifyContent: "space-evenly",
                     }}>
                     <Pressable
                         onPress={handleLogin}
@@ -44,20 +70,40 @@ const SignInScreen = () => {
                             justifyContent: "center",
                             backgroundColor: "black",
 
+
                         }}>
                         <Text
                             style={{
                                 fontSize: 20,
                                 color: "white"
                             }}>
-                            Login
+                            SE CONNECTER
+                        </Text>
+                    </Pressable>
+                    <Pressable
+                        onPress={handleLogin}
+                        style={{
+                            width: 400,
+                            height: 60,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: "black",
+
+
+                        }}>
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                color: "white"
+                            }}>
+                            INSCRIPTION
                         </Text>
                     </Pressable>
 
                 </View>
 
 
-            </View>
+            </SafeAreaView>
 
         </ImageBackground >
     )
