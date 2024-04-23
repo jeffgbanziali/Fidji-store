@@ -1,25 +1,48 @@
-import { View, Text, Pressable, Animated } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Pressable, Animated, Easing } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
 const Shoes = () => {
 
 
-
     const [viewLister, setViewLister] = useState(false);
-    const [heightAnimation] = useState(new Animated.Value(0));
+    const [heightAnimation, setHeightAnimation] = useState(new Animated.Value(0));
+    const [iconAnimation] = useState(new Animated.Value(viewLister ? 1 : 0));
 
-    const showLister = () => {
-        setViewLister(!viewLister);
+    useEffect(() => {
         Animated.timing(
             heightAnimation,
             {
-                toValue: viewLister ? 0 : 200,
+                toValue: viewLister ? 200 : 0,
                 duration: 300,
+                easing: Easing.linear,
                 useNativeDriver: false,
             }
         ).start();
+
+        Animated.timing(
+            iconAnimation,
+            {
+                toValue: viewLister ? 1 : 0,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: false,
+            }
+        ).start();
+    }, [viewLister]);
+
+    const toggleLister = () => {
+        setViewLister(!viewLister);
+    };
+
+    const rotateInterpolate = iconAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '90deg'],
+    });
+
+    const animatedStyles = {
+        transform: [{ rotate: rotateInterpolate }],
     };
 
 
@@ -41,33 +64,23 @@ const Shoes = () => {
                         color: "black"
                     }}>Chaussures</Text>
 
-                {viewLister ? (
-                    <Pressable
-                        onPress={showLister}
-                        style={{
-                            width: 50,
-                            height: 50,
-                            right: 2,
-                            position: "absolute",
-                            alignItems: "center",
-                            justifyContent: "center"
-                        }}>
-                        <MaterialIcons name="keyboard-arrow-down" size={30} color="black" />
-                    </Pressable>
-                ) : (
-                    <Pressable
-                        onPress={showLister}
-                        style={{
-                            width: 50,
-                            height: 50,
-                            right: 2,
-                            position: "absolute",
-                            alignItems: "center",
-                            justifyContent: "center"
-                        }}>
+
+                <Pressable
+                    onPress={toggleLister}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        right: 2,
+                        position: "absolute",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                    <Animated.View style={animatedStyles}>
+
                         <MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
-                    </Pressable>
-                )}
+                    </Animated.View>
+
+                </Pressable>
 
             </View>
 
