@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Dimensions } from 'react-native'
+import { View, Text, SafeAreaView, Dimensions, ScrollView } from 'react-native'
 import React from 'react'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import SearchBar from '../Components/HomeScreen/SearchBar';
@@ -24,9 +24,17 @@ const EShoppingScreen = () => {
                 width: windowWidth,
                 height: windowHeight
             }}>
-            <SearchBar />
-            <CarouselHeader />
-            <ListsOfArticles />
+            <ScrollView
+                style={{
+                    width: '100%',
+                    height: "100%",
+                }}>
+                <SearchBar />
+                <CarouselHeader />
+                <ListsOfArticles />
+
+            </ScrollView>
+
 
         </SafeAreaView>
     )
