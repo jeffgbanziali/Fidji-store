@@ -4,8 +4,10 @@ import React from 'react'
 import HomeScreen from '../Screens/HomeScreen';
 import Profile from '../Screens/ProfileScreen';
 import SignInScreen from '../Screens/SignInScreen';
+import RegisterScreen from '../Screens/RegisterScreen';
 import TabNavigation from './TabNavigation';
 import NewsArticlesScreen from '../Screens/NewsArticlesScreen';
+import StartPage from '../Screens/StartPage';
 
 
 
@@ -25,8 +27,10 @@ const StackNavigation = () => {
                 headerShown: false,
             }}
         >
-            <Stack.Screen name="Signin" component={SignInScreen} />
             <Stack.Screen name="TabNavigation" component={TabNavigation} />
+            <Stack.Screen name="Start" component={StartPage} />
+            <Stack.Screen name="Signin" component={SignInScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="NewArticles" component={NewsArticlesScreen} />
         </Stack.Navigator>

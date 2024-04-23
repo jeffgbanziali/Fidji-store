@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import HomeScreen from '../Screens/HomeScreen'
 import Profile from '../Screens/ProfileScreen'
 import LeavesScreen from '../Screens/LeavesScreen'
@@ -61,9 +61,25 @@ const TabNavigation = () => {
                     options={{
                         tabBarIcon: ({ focused }) => (
                             focused ? (
-                                <FontAwesome name="euro" size={24} color="black" />
+                                <Image
+                                    source={require('../assets/image/1.jpg')}
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        borderRadius: 100,
+                                    }}
+
+                                />
                             ) : (
-                                <FontAwesome name="euro" size={24} color="black" />
+                                <Image
+                                    source={require('../assets/image/1.jpg')}
+                                    style={{
+                                        width: 32,
+                                        height: 32,
+                                        borderRadius: 100,
+                                    }}
+
+                                />
                             )
                         ),
                     }} />
