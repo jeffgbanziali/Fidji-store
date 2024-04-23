@@ -1,8 +1,19 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import { SimpleLineIcons, Fontisto } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const CardsArticles = ({ item }) => {
+
+    const navigation = useNavigation()
+
+    const showArticle = () => {
+        navigation.navigate("ViewArticleScreen", { article: item })
+    }
+
+
+
+
     return (
         <View
 
@@ -13,7 +24,8 @@ const CardsArticles = ({ item }) => {
 
             }}>
 
-            <View
+            <Pressable
+                onPress={() => showArticle(item)}
                 style={{
                     width: "100%",
                     height: 300,
@@ -28,8 +40,7 @@ const CardsArticles = ({ item }) => {
                     }
                     } />
 
-            </View>
-
+            </Pressable>
 
             <Text
                 style={{

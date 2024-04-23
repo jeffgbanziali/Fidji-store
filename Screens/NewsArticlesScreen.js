@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList } from 'react-native'
 import React, { useState } from 'react'
-import { Entypo, AntDesign } from '@expo/vector-icons';
+import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
 import TabNavigation from "../Navigation/TabNavigation"
@@ -68,7 +68,39 @@ const NewsArticlesScreen = () => {
                     </Text>
 
 
+                    <Pressable
+                        style={{
+                            width: 50,
+                            height: 50,
+                            right: 2,
+                            position: "absolute",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <View
+                            style={{
+                                width: 20,
+                                height: 20,
+                                right: 2,
+                                top: 2,
+                                borderRadius: 100,
+                                position: "absolute",
+                                alignItems: "center",
+                                backgroundColor: "black",
+                                justifyContent: "center"
+                            }}>
+                            <Text
+                                style={{
+                                    fontSize: 12,
+                                    fontWeight: "500",
+                                    color: "white"
+                                }} >
+                                0
+                            </Text>
+                        </View>
 
+                        <SimpleLineIcons name="basket" size={26} color="black" />
+                    </Pressable>
 
                 </View>
 

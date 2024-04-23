@@ -8,6 +8,7 @@ import RegisterScreen from '../Screens/RegisterScreen';
 import TabNavigation from './TabNavigation';
 import NewsArticlesScreen from '../Screens/NewsArticlesScreen';
 import StartPage from '../Screens/StartPage';
+import ViewArticleScreen from '../Screens/ViewArticleScreen';
 
 
 
@@ -33,6 +34,7 @@ const StackNavigation = () => {
             <Stack.Screen name="Register" component={RegisterScreen} />
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="NewArticles" component={NewsArticlesScreen} />
+            <Stack.Screen name="ViewArticleScreen" component={ViewArticleScreen} />
         </Stack.Navigator>
 
     )
