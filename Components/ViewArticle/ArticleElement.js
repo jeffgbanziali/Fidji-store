@@ -4,6 +4,14 @@ import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const ArticleElement = ({ article }) => {
+
+
+
+    console.log("Bonjour fifa", article)
+
+
+
+
     return (
         <>
             <View
@@ -91,7 +99,7 @@ const ArticleElement = ({ article }) => {
                 </View>
             </View>
 
-            
+
         </>
     )
 }

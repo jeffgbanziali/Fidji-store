@@ -7,7 +7,7 @@ const LastTrend = () => {
         <View
             style={{
                 width: '100%',
-                height: 1200,
+                height: 1000,
                 alignItems: "center",
                 justifyContent: "center",
             }}>
@@ -51,7 +51,7 @@ const LastTrend = () => {
                 <View
                     style={{
                         width: '100%',
-                        height: "70%",
+                        height: "60%",
                         alignItems: "center",
                         justifyContent: "space-evenly",
                         backgroundColor: "red"
@@ -84,7 +84,7 @@ const LastTrend = () => {
                         }}>
                         <Text
                             style={{
-                                fontSize: 30,
+                                fontSize: 26,
                                 textAlign: "center",
                                 fontWeight: "600",
                                 color: "black"
@@ -93,17 +93,19 @@ const LastTrend = () => {
                         </Text>
                         <Text
                             style={{
-                                fontSize: 25,
+                                fontSize: 18,
                                 paddingTop: 10,
                                 textAlign: "justify",
                                 fontWeight: "400",
                                 color: "black"
                             }}>
-                            Découvrez notre T-shirt OCEANE, un indispensable de votre look. Le basique parfait pour composer vos tenues estivales.
+                            Découvrez notre T-shirt OCEANE,
+                            un indispensable de votre look.
+                            Le basique parfait pour composer vos tenues estivales.
                         </Text>
                         <Text
                             style={{
-                                fontSize: 25,
+                                fontSize: 20,
                                 paddingTop: 10,
                                 textAlign: "justify",
                                 fontWeight: "600",
@@ -114,8 +116,8 @@ const LastTrend = () => {
                     </View>
                     <View
                         style={{
-                            width: 300,
-                            height: 50,
+                            width: 260,
+                            height: 40,
                             alignItems: "center",
                             justifyContent: "center",
                             borderRadius: 15,
@@ -125,7 +127,7 @@ const LastTrend = () => {
                         }}>
                         <Text
                             style={{
-                                fontSize: 18,
+                                fontSize: 14,
                                 textAlign: "justify",
                                 fontWeight: "600",
                                 color: "white",
@@ -134,7 +136,7 @@ const LastTrend = () => {
                             }}>
                             ACHETER MAINTENANT
                         </Text>
-                        <MaterialIcons name="local-grocery-store" size={18} color="white" />
+                        <MaterialIcons name="local-grocery-store" size={16} color="white" />
                     </View>
 
 

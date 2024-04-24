@@ -1,16 +1,47 @@
-import React from 'react'
-import { Image, View } from 'react-native'
+import React, { useState } from 'react'
+import { Animated, Easing, Image, Pressable, View } from 'react-native'
 import HomeScreen from '../Screens/HomeScreen'
 import Profile from '../Screens/ProfileScreen'
 import LeavesScreen from '../Screens/LeavesScreen'
 import { AntDesign, Entypo, Octicons, Ionicons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import Basket from '../Screens/BasketScreen'
+import BasketScreen from '../Screens/BasketScreen'
 import EShoppingScreen from '../Screens/EShoppingScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Modal from "react-native-modal";
+
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+
+
+
+    const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
+    const [showBasket, setShowBasket] = useState(false);
+
+
+
+
+
+
+    const handleViewBasket = () => {
+        if (showBasket) {
+            Animated.timing(basketHeight, {
+                toValue: 0,
+                duration: 200,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start(() => setShowBasket(false));
+        } else {
+            setShowBasket(true);
+            Animated.timing(basketHeight, {
+                toValue: 200,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+        }
+    };
 
 
 
@@ -86,15 +117,26 @@ const TabNavigation = () => {
 
                 <Tab.Screen
                     name="Panier"
-                    component={Basket} options={{
+                    component={BasketScreen} options={{
                         tabBarIcon: ({ focused }) => (
-                            focused ? (
-                                <Ionicons name="bag-handle-sharp" size={24} color="black" />
-                            ) : (
-                                <Ionicons name="bag-outline" size={24} color="black" />
-                            )
+
+                            <Pressable onPress={handleViewBasket}>
+                                {focused ? (
+                                    <Ionicons name="bag-handle-sharp" size={24} color="black" />
+                                ) : (
+                                    <Ionicons name="bag-outline" size={24} color="black" />
+                                )}
+                            </Pressable>
                         ),
-                    }} />
+
+                    }}
+                    listeners={({ navigation, route }) => ({
+                        tabPress: (e) => {
+                            e.preventDefault();
+                        },
+                    })}
+
+                />
                 <Tab.Screen
                     name="Compte"
                     component={Profile} options={{
@@ -107,6 +149,20 @@ const TabNavigation = () => {
                         ),
                     }} />
             </Tab.Navigator>
+
+
+            <Modal
+                isVisible={showBasket}
+                onBackdropPress={handleViewBasket}
+                style={{ margin: 0, justifyContent: "flex-end" }}
+                backdropOpacity={0.5}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                useNativeDriverForBackdrop
+            >
+                <BasketScreen handleViewBasket={handleViewBasket} />
+
+            </Modal>
 
         </View>
     )

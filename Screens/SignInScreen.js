@@ -27,7 +27,6 @@ const SignInScreen = () => {
     };
 
     const handleSignIn = () => {
-        console.warn("You sign to your account")
         navigation.navigate("TabNavigation")
 
     };
