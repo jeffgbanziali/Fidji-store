@@ -2,7 +2,15 @@ import { View, Text, ImageBackground, Pressable, SafeAreaView, } from 'react-nat
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
+import { useFonts, Montserrat_400Regular, Montserrat_500Medium } from '@expo-google-fonts/montserrat';
+
 const StartPage = () => {
+
+
+    let [fontsLoaded] = useFonts({
+        MontserratRegular: Montserrat_400Regular,
+        MontserratMedium: Montserrat_500Medium,
+    });
 
     const navigation = useNavigation()
 
@@ -15,6 +23,9 @@ const StartPage = () => {
     };
 
 
+    if (!fontsLoaded) {
+        return null
+    }
 
     return (
         <ImageBackground
@@ -47,7 +58,8 @@ const StartPage = () => {
                         style={{
                             fontSize: 30,
                             fontWeight: "700",
-                            color: "white"
+                            color: "white",
+                            fontFamily: "MontserratMedium"
                         }}>
                         BOUTIQUE FIDJI
                     </Text>
@@ -99,8 +111,9 @@ const StartPage = () => {
                         <Pressable
                             onPress={handleLogin}
                             style={{
-                                width: 400,
-                                height: 60,
+                                width: 350,
+                                height: 50,
+                                borderRadius: 10,
                                 alignItems: "center",
                                 justifyContent: "center",
                                 backgroundColor: "black",
@@ -109,7 +122,7 @@ const StartPage = () => {
                             }}>
                             <Text
                                 style={{
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: "white"
                                 }}>
                                 SE CONNECTER
@@ -118,8 +131,9 @@ const StartPage = () => {
                         <Pressable
                             onPress={handleRegister}
                             style={{
-                                width: 400,
-                                height: 60,
+                                width: 350,
+                                height: 50,
+                                borderRadius: 10,
                                 alignItems: "center",
                                 justifyContent: "center",
                                 backgroundColor: "black",
@@ -128,7 +142,7 @@ const StartPage = () => {
                             }}>
                             <Text
                                 style={{
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: "white"
                                 }}>
                                 INSCRIPTION

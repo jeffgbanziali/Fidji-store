@@ -48,7 +48,8 @@ const Shoes = () => {
 
     return (
         <>
-            <View
+            <Pressable
+                onPress={toggleLister}
                 style={{
                     width: "100%",
                     height: 60,
@@ -59,14 +60,13 @@ const Shoes = () => {
 
                 <Text
                     style={{
-                        fontSize: 28,
+                        fontSize: 22,
                         fontWeight: "600",
                         color: "black"
                     }}>Chaussures</Text>
 
 
-                <Pressable
-                    onPress={toggleLister}
+                <View
                     style={{
                         width: 50,
                         height: 50,
@@ -79,10 +79,10 @@ const Shoes = () => {
 
                         <MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
                     </Animated.View>
+                </View>
 
-                </Pressable>
+            </Pressable>
 
-            </View>
 
 
 

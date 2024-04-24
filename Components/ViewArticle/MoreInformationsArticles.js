@@ -43,7 +43,6 @@ const MoreInformationsArticles = ({ article }) => {
     };
 
 
-    console.log("My woman", article.entretien)
 
 
 
@@ -101,7 +100,9 @@ const MoreInformationsArticles = ({ article }) => {
             </View>
 
 
-            <View
+            <Pressable
+                onPress={toggleLister}
+
                 style={{
                     width: "100%",
                     height: 50,
@@ -120,8 +121,7 @@ const MoreInformationsArticles = ({ article }) => {
                     }}>DÉTAILS & COMPOSITION</Text>
 
 
-                <Pressable
-                    onPress={toggleLister}
+                <View
                     style={{
                         width: 50,
                         height: 50,
@@ -135,10 +135,10 @@ const MoreInformationsArticles = ({ article }) => {
                         <MaterialIcons name="keyboard-arrow-down" size={30} color="black" />
                     </Animated.View>
 
-                </Pressable>
+                </View>
 
 
-            </View>
+            </Pressable>
 
 
             <Animated.View
@@ -147,7 +147,8 @@ const MoreInformationsArticles = ({ article }) => {
                     height: heightAnimation,
                     overflow: 'hidden',
                     paddingLeft: 10,
-                    justifyContent: "center",
+                    paddingTop: 20,
+
                 }}>
                 <View
                     style={{
@@ -156,14 +157,13 @@ const MoreInformationsArticles = ({ article }) => {
 
                     <Text
                         style={{
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: "600",
                             color: "black"
                         }} >
                         Matière principale :
                         <Text style={{
-                            fontSize: 16,
-                            paddingTop: 20,
+                            fontSize: 14,
                             fontWeight: "400",
                             color: "black"
                         }}>
@@ -173,7 +173,7 @@ const MoreInformationsArticles = ({ article }) => {
 
                     <Text
                         style={{
-                            fontSize: 18,
+                            fontSize: 16,
                             paddingTop: 20,
 
                             fontWeight: "600",
@@ -181,7 +181,7 @@ const MoreInformationsArticles = ({ article }) => {
                         }} >
                         Composition :
                         <Text style={{
-                            fontSize: 16,
+                            fontSize: 14,
                             paddingTop: 20,
                             fontWeight: "400",
                             color: "black"
@@ -189,7 +189,7 @@ const MoreInformationsArticles = ({ article }) => {
                             {" "}
                             {article.composition.map((item, index) => (
                                 <Text style={{
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontWeight: "500",
                                     color: "black"
                                 }} key={index}>
@@ -202,14 +202,14 @@ const MoreInformationsArticles = ({ article }) => {
 
                     <Text
                         style={{
-                            fontSize: 18,
+                            fontSize: 16,
                             paddingTop: 20,
                             fontWeight: "600",
                             color: "black"
                         }}>
                         Entretien :
                         <Text style={{
-                            fontSize: 16,
+                            fontSize: 14,
                             paddingTop: 20,
                             fontWeight: "400",
                             color: "black"

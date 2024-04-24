@@ -23,20 +23,22 @@ const AddBasket = () => {
                 justifyContent: "center",
                 flexDirection: "row"
             }}>
+
             <View
                 style={{
-                    width: 140,
-                    height: 50,
+                    width: 120,
+                    height: 45,
                     margin: 4,
                     borderRadius: 10,
                     flexDirection: "row",
-                    paddingLeft: 10,
-                    paddingRight: 10,
+                    paddingLeft: 2,
+                    paddingRight: 2,
                     borderWidth: 2,
                     borderColor: "gray",
                     alignItems: "center",
                     justifyContent: "space-between",
                 }}>
+
                 <Pressable
                     onPress={decreaseQuantity}
                     style={{
@@ -46,12 +48,14 @@ const AddBasket = () => {
                         alignItems: "center"
 
                     }}>
-                    <AntDesign name="minus" size={24} color="black" />
+                    <AntDesign name="minus" size={20} color="black" />
 
                 </Pressable>
+
+                
                 <Text
                     style={{
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: "600",
                         color: "black"
                     }}>
@@ -67,14 +71,16 @@ const AddBasket = () => {
                         alignItems: "center",
 
                     }}>
-                    <AntDesign name="plus" size={24} color="black" />
+                    <AntDesign name="plus" size={20} color="black" />
                 </Pressable>
 
             </View>
+
+
             <View
                 style={{
-                    width: 260,
-                    height: 60,
+                    width: 200,
+                    height: 50,
                     margin: 4,
                     borderRadius: 10,
                     alignItems: "center",
@@ -83,7 +89,7 @@ const AddBasket = () => {
                 }}>
                 <Text
                     style={{
-                        fontSize: 20,
+                        fontSize: 16,
                         fontWeight: "600",
                         color: "white"
                     }}>

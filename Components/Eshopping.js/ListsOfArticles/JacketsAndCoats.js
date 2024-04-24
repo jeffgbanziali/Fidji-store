@@ -19,7 +19,9 @@ const JacketsAndCoats = () => {
 
     return (
         <>
-            <View
+            <Pressable
+                onPress={showLister}
+
                 style={{
                     width: "100%",
                     height: 60,
@@ -30,14 +32,13 @@ const JacketsAndCoats = () => {
 
                 <Text
                     style={{
-                        fontSize: 28,
+                        fontSize: 24,
                         fontWeight: "600",
                         color: "black"
                     }}>Vestes & Manteaux</Text>
 
 
-                <Pressable
-                    onPress={showLister}
+                <View
                     style={{
                         width: 50,
                         height: 50,
@@ -47,10 +48,12 @@ const JacketsAndCoats = () => {
                         justifyContent: "center"
                     }}>
                     <MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
-                </Pressable>
+
+                </View >
+
+            </Pressable>
 
 
-            </View>
 
 
 

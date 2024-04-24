@@ -16,10 +16,12 @@ const Shirt = () => {
 
     }
 
-    
+
     return (
 
-        <View
+        <Pressable
+            onPress={showLister}
+
             style={{
                 width: "100%",
                 height: 60,
@@ -30,15 +32,14 @@ const Shirt = () => {
 
             <Text
                 style={{
-                    fontSize: 28,
+                    fontSize: 22,
 
                     fontWeight: "600",
                     color: "black"
                 }}>Chemises & Blouses</Text>
 
 
-            <Pressable
-                onPress={showLister}
+            <View
                 style={{
                     width: 50,
                     height: 50,
@@ -48,9 +49,9 @@ const Shirt = () => {
                     justifyContent: "center"
                 }}>
                 <MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
-            </Pressable>
+            </View>
 
-        </View>
+        </Pressable>
     )
 }
 

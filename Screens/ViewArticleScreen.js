@@ -7,6 +7,7 @@ import ArticleElement from '../Components/ViewArticle/ArticleElement';
 import InformationChoice from '../Components/ViewArticle/InformationChoice';
 import AddBasket from '../Components/ViewArticle/AddBasket';
 import MoreInformationsArticles from '../Components/ViewArticle/MoreInformationsArticles';
+import PaymentTools from '../Components/ViewArticle/PaymentTools';
 
 
 
@@ -25,7 +26,6 @@ const ViewArticleScreen = () => {
 
     const navigation = useNavigation()
 
-    console.log("montre toi mon frère", article)
 
 
 
@@ -55,6 +55,7 @@ const ViewArticleScreen = () => {
                 <InformationChoice article={article} />
                 <AddBasket />
                 <MoreInformationsArticles article={article} />
+                <PaymentTools />
 
 
             </ScrollView>

@@ -13,10 +13,12 @@ const InformationChoice = ({ article }) => {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
+
+
             <View
                 style={{
-                    width: 260,
-                    height: 60,
+                    width: 240,
+                    height: 50,
                     margin: 4,
                     paddingLeft: 20,
                     flexDirection: "row",
@@ -46,10 +48,12 @@ const InformationChoice = ({ article }) => {
 
 
             </View>
+
+
             <View
                 style={{
-                    width: 140,
-                    height: 60,
+                    width: 100,
+                    height: 50,
                     borderWidth: 2,
                     borderColor: "gray",
                     paddingLeft: 20,

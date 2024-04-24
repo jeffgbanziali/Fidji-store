@@ -18,9 +18,9 @@ const CardsArticles = ({ item }) => {
         <View
 
             style={{
-                width: 200,
-                height: 380,
-                borderColor: "gray"
+                width: 180,
+                height: 360,
+                margin: 2
 
             }}>
 
@@ -28,7 +28,7 @@ const CardsArticles = ({ item }) => {
                 onPress={() => showArticle(item)}
                 style={{
                     width: "100%",
-                    height: 300,
+                    height: 280,
                     alignItems: "center",
                 }}>
                 <Image

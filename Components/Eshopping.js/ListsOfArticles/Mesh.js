@@ -21,7 +21,8 @@ const Mesh = () => {
 
     return (
 
-        <View
+        <Pressable
+            onPress={showLister}
             style={{
                 width: "100%",
                 height: 60,
@@ -32,15 +33,14 @@ const Mesh = () => {
 
             <Text
                 style={{
-                    fontSize: 28,
+                    fontSize: 24,
 
                     fontWeight: "600",
                     color: "black"
                 }}>Maille</Text>
 
 
-            <Pressable
-                onPress={showLister}
+            <View
                 style={{
                     width: 50,
                     height: 50,
@@ -50,9 +50,10 @@ const Mesh = () => {
                     justifyContent: "center"
                 }}>
                 <MaterialIcons name="keyboard-arrow-right" size={30} color="black" />
-            </Pressable>
+            </View>
 
-        </View>
+
+        </Pressable>
     )
 }
 
