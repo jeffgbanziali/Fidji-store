@@ -55,7 +55,7 @@ const MoreInformationsArticles = ({ article }) => {
                     justifyContent: "center",
                     paddingLeft: 16,
                 }}>
-                {article.couture.map((item, index) => (
+                {article.couture && article.couture.map((item, index) => (
                     <Text style={{
                         fontSize: 16,
                         fontWeight: "500", color: "black"
@@ -187,7 +187,7 @@ const MoreInformationsArticles = ({ article }) => {
                             color: "black"
                         }}>
                             {" "}
-                            {article.composition.map((item, index) => (
+                            {article.composition && article.composition.map((item, index) => (
                                 <Text style={{
                                     fontSize: 14,
                                     fontWeight: "500",

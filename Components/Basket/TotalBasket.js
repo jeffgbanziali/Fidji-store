@@ -14,7 +14,7 @@ const TotalBasket = ({ calculateTotal }) => {
             }}>
             <View
                 style={{
-                    width: "98%",
+                    width: "95%",
                     flexDirection: "row",
                     justifyContent: "space-between",
 
@@ -41,7 +41,7 @@ const TotalBasket = ({ calculateTotal }) => {
             <View
 
                 style={{
-                    width: "98%",
+                    width: "95%",
                     flexDirection: "row",
                     justifyContent: "space-between",
                 }}>
@@ -51,7 +51,7 @@ const TotalBasket = ({ calculateTotal }) => {
                         fontWeight: "700",
                         color: "black"
                     }}>
-                    Sous total
+                    Livraison
                 </Text>
 
                 <Text
