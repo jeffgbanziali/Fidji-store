@@ -7,6 +7,8 @@ import BasketArticleList from '../Components/Basket/BasketArticleList';
 import DeliveryInformations from '../Components/Basket/DeliveryInformations';
 import { UserData } from "../DataFictifs/UserData"
 import BasketSelection from '../Components/Basket/BasketSelection';
+import BasketValidate from '../Components/Basket/BasketValidate';
+import TotalBasket from '../Components/Basket/TotalBasket';
 
 
 
@@ -14,6 +16,20 @@ const BasketScreen = ({ handleViewBasket }) => {
 
 
 
+
+    // Calcule la somme totale des éléments dans le panier
+    const calculateTotal = () => {
+        // Si le panier est vide, retourne 0
+        if (UserData.cart.length === 0) {
+            return 0;
+        }
+
+        // Utilise reduce pour additionner les prix de chaque article dans le panier
+        const total = UserData.cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+        // Retourne le total
+        return total;
+    };
 
 
     const navigation = useNavigation()
@@ -36,7 +52,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
                         <FlatList
                             data={UserData.cart}
-                            keyExtractor={(cart) => cart._id}
+                            keyExtractor={(cart) => cart.productId.toString()}
                             onEndReachedThreshold={0.5}
                             renderItem={({ item: cart }) => (
                                 <BasketSelection cart={cart} />
@@ -84,10 +100,13 @@ const BasketScreen = ({ handleViewBasket }) => {
                             ListFooterComponent={() => (
                                 <>
                                     <DeliveryInformations develivery={UserData.cart.length} />
+                                    <TotalBasket calculateTotal={calculateTotal} />
                                 </>
                             )}
 
                         />
+
+                        <BasketValidate calculateTotal={calculateTotal} />
 
                     </>
 

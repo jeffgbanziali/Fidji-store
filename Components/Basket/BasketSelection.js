@@ -27,13 +27,14 @@ const BasketSelection = ({ cart }) => {
                 width: "100%",
                 paddingLeft: 4,
                 borderBottomWidth: 1,
+                borderColor: "gray",
                 flexDirection: "row",
                 alignItems: "center"
             }}>
             <View
                 style={{
-                    width: 120,
-                    height: 160,
+                    width: 100,
+                    height: 140,
                     margin: 14,
                     backgroundColor: "blue"
                 }}>
@@ -90,10 +91,13 @@ const BasketSelection = ({ cart }) => {
 
                 <View
                     style={{
-                        width: 100,
-                        height: 30,
+                        width: 80,
+                        height: 28,
+                        paddingLeft: 5,
+                        paddingRight: 5,
                         margin: 4,
                         borderRadius: 10,
+                        marginTop: 12,
                         flexDirection: "row",
                         borderWidth: 1,
                         borderColor: "gray",
@@ -104,20 +108,20 @@ const BasketSelection = ({ cart }) => {
                     <Pressable
                         onPress={decreaseQuantity}
                         style={{
-                            width: 40,
-                            height: 40,
+                            width: 20,
+                            height: 20,
                             justifyContent: "center",
                             alignItems: "center"
 
                         }}>
-                        <AntDesign name="minus" size={20} color="black" />
+                        <AntDesign name="minus" size={16} color="black" />
 
                     </Pressable>
 
 
                     <Text
                         style={{
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: "600",
                             color: "black"
                         }}>
@@ -127,13 +131,13 @@ const BasketSelection = ({ cart }) => {
                     <Pressable
                         onPress={increaseQuantity}
                         style={{
-                            width: 40,
-                            height: 40,
+                            width: 20,
+                            height: 20,
                             justifyContent: "center",
                             alignItems: "center",
 
                         }}>
-                        <AntDesign name="plus" size={20} color="black" />
+                        <AntDesign name="plus" size={16} color="black" />
                     </Pressable>
 
                 </View>

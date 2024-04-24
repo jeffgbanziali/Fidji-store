@@ -61,18 +61,29 @@ export const UserData = {
             couleur: "Bleu",
             quantity: 1,
             taille: "M",
-            price: 49.99,
+            price: 50.00,
             imageUri: "https://img.freepik.com/photos-gratuite/belle-jeune-femme-parisienne-aux-cheveux-bruns-beret-elegant-trench-coat-beige-sac-noir-debout-vieux-escaliers-posant-sensibilite-exterieur_197531-24472.jpg"
         },
         {
-            productId: 4,
+            productId: 5,
             productName: "Hoodie",
             couleur: "Bleu",
             quantity: 1,
             taille: "M",
-            price: 49.99,
+            price: 50.00,
             imageUri: "https://img.freepik.com/photos-gratuite/belle-jeune-femme-parisienne-aux-cheveux-bruns-beret-elegant-trench-coat-beige-sac-noir-debout-vieux-escaliers-posant-sensibilite-exterieur_197531-24472.jpg"
         },
+        {
+            productId: 6,
+            productName: "Hoodie",
+            couleur: "Bleu",
+            quantity: 1,
+            taille: "M",
+            price: 50.00,
+            imageUri: "https://img.freepik.com/photos-gratuite/belle-jeune-femme-parisienne-aux-cheveux-bruns-beret-elegant-trench-coat-beige-sac-noir-debout-vieux-escaliers-posant-sensibilite-exterieur_197531-24472.jpg"
+        },
+      
+      
         // Autres produits dans le panier ici...
     ],
     notificationPreferences: {
