@@ -33,7 +33,7 @@ const InformationChoice = ({ article }) => {
                         fontSize: 20,
                         fontWeight: "600",
                     }}>
-                    {article.couleur}
+                    {article.attributes[0].options[0]}
                 </Text>
 
                 <Pressable
@@ -70,7 +70,7 @@ const InformationChoice = ({ article }) => {
                         fontSize: 20,
                         fontWeight: "600",
                     }}>
-                    {article.taille}
+                    {article.attributes[1].options[1]}
                 </Text>
 
                 <Pressable

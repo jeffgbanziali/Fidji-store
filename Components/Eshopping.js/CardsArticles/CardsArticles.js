@@ -13,6 +13,10 @@ const CardsArticles = ({ item }) => {
 
 
 
+    console.log("Où sont mes articles de ce soir", item)
+
+
+
 
     return (
         <View
@@ -32,7 +36,7 @@ const CardsArticles = ({ item }) => {
                     alignItems: "center",
                 }}>
                 <Image
-                    source={{ uri: item.image }}
+                    source={{ uri: item.images[0].src }}
                     style={{
                         width: '100%',
                         height: "100%",
@@ -50,7 +54,7 @@ const CardsArticles = ({ item }) => {
                     fontSize: 18,
                     fontWeight: "600",
                 }}>
-                {item.title}
+                {item.name}
             </Text>
 
             <View

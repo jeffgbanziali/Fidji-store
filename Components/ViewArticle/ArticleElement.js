@@ -7,7 +7,9 @@ const ArticleElement = ({ article }) => {
 
 
 
-    console.log("Bonjour fifa", article)
+    function removeHtmlTags(html) {
+        return html.replace(/<[^>]*>/g, '');
+    }
 
 
 
@@ -21,7 +23,7 @@ const ArticleElement = ({ article }) => {
                     backgroundColor: "gray"
                 }}>
                 <Image
-                    source={{ uri: article.imageUri }}
+                    source={{ uri: article.images[0].src }}
                     style={{
                         width: '100%',
                         height: "100%",
@@ -34,25 +36,33 @@ const ArticleElement = ({ article }) => {
             <View
                 style={{
                     width: "100%",
-                    height: 100,
+                    height: 80,
                     paddingTop: 10,
                 }}>
                 <View
                     style={{
                         width: "100%",
-                        height: 30,
+                        height: 40,
                         alignItems: "center",
                         justifyContent: "space-between",
                         flexDirection: "row"
                     }}>
-                    <Text
+                    <View
                         style={{
-                            paddingLeft: 20,
-                            fontSize: 24,
-                            fontWeight: "600",
+                            width: "70%",
+                            height: "100%",
+                            justifyContent: "center",
                         }}>
-                        {article.productName}
-                    </Text>
+                        <Text
+                            style={{
+                                paddingLeft: 20,
+                                fontSize: 20,
+                                fontWeight: "600",
+                            }}>
+                            {article.name}
+                        </Text>
+                    </View>
+
                     <View
                         style={{
                             flexDirection: "row",
@@ -65,7 +75,7 @@ const ArticleElement = ({ article }) => {
                                 paddingRight: 10,
                                 fontWeight: "400",
                             }}>
-                            {article.price}€
+                            {article.price} €
                         </Text>
                         <View
                             style={{
@@ -79,24 +89,7 @@ const ArticleElement = ({ article }) => {
                     </View>
 
                 </View>
-                <View
-                    style={{
-                        width: "100%",
-                        height: 60,
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        flexDirection: "row"
-                    }}>
-                    <Text
-                        style={{
-                            paddingLeft: 20,
-                            fontSize: 16,
-                            fontWeight: "600",
-                            color: "black"
-                        }}>
-                        {article.description}
-                    </Text>
-                </View>
+
             </View>
 
 

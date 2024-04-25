@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, Fontisto } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,10 +9,27 @@ const Wishlist = ({ wishlist }) => {
 
     const navigation = useNavigation()
 
+    const [article, setArticle] = useState(null);
 
 
 
+    useEffect(() => {
+        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=1&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
+            .then(response => response.json())
+            .then(data => setArticle(data[0]))
+            .catch(error => console.error('Error fetching article:', error));
+    }, []);
 
+    if (!article) {
+        return <Text>Loading...</Text>;
+    }
+
+    function removeHtmlTags(html) {
+        return html.replace(/<[^>]*>/g, '');
+    }
+
+
+    console.log("Où sont mes articles", removeHtmlTags(article.name))
 
 
 

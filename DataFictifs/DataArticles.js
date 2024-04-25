@@ -67,7 +67,7 @@ export const DataArticles = [
         imageUri: "https://boutiquefidji.com/wp-content/uploads/2023/12/tee-shirt-noor-300x300.jpg"
     },
     {
-        productIdid: 6,
+        productId: 6,
         productName: "Robe d'été",
         description: "Robe légère à motifs floraux parfaite pour l'été.",
         price: 49.99,

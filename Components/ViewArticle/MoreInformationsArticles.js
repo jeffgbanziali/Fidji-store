@@ -11,7 +11,7 @@ const MoreInformationsArticles = ({ article }) => {
         Animated.timing(
             heightAnimation,
             {
-                toValue: viewLister ? 250 : 0,
+                toValue: viewLister ? 320 : 0,
                 duration: 300,
                 easing: Easing.linear,
                 useNativeDriver: false,
@@ -45,6 +45,13 @@ const MoreInformationsArticles = ({ article }) => {
 
 
 
+    function removeHtmlTags(html) {
+        return html.replace(/<[^>]*>/g, '');
+    }
+
+
+
+
 
     return (
         <>
@@ -55,14 +62,13 @@ const MoreInformationsArticles = ({ article }) => {
                     justifyContent: "center",
                     paddingLeft: 16,
                 }}>
-                {article.couture && article.couture.map((item, index) => (
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: "500", color: "black"
-                    }} key={index}>
-                        {item}
-                    </Text>
-                ))}
+                <Text style={{
+                    fontSize: 16,
+                    fontWeight: "500", color: "black"
+                }}>
+                    {removeHtmlTags(article.short_description)}
+                </Text>
+
 
             </View>
 
@@ -146,76 +152,21 @@ const MoreInformationsArticles = ({ article }) => {
                     width: "100%",
                     height: heightAnimation,
                     overflow: 'hidden',
-                    paddingLeft: 10,
-                    paddingTop: 20,
-
                 }}>
                 <View
                     style={{
                         width: "100%",
+                        paddingLeft: 10,
                     }}>
 
                     <Text
                         style={{
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: "600",
+                            lineHeight: 22,
                             color: "black"
                         }} >
-                        Matière principale :
-                        <Text style={{
-                            fontSize: 14,
-                            fontWeight: "400",
-                            color: "black"
-                        }}>
-                            {" "}{article.details}
-                        </Text>
-                    </Text>
-
-                    <Text
-                        style={{
-                            fontSize: 16,
-                            paddingTop: 20,
-
-                            fontWeight: "600",
-                            color: "black"
-                        }} >
-                        Composition :
-                        <Text style={{
-                            fontSize: 14,
-                            paddingTop: 20,
-                            fontWeight: "400",
-                            color: "black"
-                        }}>
-                            {" "}
-                            {article.composition && article.composition.map((item, index) => (
-                                <Text style={{
-                                    fontSize: 14,
-                                    fontWeight: "500",
-                                    color: "black"
-                                }} key={index}>
-                                    {item}
-                                </Text>
-                            ))}
-                        </Text>
-                    </Text>
-
-
-                    <Text
-                        style={{
-                            fontSize: 16,
-                            paddingTop: 20,
-                            fontWeight: "600",
-                            color: "black"
-                        }}>
-                        Entretien :
-                        <Text style={{
-                            fontSize: 14,
-                            paddingTop: 20,
-                            fontWeight: "400",
-                            color: "black"
-                        }}>
-                            {" "}{article.entretien}
-                        </Text>
+                        {" \n"}{removeHtmlTags(article.description)}
                     </Text>
 
                 </View>

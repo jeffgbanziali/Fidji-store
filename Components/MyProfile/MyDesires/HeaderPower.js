@@ -3,7 +3,9 @@ import React from 'react'
 
 const HeaderPower = ({ wishlist }) => {
 
-    console.log("Toi là", wishlist)
+
+
+    
     return (
         <View
             style={{

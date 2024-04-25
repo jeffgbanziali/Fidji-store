@@ -14,6 +14,9 @@ const AddBasket = () => {
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
     };
+
+
+    
     return (
         <View
             style={{
