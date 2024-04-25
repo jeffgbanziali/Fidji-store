@@ -21,7 +21,7 @@ const ArticleElement = ({ article }) => {
                     backgroundColor: "gray"
                 }}>
                 <Image
-                    source={{ uri: article.image }}
+                    source={{ uri: article.imageUri }}
                     style={{
                         width: '100%',
                         height: "100%",
@@ -51,7 +51,7 @@ const ArticleElement = ({ article }) => {
                             fontSize: 24,
                             fontWeight: "600",
                         }}>
-                        {article.title}
+                        {article.productName}
                     </Text>
                     <View
                         style={{

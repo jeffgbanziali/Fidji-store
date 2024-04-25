@@ -4,7 +4,8 @@ import HeaderPower from '../Components/MyProfile/MyDesires/HeaderPower'
 import NotArticle from '../Components/MyProfile/ArticleChoise/NotArticle'
 import StockAlert from '../Components/MyProfile/ArticleChoise/StockAlert'
 import { useNavigation } from '@react-navigation/native'
-import { DataArticles } from "../DataFictifs/DataArticles"
+import { UserData } from "../DataFictifs/UserData"
+import Wishlist from '../Components/MyProfile/ArticleChoise/Wishlist'
 
 
 
@@ -28,8 +29,20 @@ const MyDesiresScreen = () => {
                     height: "100%",
                 }}>
 
-                <HeaderPower />
-                <NotArticle />
+
+
+
+                <HeaderPower wishlist={UserData.wishlist} />
+
+                {
+                    UserData.wishlist.length > 0 ? (
+                        <Wishlist wishlist={UserData.wishlist} />
+                    ) : (
+                        <NotArticle />
+
+                    )
+                }
+
                 <StockAlert />
             </ScrollView>
 

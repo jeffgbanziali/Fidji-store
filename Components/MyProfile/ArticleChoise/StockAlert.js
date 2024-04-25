@@ -62,13 +62,13 @@ const StockAlert = () => {
                 <Text
                     style={{
                         fontSize: 16,
-                        paddingTop: 5,
+                        paddingTop: 10,
                         fontWeight: "500",
                         fontStyle: "italic",
                         textAlign: "center",
                         color: "black"
                     }}>
-                    C'est que tous les articles qui vous plaisent sont pour l'instant en stock ...!
+                    C'est que tous les articles qui vous plaisent sont pour l'instant en stock ...!{"\n"}
                     Dans le cas contraire n'hésitez pas à sauvegarder ici tout article dont vous vouliez
                     afin d'être avertis lorsqu'il sera de retour !
                 </Text>

@@ -8,9 +8,6 @@ const NotArticle = () => {
 
     const navigation = useNavigation()
 
-    const showArticle = () => {
-        navigation.navigate("ViewArticleScreen",)
-    }
 
     const viewCollection = () => {
         navigation.navigate("NewArticles")

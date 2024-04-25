@@ -22,6 +22,8 @@ const ViewArticleScreen = () => {
     const route = useRoute();
     const { article } = route.params;
 
+    console.log("Vous êtes devenu quoi ", article)
+
 
 
     const navigation = useNavigation()

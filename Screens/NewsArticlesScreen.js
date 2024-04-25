@@ -118,7 +118,7 @@ const NewsArticlesScreen = () => {
 
                         data={DataArticles}
                         renderItem={({ item }) => <CardsArticles item={item} />}
-                        keyExtractor={item => item.id.toString()}
+                        keyExtractor={item => item.productId.toString()}
                         numColumns={2}
                         columnWrapperStyle={{
                             justifyContent: 'space-evenly',

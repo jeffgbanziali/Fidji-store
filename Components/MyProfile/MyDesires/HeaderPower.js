@@ -1,14 +1,18 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 
-const HeaderPower = () => {
+const HeaderPower = ({ wishlist }) => {
+
+    console.log("Toi là", wishlist)
     return (
         <View
             style={{
                 width: "100%",
                 height: 50,
                 marginBottom: 6,
-                justifyContent: "center",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexDirection: "row"
             }}>
             <Text
                 style={{
@@ -19,7 +23,29 @@ const HeaderPower = () => {
                 }} >
                 Vos coups de cœur
             </Text>
-        </View>
+
+            {
+                wishlist.length > 0 && (
+                    <Pressable
+                        style={{
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100%",
+                        }}>
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                paddingRight: 20,
+                                fontWeight: "500",
+                                color: "black"
+                            }} >
+                            Voir tout
+                        </Text>
+                    </Pressable>
+                )
+            }
+
+        </View >
     )
 }
 
