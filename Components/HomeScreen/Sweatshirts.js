@@ -1,9 +1,22 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const Sweatshirts = () => {
+
+    const navigation = useNavigation()
+
+
+    const handleGoToSweat = () => {
+        navigation.navigate("SweatCategory")
+    }
+
+
+
+
     return (
-        <View
+        <Pressable
+            onPress={handleGoToSweat}
             style={{
                 width: '100%',
                 height: 250,
@@ -28,7 +41,7 @@ const Sweatshirts = () => {
                 }}>
                 SWEATSHIRTS
             </Text>
-        </View >
+        </Pressable >
     )
 }
 

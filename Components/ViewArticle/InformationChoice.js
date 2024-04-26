@@ -1,9 +1,53 @@
 import { View, Text, Pressable } from 'react-native'
-import React from 'react'
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react'
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { Dropdown } from 'react-native-element-dropdown';
+
 
 
 const InformationChoice = ({ article }) => {
+
+    console.log("Mes attributs", article.attributes[0].options.name)
+
+    const [value, setValue] = useState(null);
+
+    const data = article.attributes[0].options.map(option => ({
+        label: option,
+        value: option
+    }));
+
+
+
+
+
+    const renderItem = item => {
+        return (
+            <View
+                style={{
+                    padding: 17,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}>
+                <Text style={{
+                    flex: 1,
+                    fontSize: 18,
+                }}>{item.label}</Text>
+                {item.value === value && (
+                    <AntDesign
+                        style={{
+                            marginRight: 5,
+                        }}
+                        color="black"
+                        name="Safety"
+                        size={20}
+                    />
+                )}
+            </View>
+        );
+    };
+
+
     return (
         <View
             style={{
@@ -15,10 +59,10 @@ const InformationChoice = ({ article }) => {
             }}>
 
 
-            <View
+            {/*   <View
                 style={{
                     width: 240,
-                    height: 50,
+                 
                     margin: 4,
                     paddingLeft: 20,
                     flexDirection: "row",
@@ -47,6 +91,62 @@ const InformationChoice = ({ article }) => {
                 </Pressable>
 
 
+            </View>*/}
+            <View
+                style={{
+                    width: 240,
+                    margin: 4,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    borderWidth: 2,
+                    borderRadius: 12,
+                    borderColor: "gray",
+                    paddingRight: 10,
+                }}>
+                <Dropdown
+                    style={{
+                        height: 50,
+                        width: 240,
+                        borderRadius: 12,
+                        padding: 12,
+                        shadowColor: '#000',
+                        shadowOffset: {
+                            width: 0,
+                            height: 1,
+                        },
+                        shadowOpacity: 0.2,
+                        shadowRadius: 1.41,
+
+                        elevation: 2,
+                    }}
+                    placeholderStyle={{
+                        fontSize: 16,
+                    }}
+                    selectedTextStyle={{ fontSize: 16, }}
+                    inputSearchStyle={{
+                        height: 40,
+                        fontSize: 16,
+                    }}
+                    iconStyle={{
+                        width: 20,
+                        height: 20,
+
+                    }}
+                    data={data}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder="Gender"
+                    value={value}
+                    onChange={item => {
+                        setValue(item.value);
+                    }}
+                    renderLeftIcon={() => (
+                        <AntDesign style={{ marginRight: 5, }} color="black" name="Safety" size={20} />
+                    )}
+                    renderItem={renderItem}
+                />
             </View>
 
 

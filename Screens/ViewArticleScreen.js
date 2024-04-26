@@ -25,13 +25,6 @@ const ViewArticleScreen = () => {
 
 
 
-    const navigation = useNavigation()
-
-
-
-
-
-
     return (
         <SafeAreaView
             style={{

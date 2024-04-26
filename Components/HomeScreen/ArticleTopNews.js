@@ -1,29 +1,40 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native';
+
 import { SimpleLineIcons, Fontisto } from '@expo/vector-icons';
 
 const ArticleTopNews = ({ item }) => {
+
+    const navigation = useNavigation()
+
+   
+    const showArticle = () => {
+        navigation.navigate("ViewArticleScreen", { article: item })
+    }
+
+
+
+
     return (
         <View
 
             style={{
                 width: 180,
-                height: 400,
-                marginTop: 60,
-                alignItems: "center",
-                borderWidth: 2,
-                borderColor: "gray"
-                
+                height: 360,
+                margin: 2
+
             }}>
 
-            <View
+            <Pressable
+                onPress={() => showArticle(item)}
                 style={{
                     width: "100%",
-                    height: "35%",
+                    height: 280,
                     alignItems: "center",
                 }}>
                 <Image
-                    source={{ uri: item.imageUri }}
+                    source={{ uri: item.images[0].src }}
                     style={{
                         width: '100%',
                         height: "100%",
@@ -31,54 +42,48 @@ const ArticleTopNews = ({ item }) => {
                     }
                     } />
 
-            </View>
+            </Pressable>
 
-
-            <Text style={{
-                alignItems: "center",
-                marginTop: 20,
-            }}>
-                {item.title}
-            </Text>
             <Text
                 style={{
                     alignItems: "center",
-                    marginTop: 20,
-                }}
-            >
-                {item.price}
+                    paddingTop: 10,
+                    paddingLeft: 10,
+                    fontSize: 18,
+                    fontWeight: "600",
+                }}>
+                {item.name}
             </Text>
+
             <View
                 style={{
-                    alignItems: "center",
-                    marginTop: 20,
                     flexDirection: "row",
-                    justifyContent: "center"
+                    width: "100%",
+                    paddingTop: 10,
+                    justifyContent: "space-between"
+
                 }}>
-                <SimpleLineIcons name="basket" size={24} color="black" />
-                <Text style={{
-                    paddingLeft: 10,
-                    fontSize: 14,
-                }}>
-                    Choix des options
+                <Text
+                    style={{
+                        paddingLeft: 10,
+                        alignItems: "center",
+                    }}
+                >
+                    {item.price} €
                 </Text>
+
+                <View
+                    style={{
+                        alignItems: "center",
+                        flexDirection: "row",
+                        paddingRight: 10,
+                        justifyContent: "center"
+                    }}>
+                    <Fontisto name="heart-alt" size={16} color="black" />
+
+                </View>
             </View>
-            <View
-                style={{
-                    width: "70%",
-                    alignItems: "center",
-                    marginTop: 20,
-                    flexDirection: "row",
-                    justifyContent: "center"
-                }}>
-                <Fontisto name="heart-alt" size={16} color="black" />
-                <Text style={{
-                    paddingLeft: 10,
-                    fontSize: 16,
-                }}>
-                    Ajouter à la liste de souhaits
-                </Text>
-            </View>
+
 
         </View>
     )

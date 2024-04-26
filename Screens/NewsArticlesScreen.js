@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import TabNavigation from "../Navigation/TabNavigation"
-import { DataArticles } from "../DataFictifs/DataArticles"
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -14,27 +12,23 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const NewsArticlesScreen = () => {
 
-
-    const navigation = useNavigation()
-
-
+    const navigation = useNavigation();
 
     const retourned = () => {
-        navigation.goBack("Start")
+        navigation.goBack();
     }
-
-
-
-
 
     const [article, setArticle] = useState([]);
 
     useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=4&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
+        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
             .then(response => response.json())
-            .then(data => setArticle(data)) // Stockez la liste complète des articles
+            .then(data => setArticle(data))
             .catch(error => console.error('Error fetching articles:', error));
     }, []);
+
+
+
 
 
 

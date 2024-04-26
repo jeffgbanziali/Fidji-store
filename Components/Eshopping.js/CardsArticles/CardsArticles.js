@@ -13,9 +13,6 @@ const CardsArticles = ({ item }) => {
 
 
 
-    console.log("Où sont mes articles de ce soir", item)
-
-
 
 
     return (

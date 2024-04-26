@@ -29,9 +29,6 @@ const Wishlist = ({ wishlist }) => {
     }
 
 
-    console.log("Où sont mes articles", removeHtmlTags(article.name))
-
-
 
     const renderItem = ({ item }) => {
 

@@ -1,9 +1,26 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const Pants = () => {
+
+
+
+
+    const navigation = useNavigation()
+
+
+    const handleGoToPant = () => {
+        navigation.navigate("PantCategory")
+    }
+
+
+
+
+
     return (
-        <View
+        <Pressable
+            onPress={handleGoToPant}
             style={{
                 width: '100%',
                 height: 250,
@@ -28,7 +45,7 @@ const Pants = () => {
                 }}>
                 PANTALONS
             </Text>
-        </View >
+        </Pressable>
     )
 }
 
