@@ -5,16 +5,30 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 
 
-const InformationChoice = ({ article }) => {
+const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
 
-    console.log("Mes attributs", article.attributes[0].options.name)
 
+    const [taille, setTaille] = useState(null);
     const [value, setValue] = useState(null);
 
-    const data = article.attributes[0].options.map(option => ({
+    console.log("Voici mes atribues", article.attributes)
+
+
+
+    const dataOptionsColor = article.attributes[0].options.map(option => ({
         label: option,
         value: option
     }));
+
+
+    const dataOptionsLenght = article.attributes[1].options.map(option => ({
+        label: option,
+        value: option
+    }));
+
+
+    const dataName = article.attributes[0].name
+    const dataColor = article.attributes[1].name
 
 
 
@@ -29,10 +43,41 @@ const InformationChoice = ({ article }) => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                 }}>
-                <Text style={{
-                    flex: 1,
-                    fontSize: 18,
-                }}>{item.label}</Text>
+                <Text
+                    style={{
+                        flex: 1,
+                        fontSize: 18,
+                    }}>{item.label}</Text>
+                {item.value === value && (
+                    <AntDesign
+                        style={{
+                            marginRight: 5,
+                        }}
+                        color="black"
+                        name="Safety"
+                        size={20}
+                    />
+                )}
+            </View>
+        );
+    };
+
+
+
+    const renderColor = item => {
+        return (
+            <View
+                style={{
+                    padding: 17,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}>
+                <Text
+                    style={{
+                        flex: 1,
+                        fontSize: 18,
+                    }}>{item.label}</Text>
                 {item.value === value && (
                     <AntDesign
                         style={{
@@ -59,39 +104,7 @@ const InformationChoice = ({ article }) => {
             }}>
 
 
-            {/*   <View
-                style={{
-                    width: 240,
-                 
-                    margin: 4,
-                    paddingLeft: 20,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    borderWidth: 2,
-                    borderColor: "gray",
-                    paddingRight: 10,
-                }}>
-                <Text
-                    style={{
-                        fontSize: 20,
-                        fontWeight: "600",
-                    }}>
-                    {article.attributes[0].options[0]}
-                </Text>
 
-                <Pressable
-                    style={{
-                        width: 30,
-                        height: 30,
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}>
-                    <MaterialIcons name="keyboard-arrow-down" size={30} color="black" />
-                </Pressable>
-
-
-            </View>*/}
             <View
                 style={{
                     width: 240,
@@ -108,7 +121,6 @@ const InformationChoice = ({ article }) => {
                     style={{
                         height: 50,
                         width: 240,
-                        borderRadius: 12,
                         padding: 12,
                         shadowColor: '#000',
                         shadowOffset: {
@@ -117,35 +129,47 @@ const InformationChoice = ({ article }) => {
                         },
                         shadowOpacity: 0.2,
                         shadowRadius: 1.41,
-
                         elevation: 2,
                     }}
-                    placeholderStyle={{
-                        fontSize: 16,
+                    dropdownStyle={{
+                        backgroundColor: 'red',
                     }}
-                    selectedTextStyle={{ fontSize: 16, }}
+                    placeholderStyle={{
+                        fontSize: 14,
+                    }}
+                    selectedTextStyle={{
+                        fontSize: 16,
+
+                    }}
                     inputSearchStyle={{
                         height: 40,
                         fontSize: 16,
+                        backgroundColor: 'red',
+
                     }}
                     iconStyle={{
                         width: 20,
                         height: 20,
 
                     }}
-                    data={data}
+                    data={dataOptionsColor}
                     maxHeight={300}
                     labelField="label"
                     valueField="value"
-                    placeholder="Gender"
+                    placeholder={dataName}
                     value={value}
                     onChange={item => {
                         setValue(item.value);
+                        onColorChange(item.value);
                     }}
                     renderLeftIcon={() => (
-                        <AntDesign style={{ marginRight: 5, }} color="black" name="Safety" size={20} />
+                        <AntDesign
+                            style={{ marginRight: 5, }}
+                            color="black"
+                            name="Safety"
+                            size={20} />
                     )}
-                    renderItem={renderItem}
+                    renderItem={renderColor}
                 />
             </View>
 
@@ -155,8 +179,8 @@ const InformationChoice = ({ article }) => {
                     width: 100,
                     height: 50,
                     borderWidth: 2,
+                    borderRadius: 12,
                     borderColor: "gray",
-                    paddingLeft: 20,
                     paddingRight: 10,
                     margin: 4,
                     flexDirection: "row",
@@ -164,24 +188,53 @@ const InformationChoice = ({ article }) => {
                     alignItems: "center",
 
                 }}>
-
-                <Text
+                <Dropdown
                     style={{
-                        fontSize: 20,
-                        fontWeight: "600",
-                    }}>
-                    {article.attributes[1].options[1]}
-                </Text>
+                        height: 50,
+                        width: 100,
+                        padding: 12,
+                        shadowColor: '#000',
+                        shadowOffset: {
+                            width: 0,
+                            height: 1,
+                        },
+                        shadowOpacity: 0.2,
+                        shadowRadius: 1.41,
+                        elevation: 2,
+                    }}
+                    dropdownStyle={{
+                        backgroundColor: 'red',
+                    }}
+                    placeholderStyle={{
+                        fontSize: 14,
+                    }}
+                    selectedTextStyle={{
+                        fontSize: 16,
 
-                <Pressable
-                    style={{
-                        width: 30,
-                        height: 30,
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}>
-                    <MaterialIcons name="keyboard-arrow-down" size={30} color="black" />
-                </Pressable>
+                    }}
+                    inputSearchStyle={{
+                        height: 40,
+                        fontSize: 16,
+                        backgroundColor: 'red',
+
+                    }}
+                    iconStyle={{
+                        width: 20,
+                        height: 20,
+
+                    }}
+                    data={dataOptionsLenght}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder={dataColor}
+                    value={taille}
+                    onChange={item => {
+                        setTaille(item.value);
+                        onSizeChange(item.value);
+                    }}
+                    renderItem={renderItem}
+                />
             </View>
         </View>
     )

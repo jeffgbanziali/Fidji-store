@@ -1,9 +1,13 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import { DataArticles } from "../DataFictifs/DataArticles"
+import { UserData } from '../DataFictifs/UserData';
+import Modal from "react-native-modal";
+import BasketScreen from './BasketScreen';
+
+
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -15,6 +19,10 @@ const PantScreen = () => {
 
 
     const navigation = useNavigation()
+
+
+    const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
+    const [showBasket, setShowBasket] = useState(false);
 
 
 
@@ -33,6 +41,26 @@ const PantScreen = () => {
             .catch(error => console.error('Error fetching articles:', error));
     }, []);
 
+
+
+    const handleViewBasket = () => {
+        if (showBasket) {
+            Animated.timing(basketHeight, {
+                toValue: 0,
+                duration: 200,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start(() => setShowBasket(false));
+        } else {
+            setShowBasket(true);
+            Animated.timing(basketHeight, {
+                toValue: 200,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+        }
+    };
 
 
 
@@ -84,6 +112,7 @@ const PantScreen = () => {
 
 
                 <Pressable
+                    onPress={handleViewBasket}
                     style={{
                         width: 50,
                         height: 50,
@@ -110,7 +139,7 @@ const PantScreen = () => {
                                 fontWeight: "500",
                                 color: "white"
                             }} >
-                            0
+                            {UserData.cart.length}
                         </Text>
                     </View>
 
@@ -119,7 +148,18 @@ const PantScreen = () => {
 
             </View>
 
+            <Modal
+                isVisible={showBasket}
+                onBackdropPress={handleViewBasket}
+                style={{ margin: 0, justifyContent: "flex-end" }}
+                backdropOpacity={0.5}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                useNativeDriverForBackdrop
+            >
+                <BasketScreen handleViewBasket={handleViewBasket} />
 
+            </Modal>
 
             <View
                 style={{

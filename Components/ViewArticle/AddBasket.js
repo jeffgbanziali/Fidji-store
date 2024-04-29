@@ -1,8 +1,9 @@
 import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
+import { UserData } from "../../DataFictifs/UserData"
 
-const AddBasket = () => {
+const AddBasket = ({ article, selectedColor, selectedSize }) => {
     const [quantity, setQuantity] = useState(1); // État initial du nombre
 
     const decreaseQuantity = () => {
@@ -16,7 +17,31 @@ const AddBasket = () => {
     };
 
 
-    
+
+    const handleAddCartArticle = () => {
+
+        const updatedArticle = { ...article };
+
+        updatedArticle.attributes[0].options = selectedColor;
+        updatedArticle.attributes[1].options = selectedSize;
+        updatedArticle.stock_quantity = quantity;
+
+
+        console.log("Données article mises à jour :", updatedArticle);
+
+        const updatedUserData = { ...UserData };
+
+        updatedUserData.cart.push(updatedArticle);
+
+
+        console.log("Données utilisateur mises à jour :", updatedUserData);
+
+
+    };
+
+
+
+
     return (
         <View
             style={{
@@ -55,7 +80,7 @@ const AddBasket = () => {
 
                 </Pressable>
 
-                
+
                 <Text
                     style={{
                         fontSize: 18,
@@ -80,7 +105,8 @@ const AddBasket = () => {
             </View>
 
 
-            <View
+            <Pressable
+                onPress={handleAddCartArticle}
                 style={{
                     width: 200,
                     height: 50,
@@ -98,7 +124,7 @@ const AddBasket = () => {
                     }}>
                     Ajouter au panier
                 </Text>
-            </View>
+            </Pressable>
 
 
         </View>

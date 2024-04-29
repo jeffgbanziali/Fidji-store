@@ -25,7 +25,7 @@ const BasketScreen = ({ handleViewBasket }) => {
         }
 
         // Utilise reduce pour additionner les prix de chaque article dans le panier
-        const total = UserData.cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        const total = UserData.cart.reduce((acc, item) => acc + (item.price * item.stock_quantity), 0);
 
         // Retourne le total
         return total;
@@ -52,7 +52,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
                         <FlatList
                             data={UserData.cart}
-                            keyExtractor={(cart) => cart.productId.toString()}
+                            keyExtractor={(cart) => cart.id.toString()}
                             onEndReachedThreshold={0.5}
                             renderItem={({ item: cart }) => (
                                 <BasketSelection cart={cart} />

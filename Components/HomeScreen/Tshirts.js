@@ -22,7 +22,6 @@ const Tshirts = () => {
                 height: 250,
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "red"
             }}>
             <Image
                 source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2023/12/tee-shirt-oceane-2.jpg" }}

@@ -21,6 +21,8 @@ const BasketSelection = ({ cart }) => {
         setQuantity(quantity + 1);
     };
 
+    console.log("image de mon panier", cart)
+
     return (
         <View
             style={{
@@ -39,7 +41,7 @@ const BasketSelection = ({ cart }) => {
                     backgroundColor: "blue"
                 }}>
                 <Image
-                    source={{ uri: cart.imageUri }}
+                    source={{ uri: cart.images[0].src }}
                     style={{
                         width: "100%",
                         height: "100%",
@@ -60,7 +62,7 @@ const BasketSelection = ({ cart }) => {
                         fontWeight: "600",
                         color: "black"
                     }}>
-                        {cart.productName}
+                        {cart.name}
                     </Text>
                     <Text style={{
                         fontSize: 14,
@@ -77,14 +79,14 @@ const BasketSelection = ({ cart }) => {
                             fontWeight: "bold",
                             color: "gray"
                         }}>
-                        Couleur : {cart.couleur}
+                        Couleur : {cart.attributes[0].options}
                     </Text>
                     <Text style={{
                         fontSize: 14,
                         fontWeight: "bold",
                         color: "gray"
                     }}>
-                        Taille : {cart.taille}
+                        Taille : {cart.attributes[1].options}
                     </Text>
                 </View>
 
@@ -125,7 +127,7 @@ const BasketSelection = ({ cart }) => {
                             fontWeight: "600",
                             color: "black"
                         }}>
-                        {quantity}
+                        {cart.stock_quantity}
                     </Text>
 
                     <Pressable

@@ -1,7 +1,11 @@
-import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView } from 'react-native'
-import React from 'react'
+import { View, Text, Animated, Pressable, Easing, Image, SafeAreaView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { UserData } from "../../DataFictifs/UserData"
+import Modal from "react-native-modal";
+import BasketScreen from '../../Screens/BasketScreen';
+
 
 
 
@@ -10,11 +14,32 @@ const Header = () => {
     const navigation = useNavigation()
 
 
+    const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
+    const [showBasket, setShowBasket] = useState(false);
+
+
     const retourned = () => {
         navigation.goBack("Start")
     }
 
-
+    const handleViewBasket = () => {
+        if (showBasket) {
+            Animated.timing(basketHeight, {
+                toValue: 0,
+                duration: 200,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start(() => setShowBasket(false));
+        } else {
+            setShowBasket(true);
+            Animated.timing(basketHeight, {
+                toValue: 200,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+        }
+    };
 
     return (
         <View
@@ -42,6 +67,7 @@ const Header = () => {
             </Pressable>
 
             <Pressable
+                onPress={handleViewBasket}
                 style={{
                     width: 50,
                     height: 50,
@@ -68,13 +94,24 @@ const Header = () => {
                             fontWeight: "500",
                             color: "white"
                         }} >
-                        0
+                        {UserData.cart.length}
                     </Text>
                 </View>
 
                 <SimpleLineIcons name="basket" size={26} color="black" />
             </Pressable>
+            <Modal
+                isVisible={showBasket}
+                onBackdropPress={handleViewBasket}
+                style={{ margin: 0, justifyContent: "flex-end" }}
+                backdropOpacity={0.5}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                useNativeDriverForBackdrop
+            >
+                <BasketScreen handleViewBasket={handleViewBasket} />
 
+            </Modal>
         </View>
     )
 }

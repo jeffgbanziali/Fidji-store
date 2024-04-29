@@ -1,15 +1,109 @@
-import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView } from 'react-native'
-import React from 'react'
+import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView, Animated, FlatList } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import Carousel from './Carousel';
+import AddBasket from './AddBasket';
+import InformationChoice from './InformationChoice';
+
+
+
+const { width: windowWidth, height: windowHeight } = Dimensions.get("window")
+
+
 
 const ArticleElement = ({ article }) => {
 
 
 
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [quantity, setQuantity] = useState(1);
+
+    // Fonction pour mettre à jour la couleur sélectionnée
+    const handleColorChange = (color) => {
+        setSelectedColor(color);
+    };
+
+    // Fonction pour mettre à jour la taille sélectionnée
+    const handleSizeChange = (size) => {
+        setSelectedSize(size);
+    };
+
+
+
+    const [index, setIndex] = useState(0);
+
+    const scrollX = useRef(new Animated.Value(0)).current
+
+
+    // console.log("Venez ici ", article.images)
+
     function removeHtmlTags(html) {
         return html.replace(/<[^>]*>/g, '');
     }
+
+    const handleOnScroll = event => {
+        Animated.event(
+            [
+                {
+                    nativeEvent: {
+                        contentOffset: {
+                            x: scrollX,
+                        },
+                    },
+                },
+            ],
+            {
+                useNativeDriver: false,
+            },
+        )(event);
+    };
+
+    const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
+        // console.log('viewableItems', viewableItems);
+        setIndex(viewableItems[0].index);
+    }).current;
+
+    const viewabilityConfig = useRef({
+        itemVisiblePercentThreshold: 50,
+    }).current;
+
+
+
+
+
+    const renderItem = ({ item }) => {
+
+        return (
+            <>
+
+                <View
+                    style={{
+                        height: "100%",
+                        backgroundColor: "gray",
+                        width: windowWidth,
+                        position: "relative",
+
+
+                    }}>
+                    <Image
+                        source={{ uri: item.src }}
+                        style={{
+                            width: '100%',
+                            height: "100%",
+                            resizeMode: "cover",
+                        }
+                        } />
+
+                </View>
+
+
+            </>
+        )
+
+    }
+
 
 
 
@@ -18,20 +112,26 @@ const ArticleElement = ({ article }) => {
         <>
             <View
                 style={{
-                    width: "100%",
-                    height: 500,
-                    backgroundColor: "gray"
-                }}>
-                <Image
-                    source={{ uri: article.images[0].src }}
-                    style={{
-                        width: '100%',
-                        height: "100%",
-                        position: "absolute"
-                    }
-                    } />
+                    height: 600,
+                    backgroundColor: "gray",
+                    width: windowWidth,
+                    position: "relative",
 
+
+                }}>
+                <FlatList
+                    data={article.images}
+                    horizontal
+                    pagingEnabled
+                    snapToAlignment="center"
+                    showsHorizontalScrollIndicator={false}
+                    onScroll={handleOnScroll}
+                    onViewableItemsChanged={handleOnViewableItemsChanged}
+                    viewabilityConfig={viewabilityConfig}
+                    keyExtractor={(item, index) => item.id.toString()}
+                    renderItem={renderItem} />
             </View>
+
 
             <View
                 style={{
@@ -91,6 +191,9 @@ const ArticleElement = ({ article }) => {
                 </View>
 
             </View>
+            <InformationChoice article={article} onColorChange={handleColorChange} onSizeChange={handleSizeChange} />
+
+            <AddBasket article={article} selectedColor={selectedColor} selectedSize={selectedSize} />
 
 
         </>

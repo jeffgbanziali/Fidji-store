@@ -46,8 +46,6 @@ const ViewArticleScreen = () => {
 
 
                 <ArticleElement article={article} />
-                <InformationChoice article={article} />
-                <AddBasket />
                 <MoreInformationsArticles article={article} />
                 <PaymentTools />
 
