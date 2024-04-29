@@ -7,6 +7,7 @@ import { DataArticles } from "../DataFictifs/DataArticles"
 import { UserData } from '../DataFictifs/UserData';
 import Modal from "react-native-modal";
 import BasketScreen from './BasketScreen';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 
 
@@ -73,6 +74,10 @@ const SweatshirtScreen = () => {
             }).start();
         }
     };
+
+    const bottomTabHeight = useBottomTabBarHeight();
+
+
 
 
 

@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import TabNavigation from './Navigation/TabNavigation';
+import FirstNavigation from './Navigation/FirstNavigation';
 
 const App = () => {
   return (
     <View style={styles.container}>
 
       <NavigationContainer>
-        <TabNavigation />
+        <FirstNavigation />
       </NavigationContainer>
     </View>
   );

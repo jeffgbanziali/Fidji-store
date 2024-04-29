@@ -8,6 +8,7 @@ import InformationChoice from '../Components/ViewArticle/InformationChoice';
 import AddBasket from '../Components/ViewArticle/AddBasket';
 import MoreInformationsArticles from '../Components/ViewArticle/MoreInformationsArticles';
 import PaymentTools from '../Components/ViewArticle/PaymentTools';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 
 
@@ -22,6 +23,7 @@ const ViewArticleScreen = () => {
     const route = useRoute();
     const { article } = route.params;
 
+    const bottomTabHeight = useBottomTabBarHeight();
 
 
 
@@ -30,7 +32,7 @@ const ViewArticleScreen = () => {
             style={{
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
-                height: windowHeight,
+                height: windowHeight - bottomTabHeight,
                 alignItems: "center",
 
             }}>

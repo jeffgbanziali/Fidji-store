@@ -6,6 +6,7 @@ import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticle
 import { UserData } from '../DataFictifs/UserData';
 import Modal from "react-native-modal";
 import BasketScreen from './BasketScreen';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 
 
@@ -70,6 +71,12 @@ const TshirtScreen = () => {
 
 
 
+    const bottomTabHeight = useBottomTabBarHeight();
+
+
+
+
+
 
 
     return (
@@ -77,7 +84,7 @@ const TshirtScreen = () => {
             style={{
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
-                height: windowHeight,
+                height: windowHeight - bottomTabHeight,
                 alignItems: "center",
 
             }}>
