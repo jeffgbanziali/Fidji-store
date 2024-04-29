@@ -14,6 +14,7 @@ import CoatScreen from '../Screens/CoatScreen';
 import PantScreen from '../Screens/PantScreen';
 import SweatshirtScreen from '../Screens/SweatshirtScreen';
 import TshirtScreen from '../Screens/TshirtScreen';
+import EShoppingScreen from '../Screens/EShoppingScreen';
 
 
 
@@ -34,7 +35,7 @@ const StackNavigation = () => {
             }}
         >
 
-            <Stack.Screen name="TabNavigation" component={TabNavigation} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="Start" component={StartPage} />
             <Stack.Screen name="Signin" component={SignInScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />

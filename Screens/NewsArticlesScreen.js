@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticle
 import { UserData } from '../DataFictifs/UserData';
 import Modal from "react-native-modal";
 import BasketScreen from './BasketScreen';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -19,7 +20,7 @@ const NewsArticlesScreen = () => {
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
 
-
+    const [loading, setLoading] = useState(true);
 
 
     const navigation = useNavigation();
@@ -33,8 +34,14 @@ const NewsArticlesScreen = () => {
     useEffect(() => {
         fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
             .then(response => response.json())
-            .then(data => setArticle(data))
-            .catch(error => console.error('Error fetching articles:', error));
+            .then(data => {
+                setArticle(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching articles:', error);
+                setLoading(false);
+            });
     }, []);
 
 
@@ -63,6 +70,9 @@ const NewsArticlesScreen = () => {
 
 
 
+    const bottomTabHeight = useBottomTabBarHeight();
+
+
 
 
 
@@ -76,7 +86,7 @@ const NewsArticlesScreen = () => {
                 style={{
                     backgroundColor: "#f5e1ce",
                     width: windowWidth,
-                    height: windowHeight,
+                    height: windowHeight - bottomTabHeight,
                     alignItems: "center",
 
                 }}>
@@ -151,75 +161,97 @@ const NewsArticlesScreen = () => {
 
                 </View>
 
-                <View
-                    style={{
-                        width: "100%",
-                        height: "94%",
-                        justifyContent: "space-evenly",
-                    }}>
 
 
 
-                    <FlatList
 
-                        data={article}
-                        renderItem={({ item }) => <CardsArticles item={item} />}
-                        keyExtractor={item => item.id.toString()}
-                        numColumns={2}
-                        columnWrapperStyle={{
-                            justifyContent: 'space-evenly',
-
-                        }}
-                        ListHeaderComponent={() => (
+                {
+                    loading ? (
+                        <>
                             <View
                                 style={{
                                     width: "100%",
-                                    height: 150,
-                                    marginBottom: 40,
-                                    alignItems: "center",
-                                    justifyContent: "center",
+                                    height: "94%",
+                                    justifyContent: "space-evenly",
                                 }}>
-                                <View
-                                    style={{
-                                        width: "50%",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }}>
-                                    <Text
-                                        style={{
-                                            fontSize: 28,
-                                            fontWeight: "600",
-                                            textAlign: "center",
-                                            color: "black"
-                                        }}>
-                                        NOUVEAUTÉS & RÉASSORTS
-                                    </Text>
-                                </View>
-
-                                <View
-                                    style={{
-                                        width: "80%",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        paddingTop: 20
-                                    }}>
-
-                                    <Text
-                                        style={{
-                                            fontSize: 18,
-                                            textAlign: "center",
-                                            color: "black"
-                                        }}>
-                                        Nos dernières nouveautés et réassorts sont arrivés sur le site !
-                                    </Text>
-
-                                </View>
-
+                                <ActivityIndicator size="large" color="black" />
                             </View>
-                        )}
-                    />
+                        </>
+                    ) : (
 
-                </View>
+                        <View
+                            style={{
+                                width: "100%",
+                                height: "94%",
+                                justifyContent: "space-evenly",
+                            }}>
+
+
+
+                            <FlatList
+
+                                data={article}
+                                renderItem={({ item }) => <CardsArticles item={item} />}
+                                keyExtractor={item => item.id.toString()}
+                                numColumns={2}
+                                columnWrapperStyle={{
+                                    justifyContent: 'space-evenly',
+
+                                }}
+                                ListHeaderComponent={() => (
+                                    <View
+                                        style={{
+                                            width: "100%",
+                                            height: 150,
+                                            marginBottom: 40,
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                        }}>
+                                        <View
+                                            style={{
+                                                width: "50%",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                            }}>
+                                            <Text
+                                                style={{
+                                                    fontSize: 28,
+                                                    fontWeight: "600",
+                                                    textAlign: "center",
+                                                    color: "black"
+                                                }}>
+                                                NOUVEAUTÉS & RÉASSORTS
+                                            </Text>
+                                        </View>
+
+                                        <View
+                                            style={{
+                                                width: "80%",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                paddingTop: 20
+                                            }}>
+
+                                            <Text
+                                                style={{
+                                                    fontSize: 18,
+                                                    textAlign: "center",
+                                                    color: "black"
+                                                }}>
+                                                Nos dernières nouveautés et réassorts sont arrivés sur le site !
+                                            </Text>
+
+                                        </View>
+
+                                    </View>
+                                )}
+                            />
+
+                        </View>
+                    )
+                }
+
+
 
             </SafeAreaView>
 

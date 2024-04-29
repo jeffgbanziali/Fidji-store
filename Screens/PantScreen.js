@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -25,20 +25,27 @@ const PantScreen = () => {
     const [showBasket, setShowBasket] = useState(false);
 
 
+    const [loading, setLoading] = useState(true);
+
+
 
     const retourned = () => {
-        navigation.goBack()
+        navigation.goBack();
     }
-
-
 
     const [article, setArticle] = useState([]);
 
     useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?category=92&per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
+        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
             .then(response => response.json())
-            .then(data => setArticle(data))
-            .catch(error => console.error('Error fetching articles:', error));
+            .then(data => {
+                setArticle(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching articles:', error);
+                setLoading(false);
+            });
     }, []);
 
 
@@ -161,30 +168,44 @@ const PantScreen = () => {
 
             </Modal>
 
-            <View
-                style={{
-                    width: "100%",
-                    height: "94%",
-                    marginTop: 10,
-                    justifyContent: "space-evenly",
-                }}>
+            {
+                loading ? (
+                    <>
+                        <View
+                            style={{
+                                width: "100%",
+                                height: "94%",
+                                justifyContent: "space-evenly",
+                            }}>
+                            <ActivityIndicator size="large" color="black" />
+                        </View>
+                    </>
+                ) : (
+                    <View
+                        style={{
+                            width: "100%",
+                            height: "94%",
+                            marginTop: 10,
+                            justifyContent: "space-evenly",
+                        }}>
 
 
 
-                <FlatList
+                        <FlatList
 
-                    data={article}
-                    renderItem={({ item }) => <CardsArticles item={item} />}
-                    keyExtractor={item => item.id.toString()}
-                    numColumns={2}
-                    columnWrapperStyle={{
-                        justifyContent: 'space-evenly',
+                            data={article}
+                            renderItem={({ item }) => <CardsArticles item={item} />}
+                            keyExtractor={item => item.id.toString()}
+                            numColumns={2}
+                            columnWrapperStyle={{
+                                justifyContent: 'space-evenly',
 
-                    }}
+                            }}
 
-                />
+                        />
 
-            </View>
+                    </View>
+                )}
         </SafeAreaView>
     )
 }

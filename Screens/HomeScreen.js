@@ -27,7 +27,7 @@ const HomeScreen = () => {
                 flex: 1,
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
-                height: windowHeight
+                height: windowHeight - bottomTabHeight,
             }}>
             <ScrollView
                 style={{

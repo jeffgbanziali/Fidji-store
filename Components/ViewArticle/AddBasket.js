@@ -1,10 +1,12 @@
-import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
+import { Modal, Text, Pressable, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { UserData } from "../../DataFictifs/UserData"
+import SuccessModal from './SuccessModal';
 
 const AddBasket = ({ article, selectedColor, selectedSize }) => {
-    const [quantity, setQuantity] = useState(1); // État initial du nombre
+    const [quantity, setQuantity] = useState(1);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const decreaseQuantity = () => {
         if (quantity > 1) {
@@ -32,12 +34,17 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
         const updatedUserData = { ...UserData };
 
         updatedUserData.cart.push(updatedArticle);
-
+        setShowSuccessModal(true);
 
         console.log("Données utilisateur mises à jour :", updatedUserData);
 
 
     };
+
+    const closeSuccessModal = () => {
+        setShowSuccessModal(false);
+    };
+
 
 
 
@@ -126,6 +133,8 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
                 </Text>
             </Pressable>
 
+
+            <SuccessModal visible={showSuccessModal} onClose={closeSuccessModal} />
 
         </View>
     )

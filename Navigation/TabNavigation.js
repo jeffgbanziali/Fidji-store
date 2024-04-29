@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Animated, Easing, Image, Pressable, View } from 'react-native'
+import { Animated, Easing, Text, Image, Pressable, View } from 'react-native'
 import HomeScreen from '../Screens/HomeScreen'
 import Profile from '../Screens/ProfileScreen'
 import LeavesScreen from '../Screens/LeavesScreen'
@@ -8,6 +8,8 @@ import BasketScreen from '../Screens/BasketScreen'
 import EShoppingScreen from '../Screens/EShoppingScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Modal from "react-native-modal";
+import { UserData } from '../DataFictifs/UserData'
+import StackNavigation from './StackNavigation'
 
 
 const Tab = createBottomTabNavigator();
@@ -62,7 +64,7 @@ const TabNavigation = () => {
             >
                 <Tab.Screen
                     name="Accueil"
-                    component={HomeScreen}
+                    component={StackNavigation}
                     options={{
                         tabBarIcon: ({ focused }) => (
                             focused ? (
@@ -121,6 +123,29 @@ const TabNavigation = () => {
                         tabBarIcon: ({ focused }) => (
 
                             <Pressable onPress={handleViewBasket}>
+                                <View
+                                    style={{
+                                        width: 20,
+                                        height: 20,
+                                        right: 5,
+                                        left: 2,
+                                        top: 5,
+                                        borderRadius: 100,
+                                        position: "absolute",
+                                        alignItems: "center",
+                                        //backgroundColor: "black",
+                                        justifyContent: "center"
+                                    }}>
+
+                                    <Text
+                                        style={{
+                                            fontSize: 8,
+                                            fontWeight: "500",
+                                            color: "black"
+                                        }} >
+                                        {UserData.cart.length}
+                                    </Text>
+                                </View>
                                 {focused ? (
                                     <Ionicons name="bag-handle-sharp" size={24} color="black" />
                                 ) : (
