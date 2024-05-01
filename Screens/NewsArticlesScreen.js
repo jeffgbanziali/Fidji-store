@@ -7,6 +7,9 @@ import { UserData } from '../DataFictifs/UserData';
 import Modal from "react-native-modal";
 import BasketScreen from './BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { getProducts } from '../ReduxActions/products.actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from '../Context/UtilsFunctions';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -19,30 +22,29 @@ const NewsArticlesScreen = () => {
 
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
-
     const [loading, setLoading] = useState(true);
 
+    const products = useSelector(state => state.productsReducer);
 
     const navigation = useNavigation();
 
     const retourned = () => {
         navigation.goBack();
     }
+    const dispatch = useDispatch();
 
-    const [article, setArticle] = useState([]);
 
     useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
-            .then(response => response.json())
-            .then(data => {
-                setArticle(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching articles:', error);
-                setLoading(false);
-            });
-    }, []);
+        dispatch(getProducts());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (!isEmpty(products)) {
+            setLoading(false);
+        }
+    }, [products]);
+
 
 
 
@@ -65,6 +67,10 @@ const NewsArticlesScreen = () => {
         }
     };
 
+
+
+
+    console.log("Où sont mes produits", products)
 
 
 
@@ -190,7 +196,7 @@ const NewsArticlesScreen = () => {
 
                             <FlatList
 
-                                data={article}
+                                data={products}
                                 renderItem={({ item }) => <CardsArticles item={item} />}
                                 keyExtractor={item => item.id.toString()}
                                 numColumns={2}

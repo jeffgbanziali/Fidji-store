@@ -1,16 +1,21 @@
-import { View, Text, Image, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, Image, Pressable, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, Fontisto } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 const CardsArticles = ({ item }) => {
 
     const navigation = useNavigation()
-
+    const [isLoading, setIsLoading] = useState(true);
     const showArticle = () => {
         navigation.navigate("ViewArticleScreen", { article: item })
     }
 
+    useEffect(() => {
+        if (item.images && item.images.length > 0) {
+            setIsLoading(false);
+        }
+    }, [item]);
 
 
 
@@ -32,14 +37,26 @@ const CardsArticles = ({ item }) => {
                     height: 280,
                     alignItems: "center",
                 }}>
-                <Image
-                    source={{ uri: item.images[0].src }}
-                    style={{
-                        width: '100%',
-                        height: "100%",
-                        position: "absolute"
-                    }
-                    } />
+
+                {isLoading ? (
+                    <Image
+                        source={require('../../../assets/image/backgroundImage.png')}
+                        style={{
+                            width: '100%',
+                            height: "100%",
+                            position: "absolute"
+                        }
+                        } />
+                ) : (
+                    <Image
+                        source={{ uri: item.images[0].src }}
+                        style={{
+                            width: '100%',
+                            height: "100%",
+                            position: "absolute"
+                        }
+                        } />
+                )}
 
             </Pressable>
 

@@ -23,10 +23,13 @@ const FirstNavigation = () => {
             }}
         >
 
+
+
             <Stack.Screen name="Start" component={StartPage} />
             <Stack.Screen name="TabNavigation" component={TabNavigation} />
             <Stack.Screen name="Signin" component={SignInScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
+
 
 
         </Stack.Navigator>

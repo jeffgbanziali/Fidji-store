@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, Alert } from 'react-native'
+import React, { useContext, useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../Context/AuthContext';
 
 const SignInScreen = () => {
 
@@ -26,15 +27,64 @@ const SignInScreen = () => {
         console.warn("change your password")
     };
 
-    const handleSignIn = () => {
-        navigation.navigate("TabNavigation")
 
+    const { signIn } = useContext(AuthContext);
+
+    const handleSignIn = async () => {
+        try {
+            const response = await fetch('https://boutiquefidji.com/wp-json/api/v1/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: email,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Récupérer les détails de l'utilisateur en appelant une autre API WordPress avec le token JWT
+                const userResponse = await fetch('https://boutiquefidji.com/wp-json/wp/v2/users/me', {
+                    headers: {
+                        'Authorization': 'Bearer ' + data.jwt_token
+                    }
+                });
+
+                if (userResponse.ok) {
+                    const userData = await userResponse.json();
+                    // Extraire l'ID de l'utilisateur de userData
+                    const userId = userData.id;
+                    console.log('Détails de l\'utilisateur:', userId);
+
+                    // Continuer avec votre logique de connexion
+                    signIn(data.jwt_token, userId);
+
+                } else {
+                    // Gérer les erreurs lors de la récupération des détails de l'utilisateur
+                    console.error('Erreur lors de la récupération des détails de l\'utilisateur');
+                }
+
+            } else {
+                Alert.alert('Erreur', 'Identifiants incorrects. Veuillez réessayer.');
+            }
+        } catch (error) {
+            console.error('Erreur lors de la connexion :', error);
+            Alert.alert('Erreur', 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer plus tard.');
+        }
     };
+
+
+
+
+
 
     const handleGoSignUp = () => {
-        navigation.navigate("Register")
-
+        navigation.navigate("Register");
     };
+
+
 
     return (
 
