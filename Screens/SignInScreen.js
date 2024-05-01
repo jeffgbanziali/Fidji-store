@@ -220,6 +220,9 @@ const SignInScreen = () => {
                                         placeholder="Identifiant ou e-mail"
                                         placeholderTextColor="black"
                                         autoCapitalize="none"
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
+                                        editable={editable}
                                     />
 
 
@@ -261,7 +264,11 @@ const SignInScreen = () => {
                                         secureTextEntry={!showPass}
                                         autoCapitalize="none"
                                         placeholder="Mot de passe"
-                                        placeholderTextColor="black" />
+                                        placeholderTextColor="black"
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
+                                        editable={editable}
+                                    />
 
                                     <Pressable
                                         onPress={viewPass}
