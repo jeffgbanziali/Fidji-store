@@ -7,6 +7,9 @@ import { UserData } from '../DataFictifs/UserData';
 import Modal from "react-native-modal";
 import BasketScreen from './BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useDispatch, useSelector } from 'react-redux';
+import { getShirt } from '../ReduxActions/products.actions';
+import { isEmpty } from '../Context/UtilsFunctions';
 
 
 
@@ -21,34 +24,34 @@ const ShirtScreen = () => {
 
 
     const navigation = useNavigation()
-
-
+    const dispatch = useDispatch();
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
 
 
     const [loading, setLoading] = useState(true);
-
-
-
     const retourned = () => {
         navigation.goBack();
     }
 
-    const [article, setArticle] = useState([]);
+    const allShort = useSelector(state => state.productsReducer.shirts);
+
+
+
 
     useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
-            .then(response => response.json())
-            .then(data => {
-                setArticle(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching articles:', error);
-                setLoading(false);
-            });
-    }, []);
+        dispatch(getShirt());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (!isEmpty(allShort)) {
+            setLoading(false);
+        }
+    }, [allShort]);
+
+
+
 
 
 
@@ -188,7 +191,7 @@ const ShirtScreen = () => {
 
                         <FlatList
 
-                            data={article}
+                            data={allShort}
                             renderItem={({ item }) => <CardsArticles item={item} />}
                             keyExtractor={item => item.id.toString()}
                             numColumns={2}

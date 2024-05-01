@@ -7,6 +7,9 @@ import { DataArticles } from "../DataFictifs/DataArticles"
 import { UserData } from '../DataFictifs/UserData';
 import BasketScreen from './BasketScreen';
 import Modal from "react-native-modal";
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from '../Context/UtilsFunctions';
+import { getCoats } from '../ReduxActions/products.actions';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -27,8 +30,8 @@ const CoatScreen = () => {
     }
 
 
-    
-    const [article, setArticle] = useState([]);
+
+
 
 
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
@@ -40,19 +43,21 @@ const CoatScreen = () => {
 
 
 
-    useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=100&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
-            .then(response => response.json())
-            .then(data => {
-                setArticle(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching articles:', error);
-                setLoading(false);
-            });
-    }, []);
+    const dispatch = useDispatch()
 
+    const allCoat = useSelector(state => state.productsReducer.coats);
+
+
+    useEffect(() => {
+        dispatch(getCoats());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        if (!isEmpty(allCoat)) {
+            setLoading(false);
+        }
+    }, [allCoat]);
 
 
 
@@ -186,7 +191,7 @@ const CoatScreen = () => {
 
                         <FlatList
 
-                            data={article}
+                            data={allCoat}
                             renderItem={({ item }) => <CardsArticles item={item} />}
                             keyExtractor={item => item.id.toString()}
                             numColumns={2}

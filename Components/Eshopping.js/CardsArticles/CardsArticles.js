@@ -11,6 +11,7 @@ const CardsArticles = ({ item }) => {
         navigation.navigate("ViewArticleScreen", { article: item })
     }
 
+
     useEffect(() => {
         if (item.images && item.images.length > 0) {
             setIsLoading(false);
