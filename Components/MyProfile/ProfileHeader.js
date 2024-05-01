@@ -5,6 +5,21 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const ProfileHeader = () => {
+
+
+
+
+    const navigation = useNavigation()
+
+
+    const goToProfilSetting = () => {
+        navigation.navigate("Settings")
+    }
+
+
+
+
+
     return (
         <View
             style={{
@@ -39,7 +54,10 @@ const ProfileHeader = () => {
 
                 <MaterialCommunityIcons name="message-question-outline" size={26} color="black" />
             </Pressable>
+
+
             <Pressable
+                onPress={goToProfilSetting}
                 style={{
                     width: 50,
                     height: 50,

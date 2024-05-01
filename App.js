@@ -53,6 +53,7 @@ const AppContent = () => {
   return (
     <View style={styles.container}>
       <NavigationContainer>
+        <StatusBar style="auto" />
         {
           userToken ?
             <TabNavigation /> :
