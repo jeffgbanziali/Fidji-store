@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }) => {
             await AsyncStorage.removeItem('userId'); // Supprimer également l'ID de l'utilisateur
             setUserToken(null);
             setUserId(null);
+            console.log("Déconnexion réussie")
         } catch (error) {
             console.error('Erreur lors de la suppression du jeton JWT et de l\'ID de l\'utilisateur depuis AsyncStorage :', error);
         }
