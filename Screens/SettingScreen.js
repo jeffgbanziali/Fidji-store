@@ -7,6 +7,14 @@ import { UserData } from '../DataFictifs/UserData';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import SignOutButton from '../Components/MyProfile/Settings/SignOutButton';
 import LoadingScreen from '../Components/SignInScreen/LoadingScreen';
+import CustomersInformations from '../Components/MyProfile/Settings/CustomersInformations';
+import PaymentMode from '../Components/MyProfile/Settings/PaymentMode';
+import AddressBook from '../Components/MyProfile/Settings/AddressBook';
+import DeliveryCountry from '../Components/MyProfile/Settings/DeliveryCountry';
+import Notifications from '../Components/MyProfile/Settings/Notifications';
+import CGV from '../Components/MyProfile/Settings/CGV';
+import Confidentialities from '../Components/MyProfile/Settings/Confidentialities';
+import Discounts from '../Components/MyProfile/Settings/Discounts';
 
 
 
@@ -19,7 +27,7 @@ const SettingScreen = () => {
     const [isLoadingSignOut, setIsLoadingSignOut] = useState(false);
 
     const retourned = () => {
-        navigation.replace("Profile");
+        navigation.goBack("");
     }
     const bottomTabHeight = useBottomTabBarHeight();
 
@@ -64,7 +72,7 @@ const SettingScreen = () => {
                             </Pressable>
                             <Text
                                 style={{
-                                    fontSize: 20,
+                                    fontSize: 24,
                                     fontWeight: "500",
                                     color: "black"
                                 }} >
@@ -78,6 +86,14 @@ const SettingScreen = () => {
                         <SignOutButton
                             isLoadingSignOut={isLoadingSignOut}
                             setIsLoadingSignOut={setIsLoadingSignOut} />
+                        <CustomersInformations />
+                        <PaymentMode />
+                        <AddressBook />
+                        <Discounts />
+                        <DeliveryCountry />
+                        <Notifications />
+                        <CGV />
+                        <Confidentialities />
 
 
                     </SafeAreaView>

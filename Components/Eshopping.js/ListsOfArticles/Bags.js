@@ -54,6 +54,7 @@ const Bags = () => {
                     height: 60,
                     marin: 2,
                     paddingLeft: 10,
+
                     justifyContent: "center",
                 }}>
 

@@ -53,8 +53,10 @@ const SignOutButton = ({ setIsLoadingSignOut }) => {
         <View
             style={{
                 width: "100%",
-                height: 50,
+                height: 80,
                 justifyContent: "center",
+                borderBottomWidth: 1,
+                borderColor: "gray",
                 alignItems: "center",
 
             }}>
