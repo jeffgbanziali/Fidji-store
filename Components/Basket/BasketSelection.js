@@ -21,7 +21,6 @@ const BasketSelection = ({ cart }) => {
         setQuantity(quantity + 1);
     };
 
-    console.log("image de mon panier", cart)
 
     return (
         <View

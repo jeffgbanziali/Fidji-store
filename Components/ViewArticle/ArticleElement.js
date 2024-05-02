@@ -1,5 +1,5 @@
 import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView, Animated, FlatList } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Carousel from './Carousel';
@@ -18,7 +18,13 @@ const ArticleElement = ({ article }) => {
 
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
-    const [quantity, setQuantity] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (article.images && article.images.length > 0) {
+            setIsLoading(false);
+        }
+    }, [article.images]);
 
     // Fonction pour mettre à jour la couleur sélectionnée
     const handleColorChange = (color) => {
@@ -87,14 +93,27 @@ const ArticleElement = ({ article }) => {
 
 
                     }}>
-                    <Image
-                        source={{ uri: item.src }}
-                        style={{
-                            width: '100%',
-                            height: "100%",
-                            resizeMode: "cover",
-                        }
-                        } />
+
+                    {
+                        isLoading ? (
+                            <Image
+                                source={require('../../assets/image/backgroundImage.png')}
+                                style={{
+                                    width: '100%',
+                                    height: "100%",
+                                    position: "absolute"
+                                }
+                                } />
+                        ) : (
+                            <Image
+                                source={{ uri: item.src }}
+                                style={{
+                                    width: '100%',
+                                    height: "100%",
+                                    resizeMode: "cover",
+                                }} />
+                        )}
+
 
                 </View>
 

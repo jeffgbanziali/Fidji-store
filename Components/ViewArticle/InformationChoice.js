@@ -11,7 +11,6 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
     const [taille, setTaille] = useState(null);
     const [value, setValue] = useState(null);
 
-    console.log("Voici mes atribues", article.attributes)
 
 
 
