@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -47,6 +47,9 @@ const SettingScreen = () => {
                             alignItems: "center",
 
                         }}>
+
+
+
                         <View
                             style={{
                                 width: "100%",
@@ -83,17 +86,24 @@ const SettingScreen = () => {
 
                         </View>
 
-                        <SignOutButton
-                            isLoadingSignOut={isLoadingSignOut}
-                            setIsLoadingSignOut={setIsLoadingSignOut} />
-                        <CustomersInformations />
-                        <PaymentMode />
-                        <AddressBook />
-                        <Discounts />
-                        <DeliveryCountry />
-                        <Notifications />
-                        <CGV />
-                        <Confidentialities />
+                        <ScrollView
+                            style={{
+                                width: '100%',
+                                height: "100%",
+                            }}>
+                            <SignOutButton
+                                isLoadingSignOut={isLoadingSignOut}
+                                setIsLoadingSignOut={setIsLoadingSignOut} />
+                            <CustomersInformations />
+                            <PaymentMode />
+                            <AddressBook />
+                            <Discounts />
+                            <DeliveryCountry />
+                            <Notifications />
+                            <CGV />
+                            <Confidentialities />
+                        </ScrollView>
+
 
 
                     </SafeAreaView>

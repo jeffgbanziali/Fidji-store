@@ -42,7 +42,7 @@ const SearchBar = () => {
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
-                    <Feather name="search" size={28} color="white" />
+                    <Feather name="search" size={24} color="white" />
                 </View>
 
             </View>
@@ -67,7 +67,10 @@ const SearchBar = () => {
                     onChangeText={handleInputChange}
                     value={newSearch}
                     placeholder="QUE RECHERCHEZ-VOUS"
-                    placeholderTextColor="white" />
+                    placeholderTextColor="white"
+                    fontSize={16}
+
+                />
 
 
                 {isTyping && (
