@@ -6,6 +6,52 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [userId, setUserId] = useState(null); // Ajouter un état pour stocker l'ID de l'utilisateur
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        // Charger le panier depuis le stockage local lors du montage du composant
+        const loadCart = async () => {
+            try {
+                const storedCart = await AsyncStorage.getItem('localCart');
+                if (storedCart) {
+                    setCart(JSON.parse(storedCart));
+                }
+            } catch (error) {
+                console.error('Error loading cart from AsyncStorage:', error);
+            }
+        };
+        loadCart();
+    }, []);
+
+    const addToCart = (product) => {
+        const existingItemIndex = cart.findIndex(item => item.id === product.id);
+        if (existingItemIndex !== -1) {
+            // L'article existe déjà dans le panier, augmenter la quantité
+            const updatedCart = [...cart];
+            updatedCart[existingItemIndex].quantity++;
+            setCart(updatedCart);
+        } else {
+            // Ajouter l'article au panier
+            setCart([...cart, { ...product, quantity: 1 }]);
+        }
+    };
+
+    const removeFromCart = (productId) => {
+        const updatedCart = cart.filter(item => item.id !== productId);
+        setCart(updatedCart);
+    };
+
+    useEffect(() => {
+        // Mettre à jour le stockage local chaque fois que le panier change
+        const saveCart = async () => {
+            try {
+                await AsyncStorage.setItem('localCart', JSON.stringify(cart));
+            } catch (error) {
+                console.error('Error saving cart to AsyncStorage:', error);
+            }
+        };
+        saveCart();
+    }, [cart]);
 
     useEffect(() => {
         const checkUserToken = async () => {
@@ -63,6 +109,9 @@ export const AuthProvider = ({ children }) => {
                 userId,
                 signIn,
                 signOut,
+                cart,
+                addToCart,
+                removeFromCart
             }}
         >
             {children}

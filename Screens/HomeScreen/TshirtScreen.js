@@ -1,16 +1,15 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import { UserData } from '../DataFictifs/UserData';
+import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArticles';
 import Modal from "react-native-modal";
-import BasketScreen from './BasketScreen';
+import BasketScreen from '../BasketScreen/BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getShirt } from '../ReduxActions/products.actions';
-import { isEmpty } from '../Context/UtilsFunctions';
-
+import { isEmpty } from '../../Context/UtilsFunctions';
+import { getTshirt } from '../../ReduxActions/products.actions';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 
@@ -20,39 +19,39 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
 
-const ShirtScreen = () => {
+const TshirtScreen = () => {
 
 
     const navigation = useNavigation()
-    const dispatch = useDispatch();
+
+
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
-
-
     const [loading, setLoading] = useState(true);
+
+
+
     const retourned = () => {
         navigation.goBack();
     }
 
-    const allShort = useSelector(state => state.productsReducer.shirts);
 
+    const dispatch = useDispatch()
 
+    const alltshirt = useSelector(state => state.productsReducer.tshirts);
+    const { cart } = useContext(AuthContext)
 
 
     useEffect(() => {
-        dispatch(getShirt());
+        dispatch(getTshirt());
     }, [dispatch]);
 
 
     useEffect(() => {
-        if (!isEmpty(allShort)) {
+        if (!isEmpty(alltshirt)) {
             setLoading(false);
         }
-    }, [allShort]);
-
-
-
-
+    }, [alltshirt]);
 
 
     const handleViewBasket = () => {
@@ -77,8 +76,6 @@ const ShirtScreen = () => {
 
 
     const bottomTabHeight = useBottomTabBarHeight();
-
-
 
 
 
@@ -124,7 +121,7 @@ const ShirtScreen = () => {
                         fontWeight: "500",
                         color: "black"
                     }} >
-                    CHEMISES
+                    T-SHIRTS-POLOS
                 </Text>
 
 
@@ -156,7 +153,7 @@ const ShirtScreen = () => {
                                 fontWeight: "500",
                                 color: "white"
                             }} >
-                            {UserData.cart.length}
+                            {cart.length}
                         </Text>
                     </View>
 
@@ -191,7 +188,7 @@ const ShirtScreen = () => {
 
                         <FlatList
 
-                            data={allShort}
+                            data={alltshirt}
                             renderItem={({ item }) => <CardsArticles item={item} />}
                             keyExtractor={item => item.id.toString()}
                             numColumns={2}
@@ -220,4 +217,4 @@ const ShirtScreen = () => {
     )
 }
 
-export default ShirtScreen
+export default TshirtScreen

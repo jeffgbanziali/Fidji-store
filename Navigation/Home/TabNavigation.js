@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Animated, Easing, Text, Image, Pressable, View } from 'react-native'
-import HomeScreen from '../Screens/HomeScreen'
-import Profile from '../Screens/ProfileScreen'
-import LeavesScreen from '../Screens/LeavesScreen'
 import { AntDesign, Entypo, Octicons, Ionicons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import BasketScreen from '../Screens/BasketScreen'
-import EShoppingScreen from '../Screens/EShoppingScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Modal from "react-native-modal";
-import { UserData } from '../DataFictifs/UserData'
 import StackNavigation from './StackNavigation'
+import ProfileNavigation from '../Profil/ProfileNavigation';
+import BasketScreen from '../../Screens/BasketScreen/BasketScreen';
+import LeavesScreen from "../../Screens/ProfileScreen/LeavesScreen"
+import EshoppingNavigation from '../Eshop/EshoppingNavigation';
+import { AuthContext } from '../../Context/AuthContext';
+
 
 
 const Tab = createBottomTabNavigator();
+
+
 
 const TabNavigation = () => {
 
@@ -22,6 +24,7 @@ const TabNavigation = () => {
     const [showBasket, setShowBasket] = useState(false);
 
 
+    const { cart } = useContext(AuthContext)
 
 
 
@@ -90,12 +93,12 @@ const TabNavigation = () => {
                 />
                 <Tab.Screen
                     name="E-shop"
-                    component={EShoppingScreen}
+                    component={EshoppingNavigation}
                     options={{
                         tabBarIcon: ({ focused }) => (
                             focused ? (
                                 <Image
-                                    source={require('../assets/image/1.jpg')}
+                                    source={require('../../assets/image/1.jpg')}
                                     style={{
                                         width: 30,
                                         height: 30,
@@ -105,7 +108,7 @@ const TabNavigation = () => {
                                 />
                             ) : (
                                 <Image
-                                    source={require('../assets/image/1.jpg')}
+                                    source={require('../../assets/image/1.jpg')}
                                     style={{
                                         width: 32,
                                         height: 32,
@@ -143,7 +146,7 @@ const TabNavigation = () => {
                                             fontWeight: "500",
                                             color: "black"
                                         }} >
-                                        {UserData.cart.length}
+                                        {cart.length}
                                     </Text>
                                 </View>
                                 {focused ? (
@@ -164,7 +167,7 @@ const TabNavigation = () => {
                 />
                 <Tab.Screen
                     name="Compte"
-                    component={Profile} options={{
+                    component={ProfileNavigation} options={{
                         tabBarIcon: ({ focused }) => (
                             focused ? (
                                 <FontAwesome name="user" size={24} color="black" />

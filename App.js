@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import FirstNavigation from './Navigation/FirstNavigation';
-import TabNavigation from './Navigation/TabNavigation';
+import FirstNavigation from './Navigation/Start/FirstNavigation';
+import TabNavigation from './Navigation/Home/TabNavigation';
 import { AuthContext, AuthProvider } from './Context/AuthContext';
 import { useContext, useEffect } from 'react';
 import { Provider, useDispatch, useSelector } from "react-redux";

@@ -1,16 +1,15 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import { DataArticles } from "../DataFictifs/DataArticles"
-import { UserData } from '../DataFictifs/UserData';
+import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArticles';
 import Modal from "react-native-modal";
-import BasketScreen from './BasketScreen';
+import BasketScreen from '../BasketScreen/BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSweatshirt } from '../ReduxActions/products.actions';
-import { isEmpty } from '../Context/UtilsFunctions';
+import { getSweatshirt } from '../../ReduxActions/products.actions';
+import { isEmpty } from '../../Context/UtilsFunctions';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 
@@ -41,6 +40,7 @@ const SweatshirtScreen = () => {
     const dispatch = useDispatch()
 
     const allSweatshirt = useSelector(state => state.productsReducer.sweatshirts);
+    const { cart } = useContext(AuthContext)
 
 
     useEffect(() => {
@@ -54,8 +54,6 @@ const SweatshirtScreen = () => {
         }
     }, [allSweatshirt]);
 
-
-    console.log("Où sont mes sweatchs", allSweatshirt)
 
 
 
@@ -155,7 +153,7 @@ const SweatshirtScreen = () => {
                                 fontWeight: "500",
                                 color: "white"
                             }} >
-                            {UserData.cart.length}
+                            {cart.length}
                         </Text>
                     </View>
 

@@ -103,7 +103,7 @@ const RegisterScreen = () => {
                             justifyContent: "center"
                         }}>
                         <Image
-                            source={require('../assets/image/2.jpg')}
+                            source={require('../../assets/image/2.jpg')}
                             style={{
                                 width: "100%",
                                 height: "100%",

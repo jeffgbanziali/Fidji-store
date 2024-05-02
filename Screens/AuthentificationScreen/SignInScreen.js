@@ -2,8 +2,8 @@ import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, P
 import React, { useContext, useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../Context/AuthContext';
-import LoadingScreen from '../Components/SignInScreen/LoadingScreen';
+import { AuthContext } from '../../Context/AuthContext';
+import LoadingScreen from '../../Components/SignInScreen/LoadingScreen';
 
 const SignInScreen = () => {
 
@@ -42,7 +42,7 @@ const SignInScreen = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: email,
+                    username: email ,
                     password: password
                 })
             });
@@ -175,7 +175,7 @@ const SignInScreen = () => {
                                     justifyContent: "center"
                                 }}>
                                 <Image
-                                    source={require('../assets/image/2.jpg')}
+                                    source={require('../../assets/image/2.jpg')}
                                     style={{
                                         width: "100%",
                                         height: "100%",

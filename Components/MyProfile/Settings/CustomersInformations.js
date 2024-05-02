@@ -1,11 +1,20 @@
 import { View, Text, Animated, Pressable } from 'react-native'
 import React from 'react'
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 const CustomersInformations = () => {
+    const navigation = useNavigation()
+
+    const goInfo = () => {
+        navigation.navigate("CustomerInfo")
+    }
+
+
     return (
         <Pressable
+            onPress={goInfo}
             style={{
                 width: "100%",
                 height: 50,

@@ -1,14 +1,14 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { SimpleLineIcons, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import HeaderBasket from '../Components/Basket/HeaderBasket';
-import BasketArticleList from '../Components/Basket/BasketArticleList';
-import DeliveryInformations from '../Components/Basket/DeliveryInformations';
-import { UserData } from "../DataFictifs/UserData"
-import BasketSelection from '../Components/Basket/BasketSelection';
-import BasketValidate from '../Components/Basket/BasketValidate';
-import TotalBasket from '../Components/Basket/TotalBasket';
+import HeaderBasket from '../../Components/Basket/HeaderBasket';
+import BasketArticleList from '../../Components/Basket/BasketArticleList';
+import DeliveryInformations from '../../Components/Basket/DeliveryInformations';
+import BasketSelection from '../../Components/Basket/BasketSelection';
+import BasketValidate from '../../Components/Basket/BasketValidate';
+import TotalBasket from '../../Components/Basket/TotalBasket';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 
@@ -16,16 +16,19 @@ const BasketScreen = ({ handleViewBasket }) => {
 
 
 
+    const { cart, addToCart } = useContext(AuthContext)
+
+
 
     // Calcule la somme totale des éléments dans le panier
     const calculateTotal = () => {
         // Si le panier est vide, retourne 0
-        if (UserData.cart.length === 0) {
+        if (cart.length === 0) {
             return 0;
         }
 
         // Utilise reduce pour additionner les prix de chaque article dans le panier
-        const total = UserData.cart.reduce((acc, item) => acc + (item.price * item.stock_quantity), 0);
+        const total = cart.reduce((acc, item) => acc + (item.price * item.stock_quantity), 0);
 
         // Retourne le total
         return total;
@@ -47,11 +50,11 @@ const BasketScreen = ({ handleViewBasket }) => {
             <HeaderBasket handleViewBasket={handleViewBasket} />
 
             {
-                UserData && UserData.cart.length > 0 ? (
+                cart && cart.length > 0 ? (
                     <>
 
                         <FlatList
-                            data={UserData.cart}
+                            data={cart}
                             keyExtractor={(cart) => cart.id.toString()}
                             onEndReachedThreshold={0.5}
                             renderItem={({ item: cart }) => (
@@ -90,7 +93,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                                                     color: "gray",
                                                     fontWeight: "600"
                                                 }}>
-                                                ({UserData.cart.length} Article)
+                                                ({cart.length} Article)
                                             </Text>
                                         </View>
 
@@ -99,7 +102,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                             )}
                             ListFooterComponent={() => (
                                 <>
-                                    <DeliveryInformations develivery={UserData.cart.length} />
+                                    <DeliveryInformations develivery={cart.length} />
                                     <TotalBasket calculateTotal={calculateTotal} />
                                 </>
                             )}

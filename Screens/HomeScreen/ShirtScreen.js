@@ -1,15 +1,16 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import { UserData } from '../DataFictifs/UserData';
+import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArticles';
 import Modal from "react-native-modal";
-import BasketScreen from './BasketScreen';
+import BasketScreen from '../BasketScreen/BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPants } from '../ReduxActions/products.actions';
-import { isEmpty } from '../Context/UtilsFunctions';
+import { getShirt } from '../../ReduxActions/products.actions';
+import { isEmpty } from '../../Context/UtilsFunctions';
+import { AuthContext } from '../../Context/AuthContext';
+
 
 
 
@@ -19,39 +20,40 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
 
-const PantScreen = () => {
+const ShirtScreen = () => {
 
 
     const navigation = useNavigation()
-
-
+    const dispatch = useDispatch();
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
 
+    const { cart } = useContext(AuthContext)
 
     const [loading, setLoading] = useState(true);
-
-
-
     const retourned = () => {
         navigation.goBack();
     }
 
-    const dispatch = useDispatch()
+    const allShort = useSelector(state => state.productsReducer.shirts);
 
-    const allPant = useSelector(state => state.productsReducer.pants);
+
 
 
     useEffect(() => {
-        dispatch(getPants());
+        dispatch(getShirt());
     }, [dispatch]);
 
 
     useEffect(() => {
-        if (!isEmpty(allPant)) {
+        if (!isEmpty(allShort)) {
             setLoading(false);
         }
-    }, [allPant]);
+    }, [allShort]);
+
+
+
+
 
 
     const handleViewBasket = () => {
@@ -72,7 +74,6 @@ const PantScreen = () => {
             }).start();
         }
     };
-
 
 
 
@@ -124,7 +125,7 @@ const PantScreen = () => {
                         fontWeight: "500",
                         color: "black"
                     }} >
-                    PANTALONS
+                    CHEMISES
                 </Text>
 
 
@@ -156,7 +157,7 @@ const PantScreen = () => {
                                 fontWeight: "500",
                                 color: "white"
                             }} >
-                            {UserData.cart.length}
+                            {cart.length}
                         </Text>
                     </View>
 
@@ -165,18 +166,6 @@ const PantScreen = () => {
 
             </View>
 
-            <Modal
-                isVisible={showBasket}
-                onBackdropPress={handleViewBasket}
-                style={{ margin: 0, justifyContent: "flex-end" }}
-                backdropOpacity={0.5}
-                animationIn="slideInUp"
-                animationOut="slideOutDown"
-                useNativeDriverForBackdrop
-            >
-                <BasketScreen handleViewBasket={handleViewBasket} />
-
-            </Modal>
 
             {
                 loading ? (
@@ -203,7 +192,7 @@ const PantScreen = () => {
 
                         <FlatList
 
-                            data={allPant}
+                            data={allShort}
                             renderItem={({ item }) => <CardsArticles item={item} />}
                             keyExtractor={item => item.id.toString()}
                             numColumns={2}
@@ -216,8 +205,20 @@ const PantScreen = () => {
 
                     </View>
                 )}
+            <Modal
+                isVisible={showBasket}
+                onBackdropPress={handleViewBasket}
+                style={{ margin: 0, justifyContent: "flex-end" }}
+                backdropOpacity={0.5}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                useNativeDriverForBackdrop
+            >
+                <BasketScreen handleViewBasket={handleViewBasket} />
+
+            </Modal>
         </SafeAreaView>
     )
 }
 
-export default PantScreen
+export default ShirtScreen

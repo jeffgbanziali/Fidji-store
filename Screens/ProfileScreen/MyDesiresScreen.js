@@ -1,11 +1,11 @@
 import { View, Text, Dimensions, ScrollView } from 'react-native'
 import React from 'react'
-import HeaderPower from '../Components/MyProfile/MyDesires/HeaderPower'
-import NotArticle from '../Components/MyProfile/ArticleChoise/NotArticle'
-import StockAlert from '../Components/MyProfile/ArticleChoise/StockAlert'
+import HeaderPower from '../../Components/MyProfile/MyDesires/HeaderPower'
+import NotArticle from '../../Components/MyProfile/ArticleChoise/NotArticle'
+import StockAlert from '../../Components/MyProfile/ArticleChoise/StockAlert'
 import { useNavigation } from '@react-navigation/native'
-import { UserData } from "../DataFictifs/UserData"
-import Wishlist from '../Components/MyProfile/ArticleChoise/Wishlist'
+import { UserData } from "../../DataFictifs/UserData"
+import Wishlist from '../../Components/MyProfile/ArticleChoise/Wishlist'
 
 
 

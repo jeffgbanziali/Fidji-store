@@ -4,7 +4,7 @@ import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UserData } from "../../DataFictifs/UserData"
 import Modal from "react-native-modal";
-import BasketScreen from '../../Screens/BasketScreen';
+import BasketScreen from '../../Screens/BasketScreen/BasketScreen';
 
 
 

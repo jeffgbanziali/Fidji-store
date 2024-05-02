@@ -2,12 +2,12 @@ import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView } fr
 import React from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Header from '../Components/ViewArticle/Header';
-import ArticleElement from '../Components/ViewArticle/ArticleElement';
-import InformationChoice from '../Components/ViewArticle/InformationChoice';
-import AddBasket from '../Components/ViewArticle/AddBasket';
-import MoreInformationsArticles from '../Components/ViewArticle/MoreInformationsArticles';
-import PaymentTools from '../Components/ViewArticle/PaymentTools';
+import Header from '../../Components/ViewArticle/Header';
+import ArticleElement from '../../Components/ViewArticle/ArticleElement';
+import InformationChoice from '../../Components/ViewArticle/InformationChoice';
+import AddBasket from '../../Components/ViewArticle/AddBasket';
+import MoreInformationsArticles from '../../Components/ViewArticle/MoreInformationsArticles';
+import PaymentTools from '../../Components/ViewArticle/PaymentTools';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 

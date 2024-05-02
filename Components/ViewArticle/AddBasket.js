@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Modal, Text, Pressable, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { UserData } from "../../DataFictifs/UserData"
 import SuccessModal from './SuccessModal';
+import { useSelector } from 'react-redux';
+import { AuthContext } from '../../Context/AuthContext';
 
 const AddBasket = ({ article, selectedColor, selectedSize }) => {
     const [quantity, setQuantity] = useState(1);
@@ -19,6 +20,14 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
     };
 
 
+    const userData = useSelector((state) => state.userReducer)
+
+
+
+    const { cart, addToCart } = useContext(AuthContext)
+
+    console.log("Mon panier est là :", cart);
+
 
     const handleAddCartArticle = () => {
 
@@ -29,14 +38,10 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
         updatedArticle.stock_quantity = quantity;
 
 
-        console.log("Données article mises à jour :", updatedArticle);
-
-        const updatedUserData = { ...UserData };
-
-        updatedUserData.cart.push(updatedArticle);
+        addToCart(updatedArticle);
         setShowSuccessModal(true);
 
-        console.log("Données utilisateur mises à jour :", updatedUserData);
+        console.log("Mon panier est rempli  :", cart);
 
 
     };

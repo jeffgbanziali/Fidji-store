@@ -1,15 +1,14 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Easing, Animated } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import CardsArticles from '../Components/Eshopping.js/CardsArticles/CardsArticles';
-import { DataArticles } from "../DataFictifs/DataArticles"
-import { UserData } from '../DataFictifs/UserData';
-import BasketScreen from './BasketScreen';
+import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArticles';
+import BasketScreen from '../BasketScreen/BasketScreen';
 import Modal from "react-native-modal";
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from '../Context/UtilsFunctions';
-import { getCoats } from '../ReduxActions/products.actions';
+import { isEmpty } from '../../Context/UtilsFunctions';
+import { getCoats } from '../../ReduxActions/products.actions';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -39,6 +38,7 @@ const CoatScreen = () => {
 
     const [loading, setLoading] = useState(true);
 
+    const { cart } = useContext(AuthContext)
 
 
 
@@ -156,7 +156,7 @@ const CoatScreen = () => {
                                 fontWeight: "500",
                                 color: "white"
                             }} >
-                            {UserData.cart.length}
+                            {cart.length}
                         </Text>
                     </View>
 

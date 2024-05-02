@@ -1,8 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import MyDesiresScreen from '../Screens/MyDesiresScreen'
-import MyOrders from '../Screens/MyOrders'
-import AboutScreen from '../Screens/AboutScreen'
+import MyDesiresScreen from '../../Screens/ProfileScreen/MyDesiresScreen'
+import MyOrders from '../../Screens/ProfileScreen/MyOrders'
+import AboutScreen from '../../Screens/AboutScreen/AboutScreen'
 
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -10,7 +10,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const Tab = createMaterialTopTabNavigator();
 
 
-const ProfilNavigation = () => {
+const ProfilTabNavigation = () => {
 
 
 
@@ -30,4 +30,4 @@ const ProfilNavigation = () => {
 }
 
 
-export default ProfilNavigation
+export default ProfilTabNavigation

@@ -11,7 +11,6 @@ const Eshop = () => {
 
     const goToEshop = () => {
         navigation.navigate("Eshoping")
-        console.warn("dfoidhfhfodiffhdiofhdo")
     }
 
 
