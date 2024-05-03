@@ -11,6 +11,7 @@ import logger from 'redux-logger';
 import { getUser } from './ReduxActions/user.actions';
 import rootReducer from './reducers';
 import { getProducts, getUsers } from './ReduxActions/products.actions';
+import LoadingScreen from './Components/SignInScreen/LoadingScreen';
 
 const App = () => {
 
@@ -31,8 +32,10 @@ const App = () => {
 }
 
 const AppContent = () => {
-  const { userToken, userId } = useContext(AuthContext);
+  const { userToken } = useContext(AuthContext);
   const dispatch = useDispatch();
+
+  console.log("My token", userToken)
 
   useEffect(() => {
     if (userToken) {
@@ -54,9 +57,11 @@ const AppContent = () => {
       <NavigationContainer>
         <StatusBar style="auto" />
         {
-          userToken ?
-            <TabNavigation /> :
-            <FirstNavigation />}
+          userToken === null ? (
+            <LoadingScreen />
+          ) : (
+            userToken ? <TabNavigation /> : <FirstNavigation />
+          )}
       </NavigationContainer>
     </View>
   );
