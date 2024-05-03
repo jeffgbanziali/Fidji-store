@@ -117,7 +117,7 @@ const SignInScreen = () => {
                         style={{
                             width: "100%",
                             height: "100%",
-                           // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+                            // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                             alignItems: "center",
                         }}>
 
@@ -169,7 +169,7 @@ const SignInScreen = () => {
                             <View
                                 style={{
                                     width: "60%",
-                                    height: 120,
+                                    height: 80,
                                     alignItems: "center",
                                     //backgroundColor: "gray",
                                     justifyContent: "center"
@@ -180,9 +180,7 @@ const SignInScreen = () => {
                                         width: "100%",
                                         height: "100%",
                                     }}
-
                                 />
-
 
                             </View>
 
@@ -293,7 +291,8 @@ const SignInScreen = () => {
                             <View
                                 style={{
                                     width: "100%",
-                                    height: 160,
+                                    height: 120,
+                                    //backgroundColor: "red",
                                     alignItems: "center",
                                     justifyContent: "space-evenly"
                                 }}>

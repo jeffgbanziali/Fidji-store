@@ -56,12 +56,26 @@ const AppContent = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <StatusBar style="auto" />
+
         {
-          userToken === null ? (
-            <LoadingScreen />
+          userToken ? (
+
+            userToken === null ? (
+
+              <LoadingScreen />
+
+            ) : (
+
+              <TabNavigation />
+
+            )
+
           ) : (
-            userToken ? <TabNavigation /> : <FirstNavigation />
-          )}
+            
+            <FirstNavigation />
+          )
+        }
+
       </NavigationContainer>
     </View>
   );
