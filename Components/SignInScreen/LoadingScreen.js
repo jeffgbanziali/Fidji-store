@@ -24,7 +24,7 @@ const LoadingScreen = () => {
             </View>
             <Text
                 style={{
-                    fontSize: 30,
+                    fontSize: 26,
                     color: "white",
                 }}
             >
