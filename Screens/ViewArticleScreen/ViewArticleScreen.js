@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Pressable, ScrollView, Image, SafeAreaView } from 'react-native'
+import { View, Text, Dimensions, Platform, ScrollView, Image, SafeAreaView, StatusBar } from 'react-native'
 import React from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -34,6 +34,8 @@ const ViewArticleScreen = () => {
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
                 alignItems: "center",
+                //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
 
             }}>
 

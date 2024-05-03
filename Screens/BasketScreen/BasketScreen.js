@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, StatusBar, } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { SimpleLineIcons, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -45,6 +45,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                 flex: 1,
                 width: "100%",
                 height: "100%",
+              //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                 backgroundColor: "white",
             }}>
             <HeaderBasket handleViewBasket={handleViewBasket} />

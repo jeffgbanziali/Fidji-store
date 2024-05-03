@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, Alert } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, StatusBar, KeyboardAvoidingView, Platform, Image, Alert } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -42,7 +42,7 @@ const SignInScreen = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: email ,
+                    username: email,
                     password: password
                 })
             });
@@ -117,9 +117,9 @@ const SignInScreen = () => {
                         style={{
                             width: "100%",
                             height: "100%",
+                           // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                             alignItems: "center",
                         }}>
-
 
                         <View
                             style={{
@@ -197,7 +197,7 @@ const SignInScreen = () => {
 
                                 <View
                                     style={{
-                                        width: 380,
+                                        width: 350,
                                         height: 50,
                                         borderRadius: 10,
                                         flexDirection: "row",
@@ -241,7 +241,7 @@ const SignInScreen = () => {
 
                                 <View
                                     style={{
-                                        width: 380,
+                                        width: 350,
                                         height: 50,
                                         borderWidth: 2,
                                         borderColor: "black",

@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, ScrollView, Dimensions } from 'react-native'
+import { SafeAreaView, Text, ScrollView, Dimensions, Platform, StatusBar } from 'react-native'
 import React from 'react'
 import NewsArticle from '../../Components/HomeScreen/NewsArticle'
 import Eshop from '../../Components/HomeScreen/Eshop'
@@ -28,6 +28,8 @@ const HomeScreen = () => {
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
+                //padding: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
             }}>
             <ScrollView
                 style={{

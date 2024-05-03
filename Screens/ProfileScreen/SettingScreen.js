@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ActivityIndicator, Dimensions, FlatList, Animated, Easing, ScrollView, StatusBar } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -45,6 +45,8 @@ const SettingScreen = () => {
                             width: windowWidth,
                             height: windowHeight - bottomTabHeight,
                             alignItems: "center",
+                            //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
 
                         }}>
 

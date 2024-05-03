@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, StatusBar, View, Platform } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import FirstNavigation from './Navigation/Start/FirstNavigation';
 import TabNavigation from './Navigation/Home/TabNavigation';

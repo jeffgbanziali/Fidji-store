@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Dimensions } from 'react-native'
+import { View, Text, SafeAreaView, Dimensions, StatusBar, Platform } from 'react-native'
 import React from 'react'
 import ProfileHeader from '../../Components/MyProfile/ProfileHeader'
 import ProfilNavigation from '../../Navigation/Profil/ProfilTabNavigation'
@@ -22,6 +22,8 @@ const Profile = () => {
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
                 backgroundColor: "white",
+               // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
             }}>
             <ProfileHeader />
             <ProfilNavigation />

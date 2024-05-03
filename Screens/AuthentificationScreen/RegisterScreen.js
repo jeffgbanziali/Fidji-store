@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -55,10 +55,10 @@ const RegisterScreen = () => {
 
     }
     const handleRegister = (data) => {
-        /*  if (validateFields()) {
-            
-    };*/
-        navigation.navigate("Adress", { data });
+
+        if (validateFields()) {
+            navigation.navigate("Adress", { data });
+        }
 
     }
 
@@ -73,6 +73,7 @@ const RegisterScreen = () => {
                 flex: 1,
                 alignItems: "center",
                 height: "100%",
+
                 width: "100%",
             }}
         >
@@ -81,6 +82,7 @@ const RegisterScreen = () => {
                 style={{
                     width: "100%",
                     height: "100%",
+                    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                     alignItems: "center",
                 }}>
                 <ScrollView>
@@ -159,7 +161,7 @@ const RegisterScreen = () => {
 
                             <View
                                 style={{
-                                    width: 380,
+                                    width: 350,
                                     height: 50,
                                     borderRadius: 10,
                                     flexDirection: "row",
@@ -202,7 +204,7 @@ const RegisterScreen = () => {
 
                             <View
                                 style={{
-                                    width: 380,
+                                    width: 350,
                                     height: 50,
                                     borderRadius: 10,
                                     flexDirection: "row",
@@ -244,7 +246,7 @@ const RegisterScreen = () => {
 
                             <View
                                 style={{
-                                    width: 380,
+                                    width: 350,
                                     height: 50,
                                     borderRadius: 10,
                                     flexDirection: "row",
@@ -285,7 +287,7 @@ const RegisterScreen = () => {
 
                             <View
                                 style={{
-                                    width: 380,
+                                    width: 350,
                                     height: 50,
                                     borderRadius: 10,
                                     flexDirection: "row",
@@ -326,7 +328,7 @@ const RegisterScreen = () => {
 
                             <View
                                 style={{
-                                    width: 380,
+                                    width: 350,
                                     height: 50,
                                     borderWidth: 2,
                                     borderColor: "black",
@@ -367,6 +369,7 @@ const RegisterScreen = () => {
 
                                 </Pressable>
                             </View>
+
 
                         </View>
 

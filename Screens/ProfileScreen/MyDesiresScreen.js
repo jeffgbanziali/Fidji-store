@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, ScrollView } from 'react-native'
+import { View, Text, Dimensions, ScrollView, StatusBar } from 'react-native'
 import React from 'react'
 import HeaderPower from '../../Components/MyProfile/MyDesires/HeaderPower'
 import NotArticle from '../../Components/MyProfile/ArticleChoise/NotArticle'
@@ -6,6 +6,7 @@ import StockAlert from '../../Components/MyProfile/ArticleChoise/StockAlert'
 import { useNavigation } from '@react-navigation/native'
 import { UserData } from "../../DataFictifs/UserData"
 import Wishlist from '../../Components/MyProfile/ArticleChoise/Wishlist'
+import { Platform } from 'react-native'
 
 
 
@@ -20,7 +21,9 @@ const MyDesiresScreen = () => {
         <View
             style={{
                 width: windowWidth,
-                height: windowHeight
+                height: windowHeight,
+                //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
             }}>
 
             <ScrollView

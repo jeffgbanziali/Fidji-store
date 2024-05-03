@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator, StatusBar } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -94,6 +94,8 @@ const PantScreen = () => {
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
                 alignItems: "center",
+                //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
 
             }}>
             <View

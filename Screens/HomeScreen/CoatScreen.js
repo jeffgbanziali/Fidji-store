@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Easing, Animated } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Easing, Animated, StatusBar } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -91,6 +91,7 @@ const CoatScreen = () => {
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
                 height: windowHeight,
+                //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                 alignItems: "center",
 
             }}>

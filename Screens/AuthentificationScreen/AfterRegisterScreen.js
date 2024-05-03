@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -13,8 +13,8 @@ const AfterRegisterScreen = () => {
 
     const { data: userData } = route.params;
 
-
     const [addressData, setAddressData] = useState({
+
         billing: {
             first_name: "",
             last_name: "",
@@ -28,6 +28,7 @@ const AfterRegisterScreen = () => {
             email: "",
             phone: ""
         },
+
         shipping: {
             first_name: "",
             last_name: "",
@@ -55,7 +56,7 @@ const AfterRegisterScreen = () => {
         return Object.keys(addressData[type]).map((key, index) => (
             <View
                 key={index} style={{
-                    width: 380,
+                    width: 350,
                     height: 50,
                     borderRadius: 10,
                     marginBottom: 10,
@@ -86,27 +87,28 @@ const AfterRegisterScreen = () => {
         ));
     };
 
-    const handleSubmit = () => {
-        // Combinez les données d'utilisateur et d'adresse pour créer un objet client
-        const clientData = {
-            ...userData, // Les données utilisateur, à remplacer par votre objet userData
-            billing: addressData.billing,
-            shipping: addressData.shipping
-        };
+    const adress = addressData.billing
+    const shipp = addressData.shipping
 
-        // Envoyez l'objet client à votre API ou backend
-        axios.post('https://boutiquefidji.com//wp-json/wc/v3/customers?consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf', clientData, {
-            headers: {
-                'Content-Type': 'application/json',
+    const handleSubmit = () => {
+
+
+        axios.post(
+            'https://boutiquefidji.com/wp-json/wc/v3/customers?consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf',
+            userData,
+            adress,
+            shipp, // Données à envoyer
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             }
-        })
+        )
             .then(response => {
                 console.log('Client créé avec succès :', response.data);
-                // Effectuez d'autres actions après la création du client si nécessaire
             })
             .catch(error => {
-                console.error('Erreur lors de la création du client :', error.message);
-                // Gérez les erreurs de création de client ici
+                console.error('Erreur lors de la création du client :', error);
             });
     };
 
@@ -138,6 +140,7 @@ const AfterRegisterScreen = () => {
                 style={{
                     width: "100%",
                     height: "100%",
+                    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                     alignItems: "center",
                 }}>
 

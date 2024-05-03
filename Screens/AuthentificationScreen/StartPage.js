@@ -1,4 +1,4 @@
-import { View, Text, ImageBackground, Pressable, SafeAreaView, } from 'react-native'
+import { View, Text, ImageBackground, Pressable, Platform, StatusBar, SafeAreaView, } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -41,6 +41,7 @@ const StartPage = () => {
                     width: "100%",
                     height: "100%",
                     alignItems: "center",
+                    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                     justifyContent: "space-between",
                 }}>
 
@@ -122,7 +123,7 @@ const StartPage = () => {
                             }}>
                             <Text
                                 style={{
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: "white"
                                 }}>
                                 SE CONNECTER
@@ -137,12 +138,10 @@ const StartPage = () => {
                                 alignItems: "center",
                                 justifyContent: "center",
                                 backgroundColor: "black",
-
-
                             }}>
                             <Text
                                 style={{
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: "white"
                                 }}>
                                 INSCRIPTION

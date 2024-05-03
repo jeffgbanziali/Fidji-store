@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, ActivityIndicator, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, StatusBar } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -90,6 +90,8 @@ const TshirtScreen = () => {
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
                 alignItems: "center",
+               // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
 
             }}>
             <View

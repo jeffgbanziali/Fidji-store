@@ -1,9 +1,10 @@
-import { View, SafeAreaView, Text, Dimensions, Pressable, TextInput, ScrollView } from 'react-native'
+import { View, SafeAreaView, Text, Dimensions, Pressable, TextInput, ScrollView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
+import { Platform } from 'react-native';
 
 
 
@@ -34,7 +35,9 @@ const CustomerInformationScreen = () => {
                 flex: 1,
                 width: windowWidth,
                 height: windowHeight - bottomTabHeight,
-                backgroundColor: "#f5e1ce"
+                backgroundColor: "#f5e1ce",
+                paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+
 
             }}>
             <View
