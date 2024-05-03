@@ -4,6 +4,7 @@ import React from 'react'
 import SignInScreen from '../../Screens/AuthentificationScreen/SignInScreen';
 import RegisterScreen from '../../Screens/AuthentificationScreen/RegisterScreen';
 import StartPage from '../../Screens/AuthentificationScreen/StartPage';
+import AfterRegisterScreen from '../../Screens/AuthentificationScreen/AfterRegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,11 +23,10 @@ const FirstNavigation = () => {
             }}
         >
 
-
-
             <Stack.Screen name="Start" component={StartPage} />
             <Stack.Screen name="Signin" component={SignInScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Adress" component={AfterRegisterScreen} />
 
 
 
