@@ -45,7 +45,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                 flex: 1,
                 width: "100%",
                 height: "100%",
-              //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+                //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
                 backgroundColor: "white",
             }}>
             <HeaderBasket handleViewBasket={handleViewBasket} />
@@ -110,7 +110,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
                         />
 
-                        <BasketValidate calculateTotal={calculateTotal} />
+                        <BasketValidate calculateTotal={calculateTotal} handleViewBasket={handleViewBasket} />
 
                     </>
 

@@ -10,7 +10,6 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { getUser } from './ReduxActions/user.actions';
 import rootReducer from './reducers';
-import { getProducts, getUsers } from './ReduxActions/products.actions';
 import LoadingScreen from './Components/SignInScreen/LoadingScreen';
 
 const App = () => {
@@ -35,7 +34,6 @@ const AppContent = () => {
   const { userToken } = useContext(AuthContext);
   const dispatch = useDispatch();
 
-  console.log("My token", userToken)
 
   useEffect(() => {
     if (userToken) {
@@ -43,9 +41,7 @@ const AppContent = () => {
     }
   }, [dispatch, userToken]);
 
-  useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+
 
 
 
@@ -71,7 +67,7 @@ const AppContent = () => {
             )
 
           ) : (
-            
+
             <FirstNavigation />
           )
         }

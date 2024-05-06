@@ -1,7 +1,11 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const TotalBasket = ({ calculateTotal }) => {
+
+
+   
     return (
         <View
             style={{
@@ -10,7 +14,8 @@ const TotalBasket = ({ calculateTotal }) => {
                 justifyContent: "space-evenly",
                 alignItems: "center",
                 borderTopWidth: 1,
-                borderColor: "gray"
+                borderColor: "gray",
+        
             }}>
             <View
                 style={{

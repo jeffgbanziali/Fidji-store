@@ -1,6 +1,7 @@
 import { View, Text, Image, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AntDesign } from '@expo/vector-icons';
+import { isEmpty } from '../../Context/UtilsFunctions';
 
 
 
@@ -10,6 +11,7 @@ const BasketSelection = ({ cart }) => {
 
 
     const [quantity, setQuantity] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
 
     const decreaseQuantity = () => {
         if (quantity > 1) {
@@ -21,6 +23,15 @@ const BasketSelection = ({ cart }) => {
         setQuantity(quantity + 1);
     };
 
+
+
+    useEffect(() => {
+        if (!isEmpty(cart)) {
+            setIsLoading(false);
+        }
+    }, [cart]);
+
+    
 
     return (
         <View
@@ -39,15 +50,26 @@ const BasketSelection = ({ cart }) => {
                     margin: 14,
                     backgroundColor: "blue"
                 }}>
-                <Image
-                    source={{ uri: cart.images[0].src }}
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                    }}
+                {
+                    isLoading ? (
+                        <Image
+                            source={require('../../assets/image/backgroundImage.png')}
+                            style={{
+                                width: '100%',
+                                height: "100%",
+                                position: "absolute"
+                            }
+                            } />
+                    ) : (
+                        <Image
+                            source={{ uri: cart.images[0].src }}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                            }}
 
-                />
-
+                        />
+                    )}
             </View>
             <View
                 style={{

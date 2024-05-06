@@ -1,9 +1,17 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
-const BasketValidate = ({ calculateTotal }) => {
+const BasketValidate = ({ calculateTotal, handleViewBasket }) => {
+
+    const navigation = useNavigation()
 
 
+    const handleChoice = () => {
+        navigation.navigate("Delivery")
+        console.warn("gogogogoog")
+        handleViewBasket()
+    }
 
 
     return (
@@ -13,9 +21,10 @@ const BasketValidate = ({ calculateTotal }) => {
             alignItems: "center",
             justifyContent: "center",
             borderTopWidth: 1,
-            borderColor: "gray"
+            borderColor: "gray",
         }}>
-            <View
+            <Pressable
+                onPress={handleChoice}
                 style={{
                     width: 200,
                     height: 50,
@@ -33,7 +42,7 @@ const BasketValidate = ({ calculateTotal }) => {
                     }}>
                     Commander - {calculateTotal()} €
                 </Text>
-            </View>
+            </Pressable>
         </View >
     )
 }

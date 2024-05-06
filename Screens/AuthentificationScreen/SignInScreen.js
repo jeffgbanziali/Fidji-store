@@ -184,7 +184,6 @@ const SignInScreen = () => {
 
                             </View>
 
-
                             <View
                                 style={{
                                     width: "100%",
@@ -286,7 +285,6 @@ const SignInScreen = () => {
 
 
                             </View>
-
 
                             <View
                                 style={{
