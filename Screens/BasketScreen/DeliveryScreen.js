@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import DeliveryTools from '../../Components/DeliveryTools/DeliveryTools';
+import DeliveryOptions from '../../Components/DeliveryTools/DeliveryOptions';
 
 
 
@@ -79,6 +80,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
             </View>
             <DeliveryTools />
+            <DeliveryOptions />
 
         </SafeAreaView>
     )

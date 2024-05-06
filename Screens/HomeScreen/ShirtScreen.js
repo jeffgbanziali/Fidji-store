@@ -31,6 +31,7 @@ const ShirtScreen = () => {
     const { cart } = useContext(AuthContext)
 
     const [loading, setLoading] = useState(true);
+    
     const retourned = () => {
         navigation.goBack();
     }

@@ -20,11 +20,15 @@ const ArticleElement = ({ article }) => {
     const [selectedSize, setSelectedSize] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log("Viens ici mon ", article.images)
+
+
     useEffect(() => {
-        if (article.images && article.images.length > 0) {
+        if (article && article.images && article.images.length > 0) {
             setIsLoading(false);
         }
     }, [article.images]);
+
 
     // Fonction pour mettre à jour la couleur sélectionnée
     const handleColorChange = (color) => {
@@ -43,7 +47,7 @@ const ArticleElement = ({ article }) => {
     const scrollX = useRef(new Animated.Value(0)).current
 
 
-    // console.log("Venez ici ", article.images)
+
 
     function removeHtmlTags(html) {
         return html.replace(/<[^>]*>/g, '');
@@ -87,7 +91,6 @@ const ArticleElement = ({ article }) => {
                 <View
                     style={{
                         height: "100%",
-                        backgroundColor: "gray",
                         width: windowWidth,
                         position: "relative",
 

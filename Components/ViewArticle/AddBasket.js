@@ -26,7 +26,6 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
 
     const { cart, addToCart } = useContext(AuthContext)
 
-    console.log("Mon panier est là :", cart);
 
 
     const handleAddCartArticle = () => {

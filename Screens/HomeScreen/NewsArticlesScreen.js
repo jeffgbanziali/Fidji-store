@@ -24,7 +24,7 @@ const NewsArticlesScreen = () => {
     const [showBasket, setShowBasket] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const products = useSelector(state => state.productsReducer);
+    const products = useSelector(state => state.productsReducer.products);
 
     const navigation = useNavigation();
 
