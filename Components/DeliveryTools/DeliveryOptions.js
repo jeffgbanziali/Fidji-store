@@ -6,7 +6,7 @@ import Modal from "react-native-modal";
 
 
 
-const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, storeAdress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
+const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAddress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
 }) => {
 
     const [heightAnimation] = useState(new Animated.Value(0));
@@ -17,9 +17,6 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, storeAdre
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
     const [showAdress, setShowAdress] = useState(false);
 
-    const isSameAddress = useAddressCustomer ? slectedAdress : null
-
-    console.log("Viens à moi adress", isSameAddress)
 
 
 

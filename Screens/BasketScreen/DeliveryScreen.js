@@ -81,12 +81,16 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const slectedAdress = sameAddress ? billingAddress : storeAdress
 
 
+    const facturationAdressStore = selectedOption === 1 && userData.customerData.billing
+
 
 
     const useSameAddress = () => {
         setUSeSameAddressCustomer(!useAddressCustomer)
     }
 
+
+    const isSameAddress = useAddressCustomer && slectedAdress
 
 
 
@@ -168,7 +172,12 @@ const DeliveryScreen = ({ handleViewBasket }) => {
             </ScrollView>
 
 
-            <DeliveryValidate calculateTotal={calculateTotal} />
+            <DeliveryValidate
+                slectedAdress={slectedAdress}
+                isSameAddress={isSameAddress}
+                addressShipping={addressShipping}
+                facturationAdressStore={facturationAdressStore}
+                calculateTotal={calculateTotal} />
 
         </SafeAreaView>
     )

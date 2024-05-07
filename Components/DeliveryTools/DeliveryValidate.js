@@ -2,13 +2,16 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ calculateTotal }) => {
+const DeliveryValidate = ({ calculateTotal, addressShipping, facturationAdressStore, isSameAddress, slectedAdress }) => {
 
     const navigation = useNavigation()
 
 
     const handleChoice = () => {
-        console.warn("gogogogoog")
+        console.log("voici adress du coup tu te", addressShipping)
+        console.log("voici facturation store livraison", facturationAdressStore)
+        console.log("voici facturation himelivraison", isSameAddress)
+
     }
 
 
