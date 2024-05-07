@@ -5,6 +5,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import DeliveryTools from '../../Components/DeliveryTools/DeliveryTools';
 import DeliveryOptions from '../../Components/DeliveryTools/DeliveryOptions';
 import DeliveryValidate from '../../Components/DeliveryTools/DeliveryValidate';
+import { useSelector } from 'react-redux';
 
 
 
@@ -14,17 +15,78 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const route = useRoute()
 
     const { cart, calculateTotal } = route.params
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [storeDelivery, setStoreDelivery] = useState(false)
+    const [homeDelivery, setHomeDelivery] = useState(false);
+    const userData = useSelector((state) => state.userReducer)
+    const [useAddressCustomer, setUSeSameAddressCustomer] = useState(null)
 
 
-    console.log("Affiche moi tout mon panier", cart)
-    console.log("Affiche moi la totalité", calculateTotal())
+
+    const handleSelectOption = (option) => {
+        setSelectedOption(option);
+        if (option === 1) {
+            setStoreDelivery(true);
+            setHomeDelivery(false);
+        } else if (option === 2) {
+            setHomeDelivery(true);
+            setStoreDelivery(false);
+        } else {
+            setStoreDelivery(false);
+            setHomeDelivery(false);
+        }
+    };
+
 
     const retourned = () => {
         navigation.goBack();
     }
 
+    const storeAdress = [
+        {
+            company: "Boutique FIDJI",
+            address_1: "25 rue des martyrs",
+            address_2: "",
+            city: "Paris",
+            postcode: "75009",
+            country: "France",
+            phone: "00000000000"
+        }
+    ]
+
 
     const navigation = useNavigation()
+
+
+    const addressShipping = selectedOption === 2 ? userData.customerData.shipping : storeAdress
+
+
+    const shippingAddress = userData.customerData.shipping
+    const billingAddress = userData.customerData.billing
+
+    const sameAddress =
+        billingAddress.first_name === shippingAddress.first_name &&
+        billingAddress.last_name === shippingAddress.last_name &&
+        billingAddress.company === shippingAddress.company &&
+        billingAddress.address_1 === shippingAddress.address_1 &&
+        billingAddress.address_2 === shippingAddress.address_2 &&
+        billingAddress.city === shippingAddress.city &&
+        billingAddress.country === shippingAddress.country &&
+        billingAddress.state === shippingAddress.state &&
+        billingAddress.postcode === shippingAddress.postcode;
+
+
+
+
+    const slectedAdress = sameAddress ? billingAddress : storeAdress
+
+
+
+
+    const useSameAddress = () => {
+        setUSeSameAddressCustomer(!useAddressCustomer)
+    }
+
 
 
 
@@ -90,7 +152,19 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
                 </View>
                 <DeliveryTools />
-                <DeliveryOptions />
+                <DeliveryOptions
+                    storeDelivery={storeDelivery}
+                    homeDelivery={homeDelivery}
+                    setHomeDelivery={setHomeDelivery}
+                    setStoreDelivery={setStoreDelivery}
+                    selectedOption={selectedOption}
+                    handleSelectOption={handleSelectOption}
+                    useAddressCustomer={useAddressCustomer}
+                    slectedAdress={slectedAdress}
+                    storeAdress={storeAdress}
+                    useSameAddress={useSameAddress}
+
+                />
             </ScrollView>
 
 

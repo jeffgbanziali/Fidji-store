@@ -8,7 +8,6 @@ const DeliveryValidate = ({ calculateTotal }) => {
 
 
     const handleChoice = () => {
-        navigation.navigate("Delivery")
         console.warn("gogogogoog")
     }
 
@@ -29,7 +28,7 @@ const DeliveryValidate = ({ calculateTotal }) => {
                 justifyContent: "center",
                 borderTopWidth: 1,
                 borderColor: "gray",
-                backgroundColor: "white",
+                backgroundColor: "#f5e1ce"
 
             }}>
             <View
@@ -51,7 +50,7 @@ const DeliveryValidate = ({ calculateTotal }) => {
                         style={{
                             fontSize: 16,
                             fontWeight: "700",
-                            color: "black"
+                            color: "gray"
                         }}>
                         Sous total
                     </Text>
@@ -60,7 +59,7 @@ const DeliveryValidate = ({ calculateTotal }) => {
                         style={{
                             fontSize: 16,
                             fontWeight: "600",
-                            color: "black"
+                            color: "gray"
                         }}>
                         {calculateTotal()} €
                     </Text>
@@ -75,8 +74,8 @@ const DeliveryValidate = ({ calculateTotal }) => {
                     <Text
                         style={{
                             fontSize: 16,
-                            fontWeight: "700",
-                            color: "black"
+                            fontWeight: "600",
+                            color: "gray"
                         }}>
                         Livraison estimée
                     </Text>
@@ -85,7 +84,7 @@ const DeliveryValidate = ({ calculateTotal }) => {
                         style={{
                             fontSize: 16,
                             fontWeight: "600",
-                            color: "black"
+                            color: "gray"
                         }}>
                         {shippingCost} €
                     </Text>

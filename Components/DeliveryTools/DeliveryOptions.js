@@ -6,36 +6,21 @@ import Modal from "react-native-modal";
 
 
 
-const DeliveryOptions = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [storeDelivery, setStoreDelivery] = useState(false)
-    const [homeDelivery, setHomeDelivery] = useState(false);
+const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, storeAdress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
+}) => {
+
     const [heightAnimation] = useState(new Animated.Value(0));
     const [iconAnimation] = useState(new Animated.Value(0));
     const userData = useSelector((state) => state.userReducer)
 
 
-
-
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
     const [showAdress, setShowAdress] = useState(false);
 
+    const isSameAddress = useAddressCustomer ? slectedAdress : null
 
-    const handleSelectOption = (option) => {
-        setSelectedOption(option);
-        if (option === 1) {
-            setStoreDelivery(true);
-            setHomeDelivery(false);
+    console.log("Viens à moi adress", isSameAddress)
 
-        } else if (option === 2) {
-            setHomeDelivery(true);
-            setStoreDelivery(false);
-
-        } else {
-            setStoreDelivery(false);
-            setHomeDelivery(false);
-        }
-    };
 
 
     const handleViewAdress = () => {
@@ -469,7 +454,8 @@ const DeliveryOptions = () => {
 
 
 
-                    <View
+                    <Pressable
+                        onPress={useSameAddress}
                         style={{
                             width: "100%",
                             height: 60,
@@ -477,16 +463,33 @@ const DeliveryOptions = () => {
                             justifyContent: "center",
                             flexDirection: "row",
                         }}>
-                        <View
-                            style={{
-                                width: 30,
-                                height: 30,
-                                borderRadius: 30,
-                                alignItems: "center",
-                                justifyContent: "center"
-                            }}>
-                            <AntDesign name="checkcircle" size={24} color="black" />
-                        </View>
+                        {
+                            useAddressCustomer ? (
+                                <View
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        borderRadius: 30,
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                    <AntDesign name="checkcircle" size={24} color="black" />
+                                </View>
+                            ) : (
+                                <View
+                                    style={{
+                                        width: 20,
+                                        height: 20,
+                                        borderRadius: 30,
+                                        borderWidth: 1,
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+
+                                </View>
+                            )
+                        }
+
                         <Text
                             style={{
                                 fontSize: 16,
@@ -494,7 +497,39 @@ const DeliveryOptions = () => {
                                 paddingLeft: 10
 
                             }}>Utiliser cette adresse comme adresse de facturation</Text>
-                    </View>
+                    </Pressable>
+
+                    {!isSameAddress && <Animated.View
+                        style={{
+                            width: "100%",
+                            height: 80,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <Pressable
+                            onPress={handleViewAdress}
+                            style={{
+                                width: 320,
+                                height: 50,
+                                borderRadius: 10,
+                                backgroundColor: "black",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    fontWeight: '500',
+                                    color: 'white',
+                                }}>
+                                Ajouter une adresse
+                            </Text>
+                        </Pressable>
+
+
+                    </Animated.View>}
+
+
                 </Animated.View>
 
 
