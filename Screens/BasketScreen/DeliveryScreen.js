@@ -173,10 +173,10 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
             <DeliveryValidate
-                slectedAdress={slectedAdress}
                 isSameAddress={isSameAddress}
                 addressShipping={addressShipping}
                 facturationAdressStore={facturationAdressStore}
+                cart={cart}
                 calculateTotal={calculateTotal} />
 
         </SafeAreaView>
