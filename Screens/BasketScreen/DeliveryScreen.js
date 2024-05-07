@@ -20,6 +20,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const [homeDelivery, setHomeDelivery] = useState(false);
     const userData = useSelector((state) => state.userReducer)
     const [useAddressCustomer, setUSeSameAddressCustomer] = useState(null)
+    const navigation = useNavigation()
 
 
 
@@ -55,7 +56,6 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     ]
 
 
-    const navigation = useNavigation()
 
 
     const addressShipping = selectedOption === 2 ? userData.customerData.shipping : storeAdress
