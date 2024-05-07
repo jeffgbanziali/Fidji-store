@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
 
 
@@ -10,15 +11,23 @@ const DeliveryOptions = () => {
     const [homeDelivery, setHomeDelivery] = useState(false);
     const [heightAnimation] = useState(new Animated.Value(0));
     const [iconAnimation] = useState(new Animated.Value(0));
+    const userData = useSelector((state) => state.userReducer)
+
+
+
+    console.log("Ma data ", userData.customerData.billing)
+
 
     const handleSelectOption = (option) => {
         setSelectedOption(option);
         if (option === 1) {
             setStoreDelivery(true);
-            setHomeDelivery(false); // Désactiver la livraison à domicile si elle était activée
+            setHomeDelivery(false);
+
         } else if (option === 2) {
             setHomeDelivery(true);
-            setStoreDelivery(false); // Désactiver la livraison en magasin si elle était activée
+            setStoreDelivery(false);
+
         } else {
             setStoreDelivery(false);
             setHomeDelivery(false);
@@ -104,50 +113,135 @@ const DeliveryOptions = () => {
 
                 </View>
 
-                <View
-                    style={{
-                        width: "100%",
-                        paddingTop: 14,
-                    }}>
-
-                    <Text
-                        style={{
-                            fontSize: 20,
-                            paddingLeft: 20,
-                            fontWeight: '500',
-                            color: 'black',
-                        }}>
-                        Adresse de facturation
-                    </Text>
-
-                    <View
-                        style={{
-                            width: "100%",
-                            height: 80,
-                            alignItems: "center",
-                            justifyContent: "center"
-                        }}>
+                {
+                    userData.customerData.billing.length === 0 ? (
                         <View
                             style={{
-                                width: 320,
-                                height: 50,
-                                borderRadius: 10,
-                                backgroundColor: "black",
-                                alignItems: "center",
-                                justifyContent: "center"
+                                width: "100%",
+                                paddingTop: 14,
+                            }}>
+
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    paddingLeft: 20,
+                                    fontWeight: '500',
+                                    color: 'black',
+                                }}>
+                                Adresse de facturation
+                            </Text>
+
+                            <View
+                                style={{
+                                    width: "100%",
+                                    height: 80,
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>
+                                <View
+                                    style={{
+                                        width: 320,
+                                        height: 50,
+                                        borderRadius: 10,
+                                        backgroundColor: "black",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>
+                                    <Text
+                                        style={{
+                                            fontSize: 16,
+                                            fontWeight: '500',
+                                            color: 'white',
+                                        }}>
+                                        Ajouter une adresse
+                                    </Text>
+                                </View>
+                            </View>
+
+                        </View>
+                    ) : (
+                        <View
+                            style={{
+                                width: "100%",
+                                paddingTop: 14,
                             }}>
                             <Text
                                 style={{
-                                    fontSize: 16,
+                                    fontSize: 20,
+                                    paddingLeft: 20,
                                     fontWeight: '500',
-                                    color: 'white',
+                                    color: 'black',
                                 }}>
-                                Ajouter une adresse
+                                Adresse de facturation
                             </Text>
-                        </View>
-                    </View>
 
-                </View>
+                            <View
+                                style={{
+                                    width: "100%",
+                                    flexDirection: "row"
+                                }}>
+
+                                <View
+                                    style={{
+                                        width: "85%",
+                                        height: 80,
+                                        justifyContent: "center"
+                                    }}>
+                                    <Text
+                                        style={{
+                                            fontSize: 18,
+                                            paddingLeft: 20,
+                                            fontWeight: '500',
+                                            color: 'black',
+                                        }}>
+                                        {userData.customerData.billing.first_name} {userData.customerData.billing.last_name}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            fontSize: 18,
+                                            paddingLeft: 20,
+                                            fontWeight: '500',
+                                            color: 'black',
+                                        }}>
+                                        {userData.customerData.billing.address_1} {userData.customerData.billing.address_2}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            fontSize: 18,
+                                            paddingLeft: 20,
+                                            fontWeight: '500',
+                                            color: 'black',
+                                        }}>
+                                        {userData.customerData.billing.postcode} {userData.customerData.billing.city} - {userData.customerData.billing.country}
+                                    </Text>
+                                </View>
+                                <View
+                                    style={{
+                                        width: "15%",
+                                        height: 80,
+                                        justifyContent: "center",
+                                        alignItems: "center"
+                                    }}>
+                                    <View
+                                        style={{
+                                            width: 30,
+                                            height: 30,
+                                            borderRadius: 30,
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                        }}>
+                                        <AntDesign name="check" size={24} color="black" />
+                                    </View>
+
+                                </View>
+                            </View>
+
+
+                        </View>
+                    )
+                }
+
+
 
             </Animated.View>
 

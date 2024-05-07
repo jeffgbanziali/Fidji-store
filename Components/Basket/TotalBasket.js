@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 const TotalBasket = ({ calculateTotal }) => {
 
 
-   
+
     return (
         <View
             style={{
@@ -15,7 +15,7 @@ const TotalBasket = ({ calculateTotal }) => {
                 alignItems: "center",
                 borderTopWidth: 1,
                 borderColor: "gray",
-        
+
             }}>
             <View
                 style={{
