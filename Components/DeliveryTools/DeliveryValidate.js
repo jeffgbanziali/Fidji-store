@@ -2,7 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = () => {
+const DeliveryValidate = ({ calculateTotal }) => {
 
     const navigation = useNavigation()
 
@@ -13,22 +13,29 @@ const DeliveryValidate = () => {
     }
 
 
+    const shippingCost = calculateTotal() > 200 ? 0 : 8;
+
+    const handlePaiement = calculateTotal() + shippingCost
+
+
     return (
         <View
             style={{
                 width: "100%",
-                height: 140,
+                height: 120,
                 position: "absolute",
                 bottom: 0,
                 alignItems: "center",
                 justifyContent: "center",
                 borderTopWidth: 1,
                 borderColor: "gray",
+                backgroundColor: "white",
+
             }}>
             <View
                 style={{
                     width: "100%",
-                    height: "40%",
+                    height: "50%",
                     justifyContent: "space-evenly",
                     alignItems: "center",
 
@@ -55,7 +62,7 @@ const DeliveryValidate = () => {
                             fontWeight: "600",
                             color: "black"
                         }}>
-                        €
+                        {calculateTotal()} €
                     </Text>
                 </View>
                 <View
@@ -80,7 +87,7 @@ const DeliveryValidate = () => {
                             fontWeight: "600",
                             color: "black"
                         }}>
-                        0 €
+                        {shippingCost} €
                     </Text>
 
                 </View>
@@ -88,7 +95,7 @@ const DeliveryValidate = () => {
             <View
                 style={{
                     width: "100%",
-                    height: "60%",
+                    height: "50%",
                     alignItems: "center",
                     justifyContent: "center",
                     borderTopWidth: 1,
@@ -98,7 +105,7 @@ const DeliveryValidate = () => {
                     onPress={handleChoice}
                     style={{
                         width: 200,
-                        height: 50,
+                        height: 40,
                         margin: 4,
                         borderRadius: 10,
                         alignItems: "center",
@@ -111,7 +118,7 @@ const DeliveryValidate = () => {
                             fontWeight: "600",
                             color: "white"
                         }}>
-                        Commander -  €
+                        Commander - {handlePaiement} €
                     </Text>
                 </Pressable>
             </View>

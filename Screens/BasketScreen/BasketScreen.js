@@ -110,7 +110,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
                         />
 
-                        <BasketValidate calculateTotal={calculateTotal} handleViewBasket={handleViewBasket} />
+                        <BasketValidate cart={cart} calculateTotal={calculateTotal} handleViewBasket={handleViewBasket} />
 
                     </>
 
