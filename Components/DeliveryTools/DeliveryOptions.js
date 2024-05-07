@@ -1,13 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+
+
 
 const DeliveryOptions = () => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [storeDelivery, setStoreDelivery] = useState(false)
+    const [homeDelivery, setHomeDelivery] = useState(false);
+    const [heightAnimation] = useState(new Animated.Value(0));
+    const [iconAnimation] = useState(new Animated.Value(0));
 
     const handleSelectOption = (option) => {
         setSelectedOption(option);
-        console.log("Option sélectionnée :", option);
+        if (option === 1) {
+            setStoreDelivery(true);
+            setHomeDelivery(false); // Désactiver la livraison à domicile si elle était activée
+        } else if (option === 2) {
+            setHomeDelivery(true);
+            setStoreDelivery(false); // Désactiver la livraison en magasin si elle était activée
+        } else {
+            setStoreDelivery(false);
+            setHomeDelivery(false);
+        }
     };
+
+
+
+    useEffect(() => {
+        Animated.timing(
+            heightAnimation,
+            {
+                toValue: storeDelivery || homeDelivery ? 200 : 0,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: false,
+            }
+        ).start();
+
+        Animated.timing(
+            iconAnimation,
+            {
+                toValue: storeDelivery || homeDelivery ? 1 : 0,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: false,
+            }
+        ).start();
+    }, [storeDelivery, homeDelivery]);
 
     return (
         <View style={styles.container}>
@@ -25,7 +65,92 @@ const DeliveryOptions = () => {
                     )}
                 </View>
                 <Text style={styles.optionText}>En boutique - Gratuit</Text>
+
             </TouchableOpacity>
+
+            <Animated.View
+                style={[
+                    styles.deliveryDetails,
+                    {
+                        height: heightAnimation,
+                        opacity: iconAnimation,
+                    },
+                    storeDelivery && styles.show
+                ]}
+            >
+                <View
+                    style={{
+                        width: "100%",
+                        paddingLeft: 20,
+                    }}>
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            fontWeight: '500',
+                            color: 'black',
+                        }}>
+                        Boutique FIDJI - Paris
+                    </Text>
+                    <Text
+                        style={{
+                            fontSize: 14,
+                            paddingTop: 4,
+                            fontWeight: '500',
+                            color: 'black',
+                        }}>
+                        25 rue des martyrs Paris 75009
+                        livraisn en 1h à la boutique
+                    </Text>
+
+                </View>
+
+                <View
+                    style={{
+                        width: "100%",
+                        paddingTop: 14,
+                    }}>
+
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            paddingLeft: 20,
+                            fontWeight: '500',
+                            color: 'black',
+                        }}>
+                        Adresse de facturation
+                    </Text>
+
+                    <View
+                        style={{
+                            width: "100%",
+                            height: 80,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <View
+                            style={{
+                                width: 320,
+                                height: 50,
+                                borderRadius: 10,
+                                backgroundColor: "black",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    fontWeight: '500',
+                                    color: 'white',
+                                }}>
+                                Ajouter une adresse
+                            </Text>
+                        </View>
+                    </View>
+
+                </View>
+
+            </Animated.View>
+
 
             <TouchableOpacity
                 style={styles.option}
@@ -38,46 +163,106 @@ const DeliveryOptions = () => {
                         <View style={[styles.checkbox, styles.checked]} />
                     )}
                 </View>
-                <Text style={styles.optionText}>Livraison en point-relais - 4 €</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.option}
-                onPress={() => handleSelectOption(3)}
-            >
-                <View style={styles.checkboxContainer}>
-                    {selectedOption !== 3 ? (
-                        <View style={styles.checkbox} />
-                    ) : (
-                        <View style={[styles.checkbox, styles.checked]} />
-                    )}
-                </View>
                 <Text style={styles.optionText}>Livraison à domicile - 8 €</Text>
             </TouchableOpacity>
-        </View>
+            <Animated.View
+                style={[
+                    styles.deliveryDetails,
+                    {
+                        height: heightAnimation,
+                        opacity: iconAnimation,
+                    },
+                    homeDelivery && styles.show
+                ]}
+            >
+
+                <View
+                    style={{
+                        width: "100%",
+                        height: 80,
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                    <View
+                        style={{
+                            width: 320,
+                            height: 50,
+                            borderRadius: 10,
+                            backgroundColor: "black",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                fontWeight: '500',
+                                color: 'white',
+                            }}>
+                            Ajouter une adresse
+                        </Text>
+                    </View>
+
+
+                </View>
+
+                <View
+                    style={{
+                        width: "100%",
+                        height: 60,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexDirection: "row"
+                    }}>
+                    <View
+                        style={{
+                            width: 30,
+                            height: 30,
+                            borderRadius: 30,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <AntDesign name="checkcircle" size={24} color="black" />
+                    </View>
+                    <Text
+                        style={{
+                            fontSize: 16,
+                            fontWeight: '500',
+                            paddingLeft: 10
+
+                        }}>Utiliser cette adresse comme adresse de facturation</Text>
+                </View>
+            </Animated.View >
+
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: 200,
         justifyContent: "center",
-        paddingLeft: 20
+        backgroundColor: "grau"
     },
     title: {
         fontSize: 22,
         fontWeight: '500',
         marginBottom: 20,
+        paddingLeft: 20,
+
     },
     option: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
+        paddingLeft: 20,
+        borderBottomWidth: 1,
+        height: 60,
+        // backgroundColor: "red"
+
     },
     checkboxContainer: {
-        width: 28,
-        height: 28,
+        width: 25,
+        height: 25,
         borderRadius: 30,
         borderWidth: 2,
         borderColor: 'black',
@@ -91,11 +276,21 @@ const styles = StyleSheet.create({
     },
     checked: {
         backgroundColor: 'gray',
-        width: 14,
-        height: 14,
+        width: 12,
+        height: 12,
         borderRadius: 30,
 
 
+    },
+    deliveryDetails: {
+        width: "100%",
+        height: 300,
+        backgroundColor: "lightgray",
+        marginBottom: 10,
+        display: 'none',
+    },
+    show: {
+        display: 'flex',
     },
     optionText: {
         fontSize: 18,

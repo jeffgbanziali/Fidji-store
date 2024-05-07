@@ -4,6 +4,7 @@ import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import DeliveryTools from '../../Components/DeliveryTools/DeliveryTools';
 import DeliveryOptions from '../../Components/DeliveryTools/DeliveryOptions';
+import DeliveryValidate from '../../Components/DeliveryTools/DeliveryValidate';
 
 
 
@@ -81,6 +82,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
             </View>
             <DeliveryTools />
             <DeliveryOptions />
+            <DeliveryValidate />
 
         </SafeAreaView>
     )

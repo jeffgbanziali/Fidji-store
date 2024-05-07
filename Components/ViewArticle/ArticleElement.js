@@ -20,7 +20,7 @@ const ArticleElement = ({ article }) => {
     const [selectedSize, setSelectedSize] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log("Viens ici mon ", article.images)
+
 
 
     useEffect(() => {

@@ -43,7 +43,7 @@ const BasketValidate = ({ calculateTotal, handleViewBasket }) => {
                     Commander - {calculateTotal()} €
                 </Text>
             </Pressable>
-        </View >
+        </View>
     )
 }
 

@@ -31,7 +31,7 @@ const BasketSelection = ({ cart }) => {
         }
     }, [cart]);
 
-    
+
 
     return (
         <View
