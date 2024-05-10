@@ -35,7 +35,8 @@ const BasketValidate = ({ cart, calculateTotal, handleViewBasket }) => {
                 onPress={() => handleChoice(
                     cart,
                     calculateTotal,
-                    totalStockQuantity)}
+                    totalStockQuantity,
+                )}
                 style={{
                     width: 200,
                     height: 50,

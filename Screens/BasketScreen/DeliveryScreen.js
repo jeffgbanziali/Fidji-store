@@ -61,6 +61,8 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const addressShipping = selectedOption === 2 ? userData.customerData.shipping : storeAdress
 
 
+
+    console.log('Selectedopyion', selectedOption)
     const shippingAddress = userData.customerData.shipping
     const billingAddress = userData.customerData.billing
 
@@ -175,6 +177,8 @@ const DeliveryScreen = ({ handleViewBasket }) => {
             <DeliveryValidate
                 isSameAddress={isSameAddress}
                 addressShipping={addressShipping}
+                selectedOption={selectedOption}
+                storeAdress={storeAdress}
                 facturationAdressStore={facturationAdressStore}
                 cart={cart}
                 calculateTotal={calculateTotal}

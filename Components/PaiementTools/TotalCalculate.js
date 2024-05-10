@@ -1,8 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
 
-const TotalBasket = ({ calculateTotal, }) => {
+const TotalCalculate = ({ calculateTotal }) => {
+
+
+    const shippingCost = calculateTotal() > 200 ? 0 : 8;
 
 
 
@@ -10,7 +12,7 @@ const TotalBasket = ({ calculateTotal, }) => {
         <View
             style={{
                 width: "100%",
-                height: 70,
+                height: 80,
                 justifyContent: "space-evenly",
                 alignItems: "center",
                 borderTopWidth: 1,
@@ -26,8 +28,8 @@ const TotalBasket = ({ calculateTotal, }) => {
                 }}>
                 <Text
                     style={{
-                        fontSize: 18,
-                        fontWeight: "700",
+                        fontSize: 16,
+                        fontWeight: "600",
                         color: "black"
                     }}>
                     Sous total
@@ -52,11 +54,11 @@ const TotalBasket = ({ calculateTotal, }) => {
                 }}>
                 <Text
                     style={{
-                        fontSize: 18,
-                        fontWeight: "700",
+                        fontSize: 16,
+                        fontWeight: "600",
                         color: "black"
                     }}>
-                    Livraison
+                    Livraison estimé
                 </Text>
 
                 <Text
@@ -65,12 +67,13 @@ const TotalBasket = ({ calculateTotal, }) => {
                         fontWeight: "600",
                         color: "black"
                     }}>
-                    0 €
+                    {shippingCost} €
                 </Text>
 
             </View>
+
         </View>
     )
 }
 
-export default TotalBasket
+export default TotalCalculate

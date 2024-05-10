@@ -2,7 +2,7 @@ import { View, Text, Image, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { isEmpty } from '../../Context/UtilsFunctions';
 
-const ProductsList = ({ cart, totalStockQuantity }) => {
+const ProductsList = ({ cart, }) => {
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -11,6 +11,13 @@ const ProductsList = ({ cart, totalStockQuantity }) => {
             setIsLoading(false);
         }
     }, [cart]);
+
+    let totalStockQuantity = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        let product = cart[i];
+        totalStockQuantity += product.stock_quantity;
+    }
 
     return (
         <View
@@ -21,12 +28,13 @@ const ProductsList = ({ cart, totalStockQuantity }) => {
                 borderColor: "gray",
 
             }}>
-            <Text style={{
-                fontSize: 22,
-                fontWeight: "600",
-                color: "black",
-                paddingLeft: 20,
-            }}>
+            <Text
+                style={{
+                    fontSize: 22,
+                    fontWeight: "600",
+                    color: "black",
+                    paddingLeft: 20,
+                }}>
                 {totalStockQuantity} Articles
             </Text>
             <View

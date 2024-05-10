@@ -2,7 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress }) => {
+const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption }) => {
 
     const navigation = useNavigation()
 
@@ -15,10 +15,10 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
     const handlePaiement = calculateTotal() + shippingCost
 
 
-    const handleChoice = (cart, handlePaiement, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress) => {
+    const handleChoice = (cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption) => {
 
 
-        navigation.navigate("BuyScreen", { cart, handlePaiement, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress })
+        navigation.navigate("BuyScreen", { cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption })
 
     }
 
@@ -106,13 +106,18 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                     borderColor: "gray",
                 }}>
                 <Pressable
-                    onPress={() => handleChoice(
-                        cart,
-                        handlePaiement,
-                        totalStockQuantity,
-                        addressShipping,
-                        facturationAdressStore,
-                        isSameAddress)}
+                   onPress={() => handleChoice(
+                    cart,
+                    handlePaiement,
+                    calculateTotal, 
+                    totalStockQuantity,
+                    addressShipping,
+                    facturationAdressStore,
+                    isSameAddress,
+                    storeAdress,
+                    selectedOption
+                )}
+                
                     style={{
                         width: 200,
                         height: 40,

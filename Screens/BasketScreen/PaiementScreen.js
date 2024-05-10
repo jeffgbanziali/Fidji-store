@@ -4,6 +4,8 @@ import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import ProductsList from '../../Components/PaiementTools/ProductsList';
 import DeliveryAdress from '../../Components/PaiementTools/DeliveryAdress';
+import TotalCalculate from '../../Components/PaiementTools/TotalCalculate';
+import PaiementValidate from '../../Components/PaiementTools/PaiementValidate';
 
 const PaiementScreen = ({ }) => {
 
@@ -16,15 +18,35 @@ const PaiementScreen = ({ }) => {
 
     const route = useRoute()
 
-    const { cart, handlePaiement, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress } = route.params
+    const { cart, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption } = route.params
 
 
 
-    console.log("Panier", cart)
-    console.log("total", handlePaiement)
+    console.log("Il faut changer", selectedOption)
     console.log("voici adress du coup tu te", addressShipping)
     console.log("voici facturation store livraison", facturationAdressStore)
     console.log("voici facturation himelivraison", isSameAddress)
+
+
+    const calculateTotal = () => {
+        // Si le panier est vide, retourne 0
+        if (cart.length === 0) {
+            return 0;
+        }
+
+        // Utilise reduce pour additionner les prix de chaque article dans le panier
+        const total = cart.reduce((acc, item) => acc + (item.price * item.stock_quantity), 0);
+
+        // Retourne le total
+        return total;
+    };
+
+
+
+    const shippingCost = calculateTotal() > 200 ? 0 : 8;
+
+    const handlePaiement = calculateTotal() + shippingCost
+
 
 
 
@@ -91,13 +113,21 @@ const PaiementScreen = ({ }) => {
             </View>
 
             <ProductsList cart={cart}
-                totalStockQuantity={totalStockQuantity}
             />
             <DeliveryAdress
                 addressShipping={addressShipping}
                 facturationAdressStore={facturationAdressStore}
                 isSameAddress={isSameAddress}
-
+                storeAdress={storeAdress}
+                selectedOption={selectedOption}
+            />
+            <TotalCalculate
+                handlePaiement={handlePaiement}
+                calculateTotal={calculateTotal}
+            />
+            <PaiementValidate
+                handlePaiement={handlePaiement}
+                calculateTotal={calculateTotal}
             />
         </SafeAreaView>
     )
