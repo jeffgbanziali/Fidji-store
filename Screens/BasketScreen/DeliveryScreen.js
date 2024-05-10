@@ -14,7 +14,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
     const route = useRoute()
 
-    const { cart, calculateTotal } = route.params
+    const { cart, calculateTotal, totalStockQuantity } = route.params
     const [selectedOption, setSelectedOption] = useState(null);
     const [storeDelivery, setStoreDelivery] = useState(false)
     const [homeDelivery, setHomeDelivery] = useState(false);
@@ -177,7 +177,9 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                 addressShipping={addressShipping}
                 facturationAdressStore={facturationAdressStore}
                 cart={cart}
-                calculateTotal={calculateTotal} />
+                calculateTotal={calculateTotal}
+                totalStockQuantity={totalStockQuantity}
+            />
 
         </SafeAreaView>
     )

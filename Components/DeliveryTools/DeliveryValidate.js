@@ -2,7 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ cart, calculateTotal, addressShipping, facturationAdressStore, isSameAddress }) => {
+const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress }) => {
 
     const navigation = useNavigation()
 
@@ -15,10 +15,10 @@ const DeliveryValidate = ({ cart, calculateTotal, addressShipping, facturationAd
     const handlePaiement = calculateTotal() + shippingCost
 
 
-    const handleChoice = (cart, handlePaiement, addressShipping, facturationAdressStore, isSameAddress) => {
+    const handleChoice = (cart, handlePaiement, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress) => {
 
 
-        navigation.navigate("BuyScreen", { cart, handlePaiement, addressShipping, facturationAdressStore, isSameAddress })
+        navigation.navigate("BuyScreen", { cart, handlePaiement, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress })
 
     }
 
@@ -109,6 +109,7 @@ const DeliveryValidate = ({ cart, calculateTotal, addressShipping, facturationAd
                     onPress={() => handleChoice(
                         cart,
                         handlePaiement,
+                        totalStockQuantity,
                         addressShipping,
                         facturationAdressStore,
                         isSameAddress)}

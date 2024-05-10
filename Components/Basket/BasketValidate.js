@@ -7,9 +7,18 @@ const BasketValidate = ({ cart, calculateTotal, handleViewBasket }) => {
     const navigation = useNavigation()
 
 
-    const handleChoice = (cart, calculateTotal) => {
-        navigation.navigate("Delivery", { cart, calculateTotal })
+    const handleChoice = (cart, calculateTotal, totalStockQuantity) => {
+        navigation.navigate("Delivery", { cart, calculateTotal, totalStockQuantity })
         handleViewBasket()
+    }
+
+
+
+    let totalStockQuantity = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        let product = cart[i];
+        totalStockQuantity += product.stock_quantity;
     }
 
 
@@ -23,7 +32,10 @@ const BasketValidate = ({ cart, calculateTotal, handleViewBasket }) => {
             borderColor: "gray",
         }}>
             <Pressable
-                onPress={() => handleChoice(cart, calculateTotal)}
+                onPress={() => handleChoice(
+                    cart,
+                    calculateTotal,
+                    totalStockQuantity)}
                 style={{
                     width: 200,
                     height: 50,

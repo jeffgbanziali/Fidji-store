@@ -12,8 +12,11 @@ import { getUser } from './ReduxActions/user.actions';
 import rootReducer from './reducers';
 import LoadingScreen from './Components/SignInScreen/LoadingScreen';
 
+
+
 const App = () => {
 
+ 
   const store = createStore(
     rootReducer,
     applyMiddleware(thunk, logger)
