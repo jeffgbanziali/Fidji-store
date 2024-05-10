@@ -44,7 +44,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
         Animated.timing(
             heightAnimation,
             {
-                toValue: storeDelivery || homeDelivery ? 242 : 0,
+                toValue: storeDelivery || homeDelivery ? 246 : 0,
                 duration: 300,
                 easing: Easing.linear,
                 useNativeDriver: false,

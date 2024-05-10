@@ -1,16 +1,43 @@
-import { View, Text, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable, Animated, Easing } from 'react-native'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import Modal from "react-native-modal";
+import PaiementMode from './PaiementMode';
+
 
 const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
 
 
     const navigation = useNavigation()
 
+    const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
+    const [showBasket, setShowBasket] = useState(false);
 
-    const handleChoice = () => {
-        console.log("Je l'ai validé")
-    }
+
+
+
+
+
+    const handlePaiementMethod = () => {
+        if (showBasket) {
+            Animated.timing(basketHeight, {
+                toValue: 0,
+                duration: 200,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start(() => setShowBasket(false));
+        } else {
+            setShowBasket(true);
+            Animated.timing(basketHeight, {
+                toValue: 200,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+        }
+    };
+
+
     return (
         <View
             style={{
@@ -26,7 +53,7 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
 
             }}>
             <Pressable
-                onPress={() => handleChoice()}
+                onPress={() => handlePaiementMethod()}
                 style={{
                     width: 320,
                     height: 60,
@@ -45,6 +72,18 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
                     Commander - {handlePaiement} €
                 </Text>
             </Pressable>
+
+            <Modal
+                isVisible={showBasket}
+                onBackdropPress={handlePaiementMethod}
+                style={{ margin: 0, justifyContent: "flex-end" }}
+                backdropOpacity={0.5}
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                useNativeDriverForBackdrop
+            >
+                <PaiementMode handlePaiementMethod={handlePaiementMethod} />
+            </Modal>
         </View>
     )
 }

@@ -31,8 +31,6 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                 bottom: 0,
                 alignItems: "center",
                 justifyContent: "center",
-                borderTopWidth: 1,
-                borderColor: "gray",
                 backgroundColor: "#f5e1ce"
 
             }}>
@@ -55,7 +53,7 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                         style={{
                             fontSize: 16,
                             fontWeight: "700",
-                            color: "gray"
+                            color: "black"
                         }}>
                         Sous total
                     </Text>
@@ -64,7 +62,7 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                         style={{
                             fontSize: 16,
                             fontWeight: "600",
-                            color: "gray"
+                            color: "black"
                         }}>
                         {calculateTotal()} €
                     </Text>
@@ -80,7 +78,7 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                         style={{
                             fontSize: 16,
                             fontWeight: "600",
-                            color: "gray"
+                            color: "black"
                         }}>
                         Livraison estimée
                     </Text>
@@ -89,7 +87,7 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                         style={{
                             fontSize: 16,
                             fontWeight: "600",
-                            color: "gray"
+                            color: "black"
                         }}>
                         {shippingCost} €
                     </Text>
@@ -106,18 +104,18 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                     borderColor: "gray",
                 }}>
                 <Pressable
-                   onPress={() => handleChoice(
-                    cart,
-                    handlePaiement,
-                    calculateTotal, 
-                    totalStockQuantity,
-                    addressShipping,
-                    facturationAdressStore,
-                    isSameAddress,
-                    storeAdress,
-                    selectedOption
-                )}
-                
+                    onPress={() => handleChoice(
+                        cart,
+                        handlePaiement,
+                        calculateTotal,
+                        totalStockQuantity,
+                        addressShipping,
+                        facturationAdressStore,
+                        isSameAddress,
+                        storeAdress,
+                        selectedOption
+                    )}
+
                     style={{
                         width: 200,
                         height: 40,
