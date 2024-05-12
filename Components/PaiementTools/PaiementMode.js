@@ -1,9 +1,40 @@
-import { View, Text, Pressable } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable, Animated, Modal, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { Image } from 'react-native'
 import { FontAwesome, Entypo } from '@expo/vector-icons';
+//import Modal from "react-native-modal";
+import BankCardMode from './PaiementMode/BankCardMode';
+
 
 const PaiementMode = ({ handlePaiementMethod }) => {
+
+    const [loading, setLoading] = useState(false);
+
+    const [bankCardHeight, setBabankCardHeight] = useState(new Animated.Value(0));
+    const [showCardBank, setShowCardBank] = useState(false);
+
+
+
+
+
+    const [showBankCardModal, setShowBankCardModal] = useState(false); // État pour contrôler la visibilité du modal de la carte bancaire
+
+    const handleBankCardMethod = () => {
+        setShowBankCardModal(!showBankCardModal); // Inverse la valeur de l'état pour afficher ou masquer le modal de la carte bancaire
+    };
+
+    const kondo = async () => {
+        console.log("Je m'amorce ");
+        handleBankCardMethod();
+    };
+
+
+    const handleCreateOrder = async () => {
+        console.log("Je crée ma commande");
+
+    };
+
+
     return (
         <View
             style={{
@@ -81,7 +112,8 @@ const PaiementMode = ({ handlePaiementMethod }) => {
                 </Text>
             </Pressable>
 
-            <Pressable
+            <TouchableOpacity
+                onPress={kondo}
                 style={{
                     width: "100%",
                     height: 50,
@@ -110,7 +142,7 @@ const PaiementMode = ({ handlePaiementMethod }) => {
                         color: 'gray',
                     }}>Carte bancaire
                 </Text>
-            </Pressable>
+            </TouchableOpacity>
 
             <Pressable
                 style={{
@@ -148,6 +180,23 @@ const PaiementMode = ({ handlePaiementMethod }) => {
                     }}>PayPal
                 </Text>
             </Pressable>
+
+            <Modal
+                animationType="slide"
+                transparent={true} // Définir transparent sur false pour que le fond soit opaque
+                visible={showBankCardModal}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setShowBankCardModal(!showBankCardModal);
+                }}>
+                <BankCardMode
+                    handleCreateOrder={handleCreateOrder}
+                    handleBankCardMethod={handleBankCardMethod}
+
+                />
+            </Modal>
+
+            {loading && <ActivityIndicator style={{ marginTop: 10 }} color="white" />}
         </View >
     )
 }

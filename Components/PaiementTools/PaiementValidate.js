@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Modal from "react-native-modal";
 import PaiementMode from './PaiementMode';
+import BankCardMode from './PaiementMode/BankCardMode';
 
 
 const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
@@ -12,10 +13,6 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
 
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
-
-
-
-
 
 
     const handlePaiementMethod = () => {
@@ -36,6 +33,8 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
             }).start();
         }
     };
+
+
 
 
     return (
@@ -82,8 +81,12 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
                 animationOut="slideOutDown"
                 useNativeDriverForBackdrop
             >
-                <PaiementMode handlePaiementMethod={handlePaiementMethod} />
+                <PaiementMode
+                    handlePaiementMethod={handlePaiementMethod} />
             </Modal>
+
+
+
         </View>
     )
 }
