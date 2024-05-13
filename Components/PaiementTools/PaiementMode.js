@@ -6,8 +6,8 @@ import { FontAwesome, Entypo } from '@expo/vector-icons';
 import BankCardMode from './PaiementMode/BankCardMode';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import ConfirmationModal from './PaiementMode/ConfirmationModal';
 import LoadingValidation from './PaiementMode/LoadingValidation';
+import { useNavigation } from '@react-navigation/native';
 
 
 const PaiementMode = ({ handlePaiementMethod, calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
@@ -18,6 +18,8 @@ const PaiementMode = ({ handlePaiementMethod, calculateTotal, handlePaiement, ca
 
     const customerId = userData.customerData.id
 
+    const navigation = useNavigation()
+
 
     const [showBankCardModal, setShowBankCardModal] = useState(true);
 
@@ -26,70 +28,58 @@ const PaiementMode = ({ handlePaiementMethod, calculateTotal, handlePaiement, ca
     };
 
     const kondo = async () => {
-        setLoading(!loading);
+
     };
 
 
 
     const handleValidation = () => {
 
-        console.log("Il était temps que tu t'actives")
+        navigation.navigate("OrderValidate")
+        console.log("Je m'amorce ", cart);
+        handlePaiementMethod()
 
-        setShowModal(!showModal);
-
-        console.log("Ouppppps c'est fini")
 
     };
-
 
     const handleCreateOrder = async () => {
-        handlePaiementMethod();
+        console.log("Before setLoading(true)");
+
         setLoading(true);
+        try {
+            // Construire les détails de la commande
+            const orderData = {
+                billing: slectedAdress,
+                shipping: isSameAddress ? addressShipping : facturationAdressStore,
+                line_items: cart.map(item => ({
+                    product_id: item.id,
+                    quantity: item.stock_quantity,
+                })),
+                customer_id: customerId,
+            };
+            console.log("Inside try block: order data", orderData);
 
-        // Créer une promesse pour la création de commande
-        const orderCreationPromise = new Promise(async (resolve, reject) => {
-            try {
-                // Construire les détails de la commande
-                const orderData = {
-                    billing: slectedAdress,
-                    shipping: isSameAddress ? addressShipping : facturationAdressStore,
-                    line_items: cart.map(item => ({
-                        product_id: item.id,
-                        quantity: item.stock_quantity,
-                    })),
-                    customer_id: customerId,
-                };
-
-                // Envoyer la commande à WooCommerce
-                /*  const {
-                      data: { id, order_key }
-                  } = await axios.post('https://boutiquefidji.com/wp-json/wc/v3/orders?per_page=1&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf', orderData);
-        */
-                // Générer l'URL de paiement
-                console.log('Votre commande facturation', orderData);
-                resolve(); // Marquer la promesse comme résolue une fois la commande créée avec succès
-            } catch (error) {
-                console.error('Error creating order:', error);
-                reject(error); // Rejeter la promesse en cas d'erreur
-            }
-        });
-
-        // Utiliser Promise.all() pour attendre à la fois la création de commande et le délai de chargement
-        Promise.all([orderCreationPromise, new Promise(resolve => setTimeout(resolve, 20000))])
-            .then(() => {
-                // Une fois que les deux promesses sont résolues (commande créée et délai écoulé),
-                // arrêtez le chargement
+            // Envoyer la commande à WooCommerce
+            /*  const {
+                  data: { id, order_key }
+              } = await axios.post('https://boutiquefidji.com/wp-json/wc/v3/orders?per_page=1&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf', orderData);
+            */
+            // Générer l'URL de paiement
+            console.log('Inside try block: Votre commande facturation', orderData);
+            // Déclencher l'arrêt du chargement après 20 secondes
+            setTimeout(() => {
                 setLoading(false);
-                console.log("Le temps est écoulé");
-                // Appeler handleValidation ici si nécessaire
-            })
-            .catch(error => {
-                // Gérer les erreurs ici si nécessaire
-                console.error('Error:', error);
-                setLoading(false); // Arrêter le chargement en cas d'erreur
-            });
-        handleValidation()
+            }, 2000);
+        } catch (error) {
+            console.error('Error creating order:', error);
+            // Arrêter le chargement en cas d'erreur
+            setLoading(false);
+
+        } finally {
+            handleValidation();
+        }
     };
+
 
 
 
@@ -261,22 +251,20 @@ const PaiementMode = ({ handlePaiementMethod, calculateTotal, handlePaiement, ca
                 />
             </Modal>*/}
 
-
             <Modal
                 animationType="slide"
                 transparent={true}
                 visible={loading}
-                onClose={() => setLoading(false)}>
-
+                onRequestClose={() => {
+                    // Ne faites rien si l'utilisateur essaie de fermer le modal
+                    // Le modal doit être fermé uniquement lorsque le chargement est terminé
+                }}
+            >
                 <LoadingValidation />
-
             </Modal>
 
 
-
-            <ConfirmationModal visible={showModal} onClose={() => setShowModal(false)} />
-
-        </View >
+        </View>
     )
 }
 
