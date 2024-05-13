@@ -9,6 +9,9 @@ export const GET_SHIRTS = 'GET_TSHIRT';
 export const GET_SWEATSHIRTS = 'GET_SWEATSHIRTS';
 
 
+
+
+
 export const getProducts = () => {
     return async (dispatch) => {
         try {
@@ -23,8 +26,6 @@ export const getProducts = () => {
     };
 };
 
-
-
 export const getShirt = () => {
     return async dispatch => {
         try {
@@ -38,10 +39,6 @@ export const getShirt = () => {
     };
 };
 
-
-
-
-
 export const getPants = () => {
     return async dispatch => {
         try {
@@ -54,8 +51,6 @@ export const getPants = () => {
         }
     };
 };
-
-
 
 export const getCoats = () => {
     return async dispatch => {

@@ -16,7 +16,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
 
 
-    const { cart, addToCart } = useContext(AuthContext)
+    const { cart, removeFromCart } = useContext(AuthContext)
 
 
 
@@ -59,7 +59,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                             keyExtractor={(cart) => cart.id.toString()}
                             onEndReachedThreshold={0.5}
                             renderItem={({ item: cart }) => (
-                                <BasketSelection cart={cart} />
+                                <BasketSelection removeFromCart={removeFromCart} cart={cart} />
 
                             )}
                             ListHeaderComponent={() => (

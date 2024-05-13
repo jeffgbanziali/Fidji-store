@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, StatusBar, } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, StatusBar, Modal, Alert, } from 'react-native'
 import React, { useContext, useState } from 'react'
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import ProductsList from '../../Components/PaiementTools/ProductsList';
 import DeliveryAdress from '../../Components/PaiementTools/DeliveryAdress';
 import TotalCalculate from '../../Components/PaiementTools/TotalCalculate';
 import PaiementValidate from '../../Components/PaiementTools/PaiementValidate';
+import LoadingValidation from '../../Components/PaiementTools/PaiementMode/LoadingValidation';
 
 const PaiementScreen = ({ }) => {
 
@@ -18,14 +19,8 @@ const PaiementScreen = ({ }) => {
 
     const route = useRoute()
 
-    const { cart, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption } = route.params
+    const { cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption } = route.params
 
-
-
-    console.log("Il faut changer", selectedOption)
-    console.log("voici adress du coup tu te", addressShipping)
-    console.log("voici facturation store livraison", facturationAdressStore)
-    console.log("voici facturation himelivraison", isSameAddress)
 
 
     const calculateTotal = () => {
@@ -51,85 +46,101 @@ const PaiementScreen = ({ }) => {
 
 
 
+
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                width: "100%",
-                height: "100%",
-                //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-                backgroundColor: "#f5e1ce"
+        <>
 
-            }}>
-            <View
+
+            <SafeAreaView
                 style={{
+                    flex: 1,
                     width: "100%",
-                    height: 40,
-                    marginBottom: 6,
-                    alignItems: "center",
-                    justifyContent: "center",
+                    height: "100%",
+                    //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+                    backgroundColor: "#f5e1ce"
 
-
-                }}>
-
-                <Pressable
-                    onPress={retourned}
+                }
+                }>
+                <View
                     style={{
-                        width: 50,
-                        height: 50,
-                        left: 2,
-                        position: "absolute",
+                        width: "100%",
+                        height: 40,
+                        marginBottom: 6,
                         alignItems: "center",
-                        justifyContent: "center"
-                    }}>
-                    <AntDesign name="left" size={24} color="black" />
-                </Pressable>
-
-                <Text
-                    style={{
-                        fontSize: 20,
-                        fontWeight: "500",
-                        color: "black"
-                    }} >
-                    Étape 4/4 - Résumé
-                </Text>
+                        justifyContent: "center",
 
 
-                <Pressable
-                    style={{
-                        width: 50,
-                        height: 50,
-                        right: 2,
-                        position: "absolute",
-                        alignItems: "center",
-                        justifyContent: "center"
                     }}>
 
-                    <MaterialCommunityIcons name="message-question-outline" size={26} color="black" />
-                </Pressable>
+                    <Pressable
+                        onPress={retourned}
+                        style={{
+                            width: 50,
+                            height: 50,
+                            left: 2,
+                            position: "absolute",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+                        <AntDesign name="left" size={24} color="black" />
+                    </Pressable>
+
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            fontWeight: "500",
+                            color: "black"
+                        }} >
+                        Étape 4/4 - Résumé
+                    </Text>
+
+
+                    <Pressable
+                        style={{
+                            width: 50,
+                            height: 50,
+                            right: 2,
+                            position: "absolute",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}>
+
+                        <MaterialCommunityIcons name="message-question-outline" size={26} color="black" />
+                    </Pressable>
 
 
 
-            </View>
+                </View>
 
-            <ProductsList cart={cart}
-            />
-            <DeliveryAdress
-                addressShipping={addressShipping}
-                facturationAdressStore={facturationAdressStore}
-                isSameAddress={isSameAddress}
-                storeAdress={storeAdress}
-                selectedOption={selectedOption}
-            />
-            <TotalCalculate
-                handlePaiement={handlePaiement}
-                calculateTotal={calculateTotal}
-            />
-            <PaiementValidate
-                handlePaiement={handlePaiement}
-                calculateTotal={calculateTotal}
-            />
-        </SafeAreaView>
+                <ProductsList cart={cart}
+                />
+                <DeliveryAdress
+                    addressShipping={addressShipping}
+                    facturationAdressStore={facturationAdressStore}
+                    isSameAddress={isSameAddress}
+                    storeAdress={storeAdress}
+                    selectedOption={selectedOption}
+                />
+                <TotalCalculate
+                    handlePaiement={handlePaiement}
+                    calculateTotal={calculateTotal}
+                />
+                <PaiementValidate
+                    handlePaiement={handlePaiement}
+                    calculateTotal={calculateTotal}
+                    cart={cart}
+                    addressShipping={addressShipping}
+                    facturationAdressStore={facturationAdressStore}
+                    isSameAddress={isSameAddress}
+                    slectedAdress={slectedAdress}
+                    storeAdress={storeAdress}
+                />
+            </SafeAreaView >
+
+
+
+        </>
+
     )
 }
 

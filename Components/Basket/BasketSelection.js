@@ -7,7 +7,7 @@ import { isEmpty } from '../../Context/UtilsFunctions';
 
 
 
-const BasketSelection = ({ cart }) => {
+const BasketSelection = ({ cart, removeFromCart }) => {
 
 
     const [quantity, setQuantity] = useState(1);
@@ -31,6 +31,11 @@ const BasketSelection = ({ cart }) => {
         }
     }, [cart]);
 
+    const removeProduct = (productId) => {
+        removeFromCart(productId);
+        console.log("Il est supprimé")
+    }
+
 
 
     return (
@@ -41,7 +46,7 @@ const BasketSelection = ({ cart }) => {
                 borderBottomWidth: 1,
                 borderColor: "gray",
                 flexDirection: "row",
-                alignItems: "center"
+                alignItems: "center",
             }}>
             <View
                 style={{
@@ -166,6 +171,24 @@ const BasketSelection = ({ cart }) => {
                 </View>
 
             </View>
+            <Pressable
+                onPress={() => removeProduct(cart.id)}
+                style={{
+                    width: 90,
+                    height: 30,
+                    backgroundColor: "red",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: 8,
+
+                }}>
+                <Text
+                    style={{
+                        color: "white"
+                    }}>
+                    Retirer
+                </Text>
+            </Pressable>
 
         </View>
     )

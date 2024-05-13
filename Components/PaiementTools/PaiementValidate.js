@@ -6,7 +6,7 @@ import PaiementMode from './PaiementMode';
 import BankCardMode from './PaiementMode/BankCardMode';
 
 
-const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
+const PaiementValidate = ({ calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
 
 
     const navigation = useNavigation()
@@ -82,7 +82,17 @@ const PaiementValidate = ({ calculateTotal, handlePaiement }) => {
                 useNativeDriverForBackdrop
             >
                 <PaiementMode
-                    handlePaiementMethod={handlePaiementMethod} />
+
+                    handlePaiementMethod={handlePaiementMethod}
+                    handlePaiement={handlePaiement}
+                    calculateTotal={calculateTotal}
+                    cart={cart}
+                    addressShipping={addressShipping}
+                    facturationAdressStore={facturationAdressStore}
+                    isSameAddress={isSameAddress}
+                    slectedAdress={slectedAdress}
+                    storeAdress={storeAdress}
+                />
             </Modal>
 
 

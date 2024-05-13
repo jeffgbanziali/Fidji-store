@@ -43,17 +43,16 @@ const DeliveryScreen = ({ handleViewBasket }) => {
         navigation.goBack();
     }
 
-    const storeAdress = [
-        {
-            company: "Boutique FIDJI",
-            address_1: "25 rue des martyrs",
-            address_2: "",
-            city: "Paris",
-            postcode: "75009",
-            country: "France",
-            phone: "00000000000"
-        }
-    ]
+    const storeAdress = {
+        company: "Boutique FIDJI",
+        address_1: "25 rue des martyrs",
+        address_2: "",
+        city: "Paris",
+        postcode: "75009",
+        country: "France",
+        phone: "00000000000"
+    }
+
 
 
 
@@ -182,6 +181,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                 facturationAdressStore={facturationAdressStore}
                 cart={cart}
                 calculateTotal={calculateTotal}
+                slectedAdress={slectedAdress}
                 totalStockQuantity={totalStockQuantity}
             />
 
