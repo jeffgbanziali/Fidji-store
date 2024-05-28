@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar, View, Platform } from 'react-native';
+import { StyleSheet, StatusBar, View, SafeAreaView, Text, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import FirstNavigation from './Navigation/Start/FirstNavigation';
 import TabNavigation from './Navigation/Home/TabNavigation';
@@ -11,17 +11,25 @@ import logger from 'redux-logger';
 import { getUser } from './ReduxActions/user.actions';
 import rootReducer from './reducers';
 import LoadingScreen from './Components/SignInScreen/LoadingScreen';
+import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/NativeDevSettings';
+import { Entypo } from '@expo/vector-icons';
 
 
 
 const App = () => {
 
- 
+
   const store = createStore(
     rootReducer,
-    applyMiddleware(thunk, logger)
+    applyMiddleware(thunk,)
   );
 
+  const connectToRemoteDebugger = () => {
+    NativeDevSettings.setIsDebuggingRemotely(true);
+  };
+
+
+  connectToRemoteDebugger()
 
 
   return (
@@ -47,7 +55,9 @@ const AppContent = () => {
 
 
 
+  const { isConnected } = useContext(AuthContext)
 
+  console.log("JE suis en ligne ", isConnected)
 
 
 
@@ -57,21 +67,57 @@ const AppContent = () => {
         <StatusBar style="auto" />
 
         {
-          userToken ? (
-
-            userToken === null ? (
-
-              <LoadingScreen />
-
+          isConnected ? (
+            userToken ? (
+              userToken === null ? (
+                <LoadingScreen />
+              ) : (
+                <TabNavigation />
+              )
             ) : (
-
-              <TabNavigation />
-
+              <FirstNavigation />
             )
-
           ) : (
+            <SafeAreaView
+              style={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+              <View style={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+                <View style={{
+                  width: "100%",
+                  height: 100,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}>
+                  <Entypo name="emoji-sad" size={100} color="black" />
+                </View>
+                <View style={{
+                  width: "100%",
+                  height: 100,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}>
+                  <ActivityIndicator size={"large"} color={"black"} />
+                  <Text style={{
+                    marginTop: 10,
+                    fontSize: 18
+                  }}>
+                    Veuillez vous connecter à interent
+                  </Text>
+                </View>
 
-            <FirstNavigation />
+
+              </View>
+
+            </SafeAreaView>
           )
         }
 
