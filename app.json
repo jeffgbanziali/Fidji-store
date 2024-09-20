@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Fidji",
+    "slug": "Fidji",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/image/1.jpg",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/image/backApp2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f1f1f1"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.flaj16.FidjiStoreApp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.flaj16.FidjiStoreApp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b5f82370-634d-4f99-a95f-fce98f33da81"
+      }
+    },
+    "owner": "flaj16"
+  }
+}
