@@ -357,7 +357,7 @@ const SignInScreen = () => {
                                             fontWeight: "500",
                                             color: "blue"
                                         }} >
-                                        Inscripvez vous
+                                        Inscrivez vous
                                     </Text>
                                 </Pressable>
                             </View>
