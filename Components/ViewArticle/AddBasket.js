@@ -31,11 +31,14 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
     const handleAddCartArticle = () => {
 
         const updatedArticle = { ...article };
+        console.log("Mon update est là", updatedArticle.attributes)
 
-        updatedArticle.attributes[0].options = selectedColor;
-        updatedArticle.attributes[1].options = selectedSize;
-        updatedArticle.stock_quantity = quantity;
+        if (updatedArticle) {
+            updatedArticle.attributes[0].options = selectedColor;
+            updatedArticle.attributes[1].options = selectedSize;
 
+            updatedArticle.stock_quantity = quantity;
+        }
 
         addToCart(updatedArticle);
         setShowSuccessModal(true);

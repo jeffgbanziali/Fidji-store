@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 
@@ -9,25 +9,31 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
 
 
     const [taille, setTaille] = useState(null);
+
     const [value, setValue] = useState(null);
 
 
+    console.log("mon article est là ", article.attributes)
 
 
-    /*  const dataOptionsColor = article.attributes[0].options.map(option => ({
-          label: option,
-          value: option
-      }));*/
 
 
-   /* const dataOptionsLenght = article.attributes[1].options.map(option => ({
-        label: option,
-        value: option
-    }));*/
+    const dataOptionsColor = useMemo(() => {
+        return article.attributes[0]?.options?.map(option => ({
+            label: option,
+            value: option
+        })) || [];
+    }, [article.attributes]);
 
+    const dataOptionsLenght = useMemo(() => {
+        return article.attributes[1]?.options?.map(option => ({
+            label: option,
+            value: option
+        })) || [];
+    }, [article.attributes]);
 
-   /* const dataName = article.attributes[0].name
-    const dataColor = article.attributes[1].name*/
+    const dataName = article.attributes[0]?.name;
+    const dataColor = article.attributes[1]?.name;
 
 
 
@@ -104,7 +110,7 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
 
 
 
-            {/*  <View
+            <View
                 style={{
                     width: 240,
                     margin: 4,
@@ -234,7 +240,7 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
                     }}
                     renderItem={renderItem}
                 />
-            </View>*/}
+            </View>
         </View>
     )
 }
