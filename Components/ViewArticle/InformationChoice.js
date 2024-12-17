@@ -14,20 +14,20 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
 
 
 
-    const dataOptionsColor = article.attributes[0].options.map(option => ({
+    /*  const dataOptionsColor = article.attributes[0].options.map(option => ({
+          label: option,
+          value: option
+      }));*/
+
+
+   /* const dataOptionsLenght = article.attributes[1].options.map(option => ({
         label: option,
         value: option
-    }));
+    }));*/
 
 
-    const dataOptionsLenght = article.attributes[1].options.map(option => ({
-        label: option,
-        value: option
-    }));
-
-
-    const dataName = article.attributes[0].name
-    const dataColor = article.attributes[1].name
+   /* const dataName = article.attributes[0].name
+    const dataColor = article.attributes[1].name*/
 
 
 
@@ -104,7 +104,7 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
 
 
 
-            <View
+            {/*  <View
                 style={{
                     width: 240,
                     margin: 4,
@@ -234,7 +234,7 @@ const InformationChoice = ({ article, onSizeChange, onColorChange }) => {
                     }}
                     renderItem={renderItem}
                 />
-            </View>
+            </View>*/}
         </View>
     )
 }
