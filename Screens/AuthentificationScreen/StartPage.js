@@ -1,6 +1,7 @@
 import { View, Text, ImageBackground, Pressable, Platform, StatusBar, SafeAreaView, } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { useFonts, Montserrat_400Regular, Montserrat_500Medium } from '@expo-google-fonts/montserrat';
 
@@ -29,12 +30,22 @@ const StartPage = () => {
 
     return (
         <ImageBackground
-            source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2023/12/camelia-2.jpg" }}
+            source={{ uri: "https://boutiquefidji.fr/wp-content/uploads/2024/11/hoodie-lubin-la-seventies-kaki-3.jpg" }}
             style={{
                 width: "100%",
                 height: "100%",
             }}
         >
+
+            <LinearGradient
+                colors={['rgba(0,0,0,0.7)', 'transparent']}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    width: '100%',
+                    height: '30%',
+                }}
+            />
 
             <SafeAreaView
                 style={{

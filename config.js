@@ -1,1 +1,1 @@
-export const APP_API_URL = 'https://boutiquefidji.com/wp-json'
+export const APP_API_URL = 'https://boutiquefidji.fr/wp-json'

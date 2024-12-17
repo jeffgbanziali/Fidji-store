@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 9.1.0"
+    "version": ">= 9.1.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -8,6 +9,9 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
       }
     },
     "preview": {
@@ -16,8 +20,18 @@
       }
     },
     "production": {
+      "autoIncrement": true,
       "android": {
         "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "boutiquefidji@gmail.com",
+        "ascAppId": "6702026361",
+        "appleTeamId": "J6TG649DYA"
       }
     }
   }

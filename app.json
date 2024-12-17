@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Fidji",
-    "slug": "Fidji",
+    "slug": "FidjiStoreApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/image/1.jpg",
@@ -16,7 +16,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.flaj16.FidjiStoreApp"
+      "bundleIdentifier": "com.flaj16.FidjiStoreApp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Cette application nécessite l'accès à la caméra pour permettre la prise de photos et de vidéos."
+      }
     },
     "android": {
       "adaptiveIcon": {
