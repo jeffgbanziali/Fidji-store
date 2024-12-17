@@ -16,7 +16,7 @@ export const fetchProducts = () => async (dispatch) => {
     }
 };
 
-export const fetchShirts = () => async (dispatch) => {
+export const getShirt = () => async (dispatch) => {
     try {
         const data = await getFilteredProducts([93]);
         dispatch({ type: GET_SHIRTS, payload: data });
@@ -25,7 +25,7 @@ export const fetchShirts = () => async (dispatch) => {
     }
 };
 
-export const fetchPants = () => async (dispatch) => {
+export const getPants = () => async (dispatch) => {
     try {
         const data = await getFilteredProducts([92, 132]);
         dispatch({ type: GET_PANTS, payload: data });
@@ -34,7 +34,7 @@ export const fetchPants = () => async (dispatch) => {
     }
 };
 
-export const fetchCoats = () => async (dispatch) => {
+export const getCoats = () => async (dispatch) => {
     try {
         const data = await getFilteredProducts([89]);
         dispatch({ type: GET_COATS, payload: data });
@@ -43,7 +43,7 @@ export const fetchCoats = () => async (dispatch) => {
     }
 };
 
-export const fetchSweatshirts = () => async (dispatch) => {
+export const getSweatshirts = () => async (dispatch) => {
     try {
         const data = await getFilteredProducts([91]);
         dispatch({ type: GET_SWEATSHIRTS, payload: data });
@@ -52,7 +52,7 @@ export const fetchSweatshirts = () => async (dispatch) => {
     }
 };
 
-export const fetchTshirts = () => async (dispatch) => {
+export const getTshirts = () => async (dispatch) => {
     try {
         const data = await getFilteredProducts([105, 94]);
         dispatch({ type: GET_TSHIRTS, payload: data });
