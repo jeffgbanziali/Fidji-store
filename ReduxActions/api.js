@@ -6,11 +6,13 @@ import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
 
 export const wpApiClient = (token) =>
     axios.create({
-        baseURL: `${APP_API_URL}/wp/v2`,
+        baseURL: `${APP_API_URL}/wp/v2`, // APP_API_URL contient déjà wp-json
         headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
         },
     });
+
 
 const wooApiClient = axios.create({
     baseURL: `${APP_API_URL}/wc/v3`,

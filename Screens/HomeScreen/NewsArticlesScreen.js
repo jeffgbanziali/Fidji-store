@@ -6,7 +6,7 @@ import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArti
 import Modal from "react-native-modal";
 import BasketScreen from '../BasketScreen/BasketScreen';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { getProducts } from '../../ReduxActions/products.actions';
+import { fetchProducts } from '../../ReduxActions/products.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from '../../Context/UtilsFunctions';
 import { AuthContext } from '../../Context/AuthContext';
@@ -35,7 +35,7 @@ const NewsArticlesScreen = () => {
 
 
     useEffect(() => {
-        dispatch(getProducts());
+        dispatch(fetchProducts());
     }, [dispatch]);
 
 

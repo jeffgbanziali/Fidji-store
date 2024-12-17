@@ -4,6 +4,8 @@ import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../Context/AuthContext';
 import LoadingScreen from '../../Components/SignInScreen/LoadingScreen';
+import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
+import { wpApiClient } from '../../ReduxActions/api';
 
 const SignInScreen = () => {
 
@@ -36,7 +38,8 @@ const SignInScreen = () => {
         setIsLoadingSignIn(true);
 
         try {
-            const response = await fetch('https://boutiquefidji.com/wp-json/api/v1/token', {
+            // Étape 1 : Obtenir le token JWT
+            const response = await fetch(`${APP_API_URL}/api/v1/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,27 +52,24 @@ const SignInScreen = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                // Récupérer les détails de l'utilisateur en appelant une autre API WordPress avec le token JWT
-                const userResponse = await fetch('https://boutiquefidji.com/wp-json/wp/v2/users/me', {
-                    headers: {
-                        'Authorization': 'Bearer ' + data.jwt_token
-                    }
-                });
+                console.log('Token JWT récupéré :', data.jwt_token);
 
-                if (userResponse.ok) {
-                    const userData = await userResponse.json();
-                    // Extraire l'ID de l'utilisateur de userData
+                // Étape 2 : Récupérer les détails utilisateur avec axios
+                const userApi = wpApiClient(data.jwt_token);
+                try {
+                    const userResponse = await userApi.get('/users/me'); // Axios déclenche une exception en cas d'erreur HTTP
+                    const userData = userResponse.data; // Axios utilise .data pour accéder au corps de la réponse
+
+                    // Extraire l'ID utilisateur
                     const userId = userData.id;
                     console.log('Détails de l\'utilisateur:', userId);
 
-                    // Continuer avec votre logique de connexion
+                    // Appel à ta fonction signIn pour continuer
                     signIn(data.jwt_token, userId);
-
-                } else {
-                    // Gérer les erreurs lors de la récupération des détails de l'utilisateur
-                    console.error('Erreur lors de la récupération des détails de l\'utilisateur');
+                } catch (userError) {
+                    console.error('Erreur lors de la récupération des détails de l\'utilisateur :', userError);
+                    Alert.alert('Erreur', 'Impossible de récupérer les informations utilisateur.');
                 }
-
             } else {
                 Alert.alert('Erreur', 'Identifiants incorrects. Veuillez réessayer.');
             }
@@ -82,6 +82,7 @@ const SignInScreen = () => {
             }, 5000);
         }
     };
+
 
 
 

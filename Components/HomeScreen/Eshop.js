@@ -27,7 +27,7 @@ const Eshop = () => {
                 justifyContent: "center",
             }}>
             <Image
-                source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2023/12/top-sylvie.jpg" }}
+                source={{ uri: "https://boutiquefidji.fr/wp-content/uploads/2024/11/pull-edmond-ladoree-gris-chine-1.jpg" }}
                 style={{
                     width: '100%',
                     height: "100%",
