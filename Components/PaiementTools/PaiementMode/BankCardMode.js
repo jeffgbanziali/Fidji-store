@@ -14,34 +14,34 @@ const BankCardMode = ({ handleBankCardMethod, handleCreateOrder, calculateTotal,
 
     const handlePayment = async () => {
         // Créer un token de carte avec les informations de paiement
-        const cardDetails = {
-            card: {
-                number: cardNumber.replace(/\s/g, ''), // Supprimer les espaces dans le numéro de carte
-                expMonth: parseInt(expiryDate.split(' / ')[0]), // Récupérer le mois d'expiration
-                expYear: parseInt(expiryDate.split(' / ')[1]), // Récupérer l'année d'expiration
-                cvc: cvv,
-            },
-        };
-
-        try {
-            // Créer un token de carte avec Stripe
-            const cardToken = await stripe.createTokenWithCard(cardDetails);
-
-            // Envoyer le token de carte au backend pour effectuer le paiement
-            const response = await axios.post('URL_DE_VOTRE_ENDPOINT_BACKEND', {
-                token: cardToken.tokenId, // Envoyer l'ID du token de carte
-                amount: handlePaiement // Remplacez MONTANT_TOTAL_A_PAYER par le montant total à payer
-            });
-
-            // Traiter la réponse du backend si nécessaire
-            console.log('Paiement réussi:', response.data);
-            // Ajoutez ici la logique pour gérer le succès du paiement
-
-            handleCreateOrder()
-        } catch (error) {
-            console.error('Erreur lors du paiement:', error);
-            // Ajoutez ici la logique pour gérer les erreurs de paiement
-        }
+        /*  const cardDetails = {
+              card: {
+                  number: cardNumber.replace(/\s/g, ''), // Supprimer les espaces dans le numéro de carte
+                  expMonth: parseInt(expiryDate.split(' / ')[0]), // Récupérer le mois d'expiration
+                  expYear: parseInt(expiryDate.split(' / ')[1]), // Récupérer l'année d'expiration
+                  cvc: cvv,
+              },
+          };
+  
+          try {
+              // Créer un token de carte avec Stripe
+              const cardToken = await stripe.createTokenWithCard(cardDetails);
+  
+              // Envoyer le token de carte au backend pour effectuer le paiement
+              const response = await axios.post('URL_DE_VOTRE_ENDPOINT_BACKEND', {
+                  token: cardToken.tokenId, // Envoyer l'ID du token de carte
+                  amount: handlePaiement // Remplacez MONTANT_TOTAL_A_PAYER par le montant total à payer
+              });
+  
+              // Traiter la réponse du backend si nécessaire
+              console.log('Paiement réussi:', response.data);
+              // Ajoutez ici la logique pour gérer le succès du paiement
+  
+              handleCreateOrder()
+          } catch (error) {
+              console.error('Erreur lors du paiement:', error);
+              // Ajoutez ici la logique pour gérer les erreurs de paiement
+          }*/
     };
 
     return (

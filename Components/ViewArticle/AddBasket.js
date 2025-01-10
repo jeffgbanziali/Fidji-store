@@ -34,8 +34,20 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
         console.log("Mon update est là", updatedArticle.attributes)
 
         if (updatedArticle) {
-            updatedArticle.attributes[0].options = selectedColor;
-            updatedArticle.attributes[1].options = selectedSize;
+            if (updatedArticle.attributes && updatedArticle.attributes.length > 0) {
+                if (updatedArticle.attributes.length > 0) {
+                    updatedArticle.attributes[0].options = selectedColor;
+                }
+                if (updatedArticle.attributes.length > 1) {
+                    updatedArticle.attributes[1].options = selectedSize;
+                }
+            } else {
+                console.log("Le tableau des attributs est vide.");
+                updatedArticle.attributes = [
+                    { options: [selectedColor] },
+                    { options: [selectedSize] }
+                ];
+            }
 
             updatedArticle.stock_quantity = quantity;
         }
@@ -43,7 +55,6 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
         addToCart(updatedArticle);
         setShowSuccessModal(true);
 
-        console.log("Mon panier est rempli  :", cart);
 
 
     };

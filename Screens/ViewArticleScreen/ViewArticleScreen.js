@@ -27,6 +27,7 @@ const ViewArticleScreen = () => {
 
 
 
+
     return (
         <SafeAreaView
             style={{

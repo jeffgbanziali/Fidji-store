@@ -48,6 +48,10 @@ const ArticleElement = ({ article }) => {
 
 
 
+    console.log("Mon article", article)
+
+
+
 
     function removeHtmlTags(html) {
         return html.replace(/<[^>]*>/g, '');

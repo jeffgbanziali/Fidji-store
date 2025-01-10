@@ -255,10 +255,7 @@ const PaiementMode = ({ handlePaiementMethod, calculateTotal, handlePaiement, ca
                 animationType="slide"
                 transparent={true}
                 visible={loading}
-                onRequestClose={() => {
-                    // Ne faites rien si l'utilisateur essaie de fermer le modal
-                    // Le modal doit être fermé uniquement lorsque le chargement est terminé
-                }}
+                onRequestClose={() => { setShowBankCardModal }}
             >
                 <LoadingValidation />
             </Modal>

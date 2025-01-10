@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
+import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
+
 
 const AfterRegisterScreen = () => {
 
@@ -90,26 +92,27 @@ const AfterRegisterScreen = () => {
     const adress = addressData.billing
     const shipp = addressData.shipping
 
-    const handleSubmit = () => {
-
-
-        axios.post(
-            'https://boutiquefidji.com/wp-json/wc/v3/customers?consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf',
-            userData,
-            adress,
-            shipp, // Données à envoyer
-            {
-                headers: {
-                    'Content-Type': 'application/json',
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post(
+                `${APP_API_URL}/wc/v3/customers`, 
+                {
+                    ...userData, 
+                    address: adress, 
+                    shipping: shipp 
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Basic ${btoa(`${CUSTOMER_KEY}:${SECRET_KEY}`)}` 
+                    }
                 }
-            }
-        )
-            .then(response => {
-                console.log('Client créé avec succès :', response.data);
-            })
-            .catch(error => {
-                console.error('Erreur lors de la création du client :', error);
-            });
+            );
+    
+            console.log('Client créé avec succès :', response.data);
+        } catch (error) {
+            console.error('Erreur lors de la création du client :', error.response ? error.response.data : error.message);
+        }
     };
 
 

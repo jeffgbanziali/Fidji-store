@@ -57,13 +57,17 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
 
-    const addressShipping = selectedOption === 2 ? userData.customerData.shipping : storeAdress
+
+    const addressShipping = selectedOption === 2 ? userData.customerData?.shipping : storeAdress
+
+    console.log("Mon adresse de livraisaon", addressShipping)
+
 
 
 
     console.log('Selectedopyion', selectedOption)
-    const shippingAddress = userData.customerData.shipping
-    const billingAddress = userData.customerData.billing
+    const shippingAddress = userData.customerData?.shipping
+    const billingAddress = userData.customerData?.billing
 
     const sameAddress =
         billingAddress.first_name === shippingAddress.first_name &&

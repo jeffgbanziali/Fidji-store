@@ -112,7 +112,7 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                         fontWeight: "bold",
                         color: "gray"
                     }}>
-                        Taille : {cart.attributes[1].options}
+                        Taille : {cart.attributes[1].options} 
                     </Text>
                 </View>
 

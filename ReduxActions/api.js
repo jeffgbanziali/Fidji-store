@@ -14,7 +14,7 @@ export const wpApiClient = (token) =>
     });
 
 
-const wooApiClient = axios.create({
+export const wooApiClient = axios.create({
     baseURL: `${APP_API_URL}/wc/v3`,
     params: {
         consumer_key: CUSTOMER_KEY,
