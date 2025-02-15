@@ -59,23 +59,37 @@ const BankCardMode = ({ handleBankCardMethod, paymentProcess, calculateTotal, ha
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
         >
-            <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', height: 50, position: 'absolute', borderBottomWidth: 1, top: 50, borderColor: 'gray', paddingLeft: 10 }}>
+            <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: 'white', }}>
+                <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', height: 50, position: 'relative', borderBottomWidth: 1, borderColor: '#e5e7e6', paddingLeft: 10 }}>
                     <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Carte Bancaire</Text>
                     <Pressable onPress={handleBankCardMethod} style={{ width: 50, height: 50, right: 2, position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
                         <Entypo name="cross" size={24} color="black" />
                     </Pressable>
                 </View>
-                <View style={{ width: '100%', height: 320, justifyContent: 'center' }}>
-                    <View style={{ width: '100%', height: 90, paddingLeft: 20, justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 16, fontWeight: '500', color: 'black' }}>Numéro de la carte</Text>
-                        <View style={{ width: '90%', height: 50, marginTop: 10, borderRadius: 10, borderWidth: 1, borderColor: 'gray' }}>
+                <View style={{
+                    width: '100%',
+                    height: 320,
+                    marginTop: 10,
+
+                }}>
+                    <View style={{
+                        width: '100%',
+                        height: 90,
+                        paddingLeft: 20,
+                        justifyContent: 'center'
+                    }}>
+                        <Text style={{ fontSize: 16, fontWeight: '600', color: 'black' }}>Numéro de la carte</Text>
+                        <View style={{ width: '90%', height: 50, marginTop: 10, backgroundColor: "#e5e7e6", borderRadius: 10, }}>
                             <TextInput
-                                style={{ width: '100%', height: '100%', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
+                                style={{ width: '100%', height: '100%', fontWeight: '600', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
                                 placeholder="1234 5678 9012 3456"
-                                placeholderTextColor="black"
+                                placeholderTextColor="gray"
                                 value={cardNumber}
                                 keyboardType="numeric"
                                 fontSize={16}
@@ -84,51 +98,52 @@ const BankCardMode = ({ handleBankCardMethod, paymentProcess, calculateTotal, ha
                         </View>
                     </View>
                     <View style={{ width: '100%', height: 90, paddingLeft: 20, justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 16, fontWeight: '500', color: 'black' }}>Nom sur la carte</Text>
-                        <View style={{ width: '90%', height: 50, marginTop: 10, borderRadius: 10, borderWidth: 1, borderColor: 'gray' }}>
+                        <Text style={{ fontSize: 16, fontWeight: '600', color: 'black' }}>Nom sur la carte</Text>
+                        <View style={{ width: '90%', height: 50, marginTop: 10, backgroundColor: "#e5e7e6", borderRadius: 10, }}>
                             <TextInput
-                                style={{ width: '100%', height: '100%', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
+                                style={{ width: '100%', height: '100%', fontWeight: '600', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
                                 placeholder="Nom sur la carte"
-                                placeholderTextColor="black"
+                                placeholderTextColor="gray"
                                 value={cardName}
                                 fontSize={16}
                                 onChangeText={setCardName}
                             />
                         </View>
                     </View>
-                    <View style={{ width: '100%', height: 90, marginLeft: 20, paddingLeft: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ width: 180, height: 30, justifyContent: 'center', flexDirection: 'row', }}>
+                    <View style={{ width: '100%', height: 90, flexDirection: 'row', }}>
 
-                            <View style={{ width: 100, height: 50, marginTop: 10, borderRadius: 10, borderWidth: 1, borderColor: 'gray' }}>
+                        <View style={{ width: 250, height: "100%", justifyContent: 'center', alignItems: 'center', flexDirection: 'row', }}>
+
+                            <View style={{ width: 80, height: 50, margin: 10, borderRadius: 10, backgroundColor: "#e5e7e6" }}>
                                 <TextInput
                                     style={{ width: '100%', height: '100%', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
                                     value={expiryMonth}
                                     placeholder="MM"
-                                    placeholderTextColor="black"
+                                    placeholderTextColor="gray"
                                     fontSize={16}
                                     onChangeText={setExpiryMonth}
                                 />
                             </View>
-                            <View style={{ width: 140, height: 50, marginTop: 10, borderRadius: 10, borderWidth: 1, borderColor: 'gray' }}>
+                            <View style={{ width: 100, height: 50, borderRadius: 10, backgroundColor: "#e5e7e6" }}>
                                 <TextInput
                                     style={{ width: '100%', height: '100%', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
                                     value={expiryYear}
-                                    placeholder="AA"
-                                    placeholderTextColor="black"
+                                    placeholder="AAAA"
+                                    placeholderTextColor="gray"
                                     fontSize={16}
                                     onChangeText={setExpiryYear}
                                 />
                             </View>
                         </View>
-                        <View style={{ width: 180, height: 90, marginTop: 20, marginLeft: 50, justifyContent: 'center' }}>
-                            <View style={{ width: 100, height: 50, marginTop: 10, borderRadius: 10, borderWidth: 1, borderColor: 'gray' }}>
+                        <View style={{ width: 180, height: 90, alignItems: 'center', justifyContent: "center" }}>
+                            <View style={{ width: 100, height: 50, borderRadius: 10, backgroundColor: "#e5e7e6" }}>
                                 <TextInput
                                     style={{ width: '100%', height: '100%', borderRadius: 10, paddingLeft: 10, color: 'black', fontSize: 16 }}
                                     value={cvv}
-                                    placeholder="3 chiffres"
+                                    placeholder="CVC"
                                     fontSize={16}
                                     keyboardType="numeric"
-                                    placeholderTextColor="black"
+                                    placeholderTextColor="gray"
                                     onChangeText={setCVV}
                                 />
                             </View>
