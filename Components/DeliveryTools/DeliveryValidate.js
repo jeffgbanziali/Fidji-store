@@ -1,25 +1,27 @@
 import { View, Text, Pressable } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress,slectedAdress, storeAdress, selectedOption }) => {
+const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
 
     const navigation = useNavigation()
 
 
-
-
+   
 
     const shippingCost = calculateTotal() > 200 ? 0 : 8;
+    const handlePaiement = calculateTotal() + shippingCost;
 
-    const handlePaiement = calculateTotal() + shippingCost
+    
+
+
+
 
 
     const handleChoice = (cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption) => {
 
 
-        navigation.navigate("BuyScreen", { cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress,storeAdress, selectedOption })
-
+        navigation.navigate("BuyScreen", { cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption })
     }
 
     return (

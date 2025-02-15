@@ -6,33 +6,10 @@ import PaiementMode from './PaiementMode';
 import BankCardMode from './PaiementMode/BankCardMode';
 
 
-const PaiementValidate = ({ calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
+const PaiementValidate = ({ handlePaiementMethod, paymentProcess, handleBankCardMethod, showBasket, createOrder, calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, setSelectedPaymentMethod }) => {
 
 
     const navigation = useNavigation()
-
-    const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
-    const [showBasket, setShowBasket] = useState(false);
-
-
-    const handlePaiementMethod = () => {
-        if (showBasket) {
-            Animated.timing(basketHeight, {
-                toValue: 0,
-                duration: 200,
-                easing: Easing.linear,
-                useNativeDriver: true
-            }).start(() => setShowBasket(false));
-        } else {
-            setShowBasket(true);
-            Animated.timing(basketHeight, {
-                toValue: 200,
-                duration: 300,
-                easing: Easing.linear,
-                useNativeDriver: true
-            }).start();
-        }
-    };
 
 
 
@@ -52,7 +29,7 @@ const PaiementValidate = ({ calculateTotal, handlePaiement, cart, addressShippin
 
             }}>
             <Pressable
-                onPress={() => handlePaiementMethod()}
+                onPress={() => createOrder()}
                 style={{
                     width: 320,
                     height: 60,
@@ -82,8 +59,9 @@ const PaiementValidate = ({ calculateTotal, handlePaiement, cart, addressShippin
                 useNativeDriverForBackdrop
             >
                 <PaiementMode
-
+                    paymentProcess={paymentProcess}
                     handlePaiementMethod={handlePaiementMethod}
+                    setSelectedPaymentMethod={setSelectedPaymentMethod}
                     handlePaiement={handlePaiement}
                     calculateTotal={calculateTotal}
                     cart={cart}
