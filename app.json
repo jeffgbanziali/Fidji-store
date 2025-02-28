@@ -14,6 +14,16 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.flaj16.FidjiStoreApp",
+          "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51HkxQLL8LbtybM2P85iaBiz9xVNmhb2raOSTCsQWMJyeJi6e2wI2l0cwQBhpfSeb6ZDzA8eNV6NTOy2MuxI0s9yi0059fikaP0",
+          "enableGooglePlay": true
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.flaj16.FidjiStoreApp",

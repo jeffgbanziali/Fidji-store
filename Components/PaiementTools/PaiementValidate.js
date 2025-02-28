@@ -6,7 +6,7 @@ import PaiementMode from './PaiementMode';
 import BankCardMode from './PaiementMode/BankCardMode';
 
 
-const PaiementValidate = ({ handlePaiementMethod, paymentProcess, handleBankCardMethod, showBasket, createOrder, calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, setSelectedPaymentMethod }) => {
+const PaiementValidate = ({ handlePaiementMethod, paymentProcess, openPaymentSheet, handleBankCardMethod, showBasket, createOrder, calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, setSelectedPaymentMethod }) => {
 
 
     const navigation = useNavigation()
@@ -19,8 +19,6 @@ const PaiementValidate = ({ handlePaiementMethod, paymentProcess, handleBankCard
             style={{
                 width: "100%",
                 height: 80,
-                position: "absolute",
-                bottom: 0,
                 alignItems: "center",
                 justifyContent: "center",
                 borderTopWidth: 1,
@@ -29,7 +27,7 @@ const PaiementValidate = ({ handlePaiementMethod, paymentProcess, handleBankCard
 
             }}>
             <Pressable
-                onPress={() => createOrder()}
+                onPress={() => openPaymentSheet()}
                 style={{
                     width: 320,
                     height: 60,

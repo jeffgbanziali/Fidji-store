@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, StatusBar, Modal, Alert, Animated, Easing, } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
+import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY, TEST_STRIPE_PUBLIC_KAY } from '@env';
 import axios from 'axios';
 import ProductsList from '../../Components/PaiementTools/ProductsList';
 import DeliveryAdress from '../../Components/PaiementTools/DeliveryAdress';
@@ -11,6 +11,9 @@ import PaiementValidate from '../../Components/PaiementTools/PaiementValidate';
 import LoadingValidation from '../../Components/PaiementTools/PaiementMode/LoadingValidation';
 import ChoosePaymentMethode from '../../Components/PaiementTools/PaiementMode/ChoosePaymentMethode';
 import BankCardMode from '../../Components/PaiementTools/PaiementMode/BankCardMode';
+import { StripeProvider, useStripe } from '@stripe/stripe-react-native';
+
+
 
 const PaiementScreen = ({ }) => {
 
@@ -21,38 +24,23 @@ const PaiementScreen = ({ }) => {
     const [paymentProcess, setPaymentProcess] = useState(null);
     const [showBankCardModal, setShowBankCardModal] = useState(null);
 
+    const stripe = useStripe();
 
 
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
-
-
-    const handlePaiementMethod = () => {
-        if (showBasket) {
-            Animated.timing(basketHeight, {
-                toValue: 0,
-                duration: 200,
-                easing: Easing.linear,
-                useNativeDriver: true
-            }).start(() => setShowBasket(false));
-        } else {
-            setShowBasket(true);
-            Animated.timing(basketHeight, {
-                toValue: 200,
-                duration: 300,
-                easing: Easing.linear,
-                useNativeDriver: true
-            }).start();
-        }
-    };
+    const [clientSecret, setClientSecret] = useState('');
 
 
 
     const retourned = () => {
-        navigation.goBack();
+        // navigation.goBack("")
+        goToDétailsCommande()
     }
 
-
+    const goToDétailsCommande = (orderId) => {
+        navigation.navigate('DétailsCommande', { orderId });
+    };
     const route = useRoute()
 
     const shipping = isSameAddress ? addressShipping : facturationAdressStore;
@@ -64,7 +52,7 @@ const PaiementScreen = ({ }) => {
         const orderData = {
             payment_method: paymentMethod,
             payment_method_title: selectedPaymentMethod,
-            set_paid: true,
+            set_paid: false, // Laisser en attente de paiement
             billing: slectedAdress,
             line_items: cart.map(item => ({
                 product_id: item.id,
@@ -73,7 +61,7 @@ const PaiementScreen = ({ }) => {
             shipping: addressShipping
         };
 
-        console.log("ma commande", orderData);
+        console.log("Données de la commande : ", orderData);
 
         try {
             const response = await axios.post(`${APP_API_URL}/wc/v3/orders`, orderData, {
@@ -83,16 +71,16 @@ const PaiementScreen = ({ }) => {
                 },
             });
             console.log("Commande créée avec succès :", response.data);
-            setPaymentProcess(response.data)
-            handleBankCardMethod()
+
+            setPaymentProcess(response.data); // ✅ Stocker l'objet de la commande
+            return response.data.id; // ✅ Retourner l'ID de la commande
         } catch (error) {
             console.error("Erreur lors de la création de la commande :", error.response ? error.response.data : error.message);
+            return null;
         }
     };
 
-    const handleBankCardMethod = () => {
-        setShowBankCardModal(!showBankCardModal);
-    }
+
 
 
 
@@ -115,6 +103,102 @@ const PaiementScreen = ({ }) => {
     const shippingCost = calculateTotal() > 200 ? 0 : 8;
 
     const handlePaiement = calculateTotal() + shippingCost
+    const fetchPaymentIntent = async () => {
+        try {
+            const response = await axios.post('http://localhost:3000/create-payment-intent', {
+                amount: handlePaiement * 100, // Montant en centimes
+                currency: 'eur',
+            });
+            setClientSecret(response.data.clientSecret);
+        } catch (e) {
+            console.warn('Erreur lors de la récupération du PaymentIntent :', e.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchPaymentIntent();
+    }, []);
+
+
+    const markOrderAsPaid = async (orderId) => {
+        if (!orderId) {
+            console.error("Erreur : ID de commande manquant !");
+            return;
+        }
+
+        const url = `${APP_API_URL}/wc/v3/orders/${orderId}`;
+        console.log("URL de mise à jour de la commande :", url);
+
+        try {
+            const response = await axios.put(url, {
+                set_paid: true,
+                status: "completed"
+            }, {
+                params: {
+                    consumer_key: CUSTOMER_KEY,
+                    consumer_secret: SECRET_KEY,
+                },
+            });
+            console.log("Commande mise à jour avec succès :", response.data);
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour de la commande :", error.response ? error.response.data : error.message);
+        }
+    };
+
+
+
+    const openPaymentSheet = async () => {
+        if (!clientSecret) return;
+
+        try {
+            // ✅ 1. Créer la commande WooCommerce avec un paiement en attente
+            const orderId = await createOrder();
+
+            if (!orderId) {
+                Alert.alert('Erreur', 'Impossible de créer la commande WooCommerce.');
+                return;
+            }
+
+            // ✅ 2. Initialiser le PaymentSheet Stripe avec le clientSecret existant
+            const { error } = await stripe.initPaymentSheet({
+                paymentIntentClientSecret: clientSecret,
+                merchantDisplayName: 'Fidji Store',
+                allowsDelayedPaymentMethods: true,
+            });
+
+            if (error) {
+                Alert.alert('Erreur', error.message);
+                return;
+            }
+
+            // ✅ 3. Afficher le PaymentSheet pour finaliser le paiement
+            const { error: paymentError } = await stripe.presentPaymentSheet();
+
+            if (paymentError) {
+                Alert.alert('Erreur', paymentError.message);
+            } else {
+                Alert.alert('Succès', 'Paiement effectué avec succès !');
+
+                // ✅ 4. Marquer la commande WooCommerce comme "payée"
+                await markOrderAsPaid(orderId);
+
+                // ✅ 5. Naviguer vers l'écran de confirmation de commande
+                goToDétailsCommande(orderId);
+            }
+
+        } catch (e) {
+            console.error("Erreur lors du paiement :", e.message);
+        }
+    };
+
+    // Fonction pour naviguer vers l'écran de détails de commande
+
+
+
+
+
+
+
 
 
 
@@ -122,7 +206,7 @@ const PaiementScreen = ({ }) => {
 
 
     return (
-        <>
+        <StripeProvider publishableKey={TEST_STRIPE_PUBLIC_KAY}>
 
 
             <SafeAreaView
@@ -201,28 +285,7 @@ const PaiementScreen = ({ }) => {
                 />
 
 
-                <ChoosePaymentMethode
-                    handlePaiementMethod={handlePaiementMethod}
-                    selectedPaymentMethod={selectedPaymentMethod}
-                    setSelectedPaymentMethod={setSelectedPaymentMethod}
-                />
 
-                <Modal
-                    animationType="slide"
-                    transparent={true} // Définir transparent sur false pour que le fond soit opaque
-                    visible={showBankCardModal}
-                    onRequestClose={() => {
-                        Alert.alert('Modal has been closed.');
-                        setShowBankCardModal(!showBankCardModal);
-                    }}>
-                    <BankCardMode
-                        paymentProcess={paymentProcess}
-                        handleBankCardMethod={handleBankCardMethod}
-                        calculateTotal={calculateTotal}
-                        handlePaiement={handlePaiement}
-
-                    />
-                </Modal>
 
 
                 <PaiementValidate
@@ -232,8 +295,9 @@ const PaiementScreen = ({ }) => {
                     calculateTotal={calculateTotal}
                     createOrder={createOrder}
                     setSelectedPaymentMethod={setSelectedPaymentMethod}
-                    handlePaiementMethod={handlePaiementMethod}
-                    handleBankCardMethod={handleBankCardMethod}
+                    handlePaiementMethod={openPaymentSheet}
+                    handleBankCardMethod={openPaymentSheet}
+                    openPaymentSheet={openPaymentSheet}
                     cart={cart}
                     addressShipping={addressShipping}
                     facturationAdressStore={facturationAdressStore}
@@ -245,7 +309,7 @@ const PaiementScreen = ({ }) => {
 
 
 
-        </>
+        </StripeProvider >
 
     )
 }
