@@ -19,6 +19,7 @@ const ArticleElement = ({ article }) => {
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [quantity, setQuantity] = useState(1);
 
 
 
@@ -95,9 +96,8 @@ const ArticleElement = ({ article }) => {
                 <View
                     style={{
                         height: "100%",
-                        width: windowWidth,
-                        position: "relative",
-
+                        width: windowWidth * 0.9,
+                        borderRadius: 50,
 
                     }}>
 
@@ -108,6 +108,8 @@ const ArticleElement = ({ article }) => {
                                 style={{
                                     width: '100%',
                                     height: "100%",
+                                    borderRadius: 50,
+
                                     position: "absolute"
                                 }
                                 } />
@@ -117,6 +119,7 @@ const ArticleElement = ({ article }) => {
                                 style={{
                                     width: '100%',
                                     height: "100%",
+                                    borderRadius: 50,
                                     resizeMode: "cover",
                                 }} />
                         )}
@@ -138,10 +141,11 @@ const ArticleElement = ({ article }) => {
         <>
             <View
                 style={{
-                    height: 600,
-                    backgroundColor: "gray",
+                    height: 500,
                     width: windowWidth,
                     position: "relative",
+                    justifyContent: "center",
+                    alignItems: "center",
 
 
                 }}>
@@ -152,6 +156,11 @@ const ArticleElement = ({ article }) => {
                     snapToAlignment="center"
                     showsHorizontalScrollIndicator={false}
                     onScroll={handleOnScroll}
+                    contentContainerStyle={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexGrow: 1
+                    }}
                     onViewableItemsChanged={handleOnViewableItemsChanged}
                     viewabilityConfig={viewabilityConfig}
                     keyExtractor={(item, index) => item.id.toString()}
@@ -159,65 +168,15 @@ const ArticleElement = ({ article }) => {
             </View>
 
 
-            <View
-                style={{
-                    width: "100%",
-                    height: 80,
-                    paddingTop: 10,
-                }}>
-                <View
-                    style={{
-                        width: "100%",
-                        height: 40,
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        flexDirection: "row"
-                    }}>
-                    <View
-                        style={{
-                            width: "70%",
-                            height: "100%",
-                            justifyContent: "center",
-                        }}>
-                        <Text
-                            style={{
-                                paddingLeft: 20,
-                                fontSize: 20,
-                                fontWeight: "600",
-                            }}>
-                            {article.name}
-                        </Text>
-                    </View>
 
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            paddingRight: 20,
-
-                        }}>
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                paddingRight: 10,
-                                fontWeight: "400",
-                            }}>
-                            {article.price} €
-                        </Text>
-                        <View
-                            style={{
-                                alignItems: "center",
-                                flexDirection: "row",
-                                justifyContent: "center"
-                            }}>
-                            <Fontisto name="heart-alt" size={18} color="black" />
-
-                        </View>
-                    </View>
-
-                </View>
-
-            </View>
-            <InformationChoice article={article} onColorChange={handleColorChange} onSizeChange={handleSizeChange} />
+            <InformationChoice
+                article={article}
+                electedColor={selectedColor}
+                selectedSize={selectedSize}
+                quantity={quantity}
+                setQuantity={setQuantity}
+                onColorChange={handleColorChange}
+                onSizeChange={handleSizeChange} />
 
             <AddBasket article={article} selectedColor={selectedColor} selectedSize={selectedSize} />
 

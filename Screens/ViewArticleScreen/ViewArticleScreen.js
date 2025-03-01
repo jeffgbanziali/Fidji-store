@@ -46,6 +46,7 @@ const ViewArticleScreen = () => {
                 style={{
                     width: '100%',
                     height: "100%",
+                    paddingTop: 20,
                 }}>
 
 

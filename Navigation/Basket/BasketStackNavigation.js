@@ -22,7 +22,6 @@ const BasketStackNavigation = () => {
         >
             <Stack.Screen name="Basket" component={BasketScreen} />
             <Stack.Screen name="Delivery" component={DeliveryScreen} />
-            <Stack.Screen name='DétailsCommande' component={DétailsCommande} />
 
         </Stack.Navigator>
 

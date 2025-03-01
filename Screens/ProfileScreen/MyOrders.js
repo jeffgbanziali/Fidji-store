@@ -41,12 +41,15 @@ const MyOrders = () => {
             backgroundColor: '#f5f5f5'
         }}>
 
-            <View style={{
-                width: "100%",
-                height: 40,
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
+            <View
+                style={{
+                    width: "100%",
+                    height: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderBottomWidth: 1,
+                    borderColor: "lightgray"
+                }}>
 
                 <ScrollView
                     horizontal showsHorizontalScrollIndicator={false}
@@ -56,7 +59,11 @@ const MyOrders = () => {
                         height: "100%"
                     }}>
                     {tabs.map((tab) => (
-                        <Pressable key={tab} onPress={() => handleTabPress(tab)} style={{ marginHorizontal: 10 }}>
+                        <Pressable
+                            key={tab} onPress={() => handleTabPress(tab)}
+                            style={{
+                                marginHorizontal: 10,
+                            }}>
                             <Text style={{
                                 fontSize: 16,
                                 color: activeTab === tab ? '#ff6f00' : '#333',
@@ -69,9 +76,9 @@ const MyOrders = () => {
                 </ScrollView>
             </View>
 
-            
-                {renderTabContent()}
-        </SafeAreaView>
+
+            {renderTabContent()}
+        </SafeAreaView >
     );
 };
 

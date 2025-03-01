@@ -94,7 +94,7 @@ const BasketScreen = ({ handleViewBasket }) => {
                                                     color: "gray",
                                                     fontWeight: "600"
                                                 }}>
-                                                ({cart.length} Article)
+                                                ({cart.length} Article(s))
                                             </Text>
                                         </View>
 

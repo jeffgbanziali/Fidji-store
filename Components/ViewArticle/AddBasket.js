@@ -5,19 +5,9 @@ import SuccessModal from './SuccessModal';
 import { useSelector } from 'react-redux';
 import { AuthContext } from '../../Context/AuthContext';
 
-const AddBasket = ({ article, selectedColor, selectedSize }) => {
-    const [quantity, setQuantity] = useState(1);
+const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize }) => {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    const decreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
-
-    const increaseQuantity = () => {
-        setQuantity(quantity + 1);
-    };
 
 
     const userData = useSelector((state) => state.userReducer)
@@ -71,72 +61,39 @@ const AddBasket = ({ article, selectedColor, selectedSize }) => {
         <View
             style={{
                 width: "100%",
-                height: 70,
+                height: 80,
                 alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row"
+                justifyContent: "space-evenly",
+                flexDirection: "row",
             }}>
+
 
             <View
                 style={{
-                    width: 120,
-                    height: 45,
-                    margin: 4,
-                    borderRadius: 10,
                     flexDirection: "row",
-                    paddingLeft: 2,
-                    paddingRight: 2,
-                    borderWidth: 2,
-                    borderColor: "gray",
+                    justifyContent: "center",
                     alignItems: "center",
-                    justifyContent: "space-between",
+
                 }}>
-
-                <Pressable
-                    onPress={decreaseQuantity}
-                    style={{
-                        width: 40,
-                        height: 40,
-                        justifyContent: "center",
-                        alignItems: "center"
-
-                    }}>
-                    <AntDesign name="minus" size={20} color="black" />
-
-                </Pressable>
-
-
+                <AntDesign name="tag" size={24} color="black" />
                 <Text
                     style={{
-                        fontSize: 18,
-                        fontWeight: "600",
-                        color: "black"
+                        fontSize: 30,
+                        paddingLeft: 10,
+                        fontWeight: "500",
                     }}>
-                    {quantity}
+                    {article.price} €
                 </Text>
 
-                <Pressable
-                    onPress={increaseQuantity}
-                    style={{
-                        width: 40,
-                        height: 40,
-                        justifyContent: "center",
-                        alignItems: "center",
-
-                    }}>
-                    <AntDesign name="plus" size={20} color="black" />
-                </Pressable>
-
             </View>
-
 
             <Pressable
                 onPress={handleAddCartArticle}
                 style={{
-                    width: 200,
+                    width: 180,
                     height: 50,
                     margin: 4,
-                    borderRadius: 10,
+                    borderRadius: 20,
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "black"

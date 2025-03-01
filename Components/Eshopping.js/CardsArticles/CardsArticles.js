@@ -26,48 +26,70 @@ const CardsArticles = ({ item }) => {
 
             style={{
                 width: 180,
-                height: 360,
-                margin: 2
+                height: 340,
+                margin: 2,
 
             }}>
+            <View
+                style={{
+                    alignItems: "center",
+                    flexDirection: "row",
+                    position: "absolute",
+                    width: 40,
+                    height: 40,
+                    backgroundColor: "white",
+                    zIndex: 3,
+                    top: 2,
+                    right: 10,
+                    borderRadius: 100,
+                    justifyContent: "center"
+                }}>
+                <Fontisto name="heart-alt" size={18} color="black" />
 
+            </View>
             <Pressable
                 onPress={() => showArticle(item)}
                 style={{
                     width: "100%",
-                    height: 280,
+                    height: 260,
                     alignItems: "center",
+                    borderRadius: 20,
                 }}>
 
-                {isLoading ? (
-                    <Image
-                        source={require('../../../assets/image/backgroundImage.png')}
-                        style={{
-                            width: '100%',
-                            height: "100%",
-                            position: "absolute"
-                        }
-                        } />
-                ) : (
-                    <Image
-                        source={{ uri: item.images[0].src }}
-                        style={{
-                            width: '100%',
-                            height: "100%",
-                            position: "absolute"
-                        }
-                        } />
-                )}
 
-            </Pressable>
+                {
+                    isLoading ? (
+                        <Image
+                            source={require('../../../assets/image/backgroundImage.png')}
+                            style={{
+                                width: '100%',
+                                height: "100%",
+                                position: "absolute",
+                                borderRadius: 20,
+
+                            }
+                            } />
+                    ) : (
+                        <Image
+                            source={{ uri: item.images[0].src }}
+                            style={{
+                                width: '100%',
+                                height: "100%",
+                                borderRadius: 20,
+                                position: "absolute"
+                            }
+                            } />
+                    )
+                }
+
+            </Pressable >
 
             <Text
                 style={{
                     alignItems: "center",
                     paddingTop: 10,
-                    paddingLeft: 10,
-                    fontSize: 18,
-                    fontWeight: "600",
+                    fontSize: 13,
+                    fontWeight: "500",
                 }}>
                 {item.name}
             </Text>
@@ -82,27 +104,19 @@ const CardsArticles = ({ item }) => {
                 }}>
                 <Text
                     style={{
-                        paddingLeft: 10,
+                        fontSize: 16,
                         alignItems: "center",
+                        fontWeight: "bold",
+
                     }}
                 >
-                    {item.price} €
+                    {item.price || 0} €
                 </Text>
 
-                <View
-                    style={{
-                        alignItems: "center",
-                        flexDirection: "row",
-                        paddingRight: 10,
-                        justifyContent: "center"
-                    }}>
-                    <Fontisto name="heart-alt" size={16} color="black" />
-
-                </View>
             </View>
 
 
-        </View>
+        </View >
     )
 }
 

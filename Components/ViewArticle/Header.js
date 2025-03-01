@@ -66,6 +66,24 @@ const Header = () => {
                 <AntDesign name="left" size={24} color="black" />
             </Pressable>
 
+            <View
+                style={{
+
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                <Text
+                    style={{
+                        fontSize: 16,
+                        fontWeight: "600",
+                    }}
+
+                >
+                    Détails
+                </Text>
+
+            </View>
+
             <Pressable
                 onPress={handleViewBasket}
                 style={{
@@ -112,7 +130,7 @@ const Header = () => {
                 <BasketScreen handleViewBasket={handleViewBasket} />
 
             </Modal>
-        </View>
+        </View >
     )
 }
 

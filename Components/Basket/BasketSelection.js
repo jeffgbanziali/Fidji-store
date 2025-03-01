@@ -42,6 +42,7 @@ const BasketSelection = ({ cart, removeFromCart }) => {
         <View
             style={{
                 width: "100%",
+                height: 200,
                 paddingLeft: 4,
                 borderBottomWidth: 1,
                 borderColor: "gray",
@@ -51,9 +52,9 @@ const BasketSelection = ({ cart, removeFromCart }) => {
             <View
                 style={{
                     width: 100,
-                    height: 140,
+                    height: 150,
+
                     margin: 14,
-                    backgroundColor: "blue"
                 }}>
                 {
                     isLoading ? (
@@ -76,26 +77,36 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                         />
                     )}
             </View>
+
             <View
                 style={{
-                    width: 120,
+                    width: "100%",
                     height: 140,
+
                 }}>
 
-                <View >
-                    <Text style={{
-                        fontSize: 18,
-                        fontWeight: "600",
-                        color: "black"
-                    }}>
+                <View
+                    style={{
+                        width: "100%",
+                        height: "80%",
+
+                    }} >
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            fontWeight: "600",
+                            color: "black"
+                        }}>
                         {cart.name}
                     </Text>
-                    <Text style={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        color: "gray"
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            marginTop: 5,
+                            fontWeight: "600",
+                            color: "gray"
 
-                    }}>
+                        }}>
                         {cart.price} €
                     </Text>
                     <Text
@@ -109,10 +120,11 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                     </Text>
                     <Text style={{
                         fontSize: 14,
+                        marginTop: 5,
                         fontWeight: "bold",
                         color: "gray"
                     }}>
-                        Taille : {cart.attributes[1].options} 
+                        Taille : {cart.attributes[1].options}
                     </Text>
                 </View>
 
@@ -171,14 +183,18 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                 </View>
 
             </View>
+
             <Pressable
                 onPress={() => removeProduct(cart.id)}
                 style={{
                     width: 90,
+                    position: "absolute",
+                    right: 20,
                     height: 30,
                     backgroundColor: "red",
                     alignItems: "center",
                     justifyContent: "center",
+
                     borderRadius: 8,
 
                 }}>

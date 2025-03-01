@@ -34,13 +34,11 @@ const PaiementScreen = ({ }) => {
 
 
     const retourned = () => {
-        // navigation.goBack("")
-        goToDétailsCommande()
+        navigation.goBack("")
+        // goToDétailsCommande()
     }
 
-    const goToDétailsCommande = (orderId) => {
-        navigation.navigate('DétailsCommande', { orderId });
-    };
+
     const route = useRoute()
 
     const shipping = isSameAddress ? addressShipping : facturationAdressStore;
@@ -195,7 +193,9 @@ const PaiementScreen = ({ }) => {
 
 
 
-
+    const goToDétailsCommande = (orderId) => {
+        navigation.navigate('DétailsCommande', { orderId });
+    };
 
 
 

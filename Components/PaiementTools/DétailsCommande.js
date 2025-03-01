@@ -9,7 +9,7 @@ const DétailsCommande = () => {
     const { orderId } = route.params; // Récupération de l'ID de la commande
 
     const handleReturnHome = () => {
-        navigation.navigate('Home'); // Naviguer vers l'écran d'accueil
+        navigation.navigate('HomeScreen'); // Naviguer vers l'écran d'accueil
     };
 
     return (
