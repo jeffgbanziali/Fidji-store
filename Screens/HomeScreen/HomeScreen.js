@@ -21,6 +21,9 @@ const HomeScreen = () => {
     const bottomTabHeight = useBottomTabBarHeight();
 
 
+    
+
+
     return (
         <SafeAreaView
             style={{

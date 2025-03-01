@@ -21,7 +21,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
 
     const dataOptionsColor = useMemo(() => {
         const colors = article?.attributes?.[0]?.options || [];
-        return colors.length > 0 ? colors.map(option => ({ label: option, value: option })) : [{ label: 'Unique', value: 'gray' }];
+        return colors.length > 0 ? colors.map(option => ({ label: option, value: option })) : [{ label: 'Unique', value: 'unique' }];
     }, [article?.attributes]);
 
 
@@ -74,41 +74,94 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                     }}
                 >
                     {dataOptionsColor.map((color, index) => (
-                        <Pressable
-                            key={index}
-                            onPress={() => {
-                                setSelectedColor(color.value);
-                                onColorChange(color.label)
-                            }}
-                            style={{
-                                width: 26,
-                                height: 26,
-                                borderRadius: 30,
-                                marginRight: 10,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderWidth: 2,
-                                borderColor: selectedColor === color.value ? color.value : 'transparent',
+                        <View key={index} style={{ flexDirection: "row", alignItems: "center" }}>
+                            {color.value === 'unique' ? (
+                                <Pressable
+                                    onPress={() => {
+                                        if (color.value !== 'gray') { // Vérifie que la couleur n'est pas unique avant de sélectionner
+                                            setSelectedColor(color.value);
+                                            onColorChange(color.label);
+                                        } else {
+                                            alert("Cet article est disponible uniquement en une seule couleur.");
+                                        }
+                                    }}
+                                    style={{
+                                        width: 80,
+                                        height: 30,
+                                        borderRadius: 10,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginLeft: 5,
+                                        backgroundColor: selectedColor === color.value ? "black" : 'transparent',
+                                    }}
+                                >
+                                    {selectedColor === color.value ? (
+                                        <View style={{
+                                            width: 80,
+                                            height: 30,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            borderRadius: 10,
+                                        }}>
+                                            <Text style={{
+                                                color: 'white',
+                                                fontSize: 16,
+                                                fontWeight: "600"
+                                            }}>{color.label}</Text>
+                                        </View>
+                                    ) : (
+                                        <View style={{
+                                            width: 80,
+                                            height: 30,
+                                            borderRadius: 10,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }} >
+                                            <Text style={{ color: 'gray', fontWeight: "600", fontSize: 16 }}>{color.label}</Text>
+                                        </View>
+                                    )}
 
-                            }}
-                        >
-                            {selectedColor === color.value ? (
-                                <View style={{
-                                    width: 16,
-                                    height: 16,
-                                    backgroundColor: selectedColor === color.value ? color.value : 'transparent',
-                                    borderRadius: 30,
-                                }} />
+
+                                </Pressable>
+
                             ) : (
-                                <View style={{
-                                    width: 18,
-                                    height: 18,
-                                    borderRadius: 30,
-                                    backgroundColor: color.value,
-                                }} />
+                                <Pressable
+                                    onPress={() => {
+                                        setSelectedColor(color.value);
+                                        onColorChange(color.label);
+                                    }}
+                                    style={{
+                                        width: 26,
+                                        height: 26,
+                                        borderRadius: 30,
+                                        marginRight: 10,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        borderWidth: 2,
+                                        borderColor: selectedColor === color.value ? color.value : 'transparent',
+                                    }}
+                                >
+                                    {selectedColor === color.value ? (
+                                        <View style={{
+                                            width: 16,
+                                            height: 16,
+                                            backgroundColor: selectedColor === color.value ? color.value : 'transparent',
+                                            borderRadius: 30,
+                                        }} />
+                                    ) : (
+                                        <View style={{
+                                            width: 18,
+                                            height: 18,
+                                            borderRadius: 30,
+                                            backgroundColor: color.value,
+                                        }} />
+                                    )}
+                                </Pressable>
                             )}
-                        </Pressable>
+                        </View>
                     ))}
+
+
                 </View>
 
 
@@ -228,7 +281,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                 </View>
             </View>
 
-        </View>
+        </View >
     );
 };
 

@@ -19,6 +19,8 @@ import DeliveryScreen from '../../Screens/BasketScreen/DeliveryScreen';
 import PaiementScreen from '../../Screens/BasketScreen/PaiementScreen';
 import OrderValidateScreen from '../../Screens/BasketScreen/OrderValidateScreen';
 import DétailsCommande from '../../Components/PaiementTools/DétailsCommande';
+import SearchScreen from '../../Screens/SearchScreen/SearchScreen';
+import ArticleDetail from '../../Screens/ProfileScreen/ArticleDetail';
 
 
 
@@ -56,6 +58,8 @@ const StackNavigation = () => {
             <Stack.Screen name="TshirtCategory" component={TshirtScreen} />
             <Stack.Screen name='DétailsCommande' component={DétailsCommande} />
             <Stack.Screen name="ViewArticleScreen" component={ViewArticleScreen} />
+            <Stack.Screen name="SearchScreen" component={SearchScreen} />
+            <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
         </Stack.Navigator>
 
     )
