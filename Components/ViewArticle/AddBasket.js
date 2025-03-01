@@ -14,6 +14,7 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
 
 
 
+
     const { cart, addToCart } = useContext(AuthContext)
 
 
@@ -21,7 +22,6 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
     const handleAddCartArticle = () => {
 
         const updatedArticle = { ...article };
-        console.log("Mon update est là", updatedArticle.attributes)
 
         if (updatedArticle) {
             if (updatedArticle.attributes && updatedArticle.attributes.length > 0) {
@@ -41,6 +41,10 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
 
             updatedArticle.stock_quantity = quantity;
         }
+
+
+        console.log("ma quantité", updatedArticle);
+
 
         addToCart(updatedArticle);
         setShowSuccessModal(true);

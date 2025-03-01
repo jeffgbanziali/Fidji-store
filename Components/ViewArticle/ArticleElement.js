@@ -22,8 +22,6 @@ const ArticleElement = ({ article }) => {
     const [quantity, setQuantity] = useState(1);
 
 
-
-
     useEffect(() => {
         if (article && article.images && article.images.length > 0) {
             setIsLoading(false);
@@ -141,7 +139,7 @@ const ArticleElement = ({ article }) => {
         <>
             <View
                 style={{
-                    height: 500,
+                    height: 480,
                     width: windowWidth,
                     position: "relative",
                     justifyContent: "center",
@@ -178,7 +176,11 @@ const ArticleElement = ({ article }) => {
                 onColorChange={handleColorChange}
                 onSizeChange={handleSizeChange} />
 
-            <AddBasket article={article} selectedColor={selectedColor} selectedSize={selectedSize} />
+            <AddBasket
+                article={article}
+                quantity={quantity}
+                selectedColor={selectedColor}
+                selectedSize={selectedSize} />
 
 
         </>

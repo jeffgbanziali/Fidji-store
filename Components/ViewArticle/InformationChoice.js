@@ -16,49 +16,41 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
         setQuantity(quantity + 1);
     };
 
-    // Données fictives pour les tests
-    const articles = {
-        attributes: [
-            {
-                name: 'Colors',
-                options: ['#FF5733', '#33FF57', '#3357FF', '#FF33A1'],
-            },
-            {
-                name: 'Sizes',
-                options: ['XS', 'S', 'M', 'L', 'XL'],
-            },
-        ],
-    };
+
 
 
     const dataOptionsColor = useMemo(() => {
-        const colors = articles.attributes[0]?.options || [];
-        return colors.length > 0 ? colors.map(option => ({ label: option, value: option })) : [{ label: 'Couleur unique', value: 'gray' }];
-    }, [articles.attributes]);
+        const colors = article?.attributes?.[0]?.options || [];
+        return colors.length > 0 ? colors.map(option => ({ label: option, value: option })) : [{ label: 'Unique', value: 'gray' }];
+    }, [article?.attributes]);
+
 
     const dataOptionsLenght = useMemo(() => {
-        const sizes = articles.attributes[1]?.options || [];
-        return sizes.length > 0 ? sizes.map(option => ({ label: option, value: option })) : [{ label: 'Taille unique', value: 'unique' }];
-    }, [articles.attributes]);
+        const sizes = article.attributes[1]?.options || [];
+        return sizes.length > 0 ? sizes.map(option => ({ label: option, value: option })) : [{ label: 'Unique', value: 'unique' }];
+    }, [article.attributes]);
 
     return (
         <View
             style={{
-                width: "100%",
+                paddingTop: 10,
+                justifyContent: "center",
+                alignItems: "center",
             }}>
             <View
                 style={{
                     width: "100%",
                     height: 60,
-                    flexDirection: "row"
-
+                    flexDirection: "row",
                 }}>
                 <View
                     style={{
-                        width: 250,
+                        width: '60%',
+                        height: 60,
                         justifyContent: "center",
                         paddingLeft: 20,
-                        flexWrap: 'wrap',
+                        flexShrink: 1,
+
                     }}
                 >
                     <Text
@@ -66,8 +58,6 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                             fontSize: 20,
                             fontWeight: "600",
                         }}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
                     >
                         {article.name}
                     </Text>
@@ -88,6 +78,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                             key={index}
                             onPress={() => {
                                 setSelectedColor(color.value);
+                                onColorChange(color.label)
                             }}
                             style={{
                                 width: 26,
@@ -128,17 +119,27 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                 style={{
                     width: "100%",
                     height: 80,
-                    paddingLeft: 20,
-
+                    justifyContent: "center",
                 }}>
 
 
-                <Text style={{ fontSize: 18, fontWeight: '500', marginBottom: 10 }}>Sizes</Text>
-                <View style={
-                    {
-                        flexDirection: "row"
-                    }
-                }>
+                <Text
+                    style={{
+                        paddingLeft: 20,
+
+                        fontSize: 18,
+                        fontWeight: '500',
+                        marginBottom: 10
+                    }}>Sizes</Text>
+                <View
+                    style={
+                        {
+                            justifyContent: "space-between",
+                            flexDirection: "row",
+                            paddingRight: 10,
+
+                        }
+                    }>
 
 
                     <View
@@ -146,12 +147,15 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                             flexDirection: "row",
                             justifyContent: "center",
                             alignItems: "center",
+                            paddingLeft: 20,
+
                         }}>
                         {dataOptionsLenght.map((size, index) => (
                             <Pressable
                                 key={index}
                                 onPress={() => {
                                     setSelectedSize(size.value);
+                                    onSizeChange(size.label)
                                 }}
                                 style={{
                                     paddingHorizontal: 16,

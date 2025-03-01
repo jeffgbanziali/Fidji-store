@@ -13,6 +13,8 @@ const BasketSelection = ({ cart, removeFromCart }) => {
     const [quantity, setQuantity] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
 
+    console.log(" la quandtité des arricle ", cart.stock_quantity)
+
     const decreaseQuantity = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
