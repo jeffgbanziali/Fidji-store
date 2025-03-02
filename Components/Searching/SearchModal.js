@@ -70,7 +70,7 @@ const SearchModal = ({ closeModal }) => {
                 style={{
                     flexDirection: 'row',
                     width: '100%',
-                    height: 50,
+                    height: 40,
                 }}
             >
                 <View
@@ -88,7 +88,7 @@ const SearchModal = ({ closeModal }) => {
                             alignItems: 'center',
                             justifyContent: "center",
                         }}>
-                        <SimpleLineIcons name="arrow-left" size={24} color="black" />
+                        <SimpleLineIcons name="arrow-left" size={20} color="black" />
                     </Pressable>
                 </View>
 
@@ -101,7 +101,6 @@ const SearchModal = ({ closeModal }) => {
                         height: "100%",
                         borderColor: 'black',
                         borderRadius: 30,
-                        height: 50,
                     }}>
 
                     <TextInput
@@ -111,7 +110,7 @@ const SearchModal = ({ closeModal }) => {
                         style={{
                             flexDirection: 'row',
                             alignItems: 'center',
-                            width: '80%',
+                            width: '90%',
                             height: "100%",
                             paddingLeft: 12,
                         }}
@@ -121,15 +120,15 @@ const SearchModal = ({ closeModal }) => {
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: "center",
-                            width: '20%',
+                            width: '10%',
                             height: "100%",
                         }}>
 
 
                         <Pressable onPress={handleSearch} style={{
                             backgroundColor: 'black',
-                            width: 40,
-                            height: 40,
+                            width: 30,
+                            height: 30,
                             borderRadius: 20,
                             alignItems: 'center',
                             justifyContent: 'center'
@@ -137,7 +136,7 @@ const SearchModal = ({ closeModal }) => {
                             {loading ? (
                                 <ActivityIndicator size="small" color="white" />
                             ) : (
-                                <Feather name="search" size={20} color="white" />
+                                <Feather name="search" size={18} color="white" />
                             )}
                         </Pressable>
                     </View>

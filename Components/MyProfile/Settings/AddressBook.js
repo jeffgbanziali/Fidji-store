@@ -1,11 +1,22 @@
 import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 const AddressBook = () => {
+
+
+    const navigation = useNavigation()
+
+    const goInfo = () => {
+        navigation.navigate("AddressBookScreen")
+    }
+
+
     return (
         <Pressable
+            onPress={goInfo}
             style={{
                 width: "100%",
                 height: 50,
@@ -23,7 +34,7 @@ const AddressBook = () => {
                     flexDirection: "row",
                     alignItems: "center",
                 }}>
-                <AntDesign name="home" size={20}color="black" />
+                <AntDesign name="home" size={20} color="black" />
                 <Text
                     style={{
                         fontSize: 18,

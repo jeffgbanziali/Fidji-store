@@ -21,6 +21,7 @@ import OrderValidateScreen from '../../Screens/BasketScreen/OrderValidateScreen'
 import DétailsCommande from '../../Components/PaiementTools/DétailsCommande';
 import SearchScreen from '../../Screens/SearchScreen/SearchScreen';
 import ArticleDetail from '../../Screens/ProfileScreen/ArticleDetail';
+import ListOfArtifclesByCatgories from '../../Screens/EShoppingScreen/ListOfArtifclesByCatgories';
 
 
 
@@ -60,6 +61,7 @@ const StackNavigation = () => {
             <Stack.Screen name="ViewArticleScreen" component={ViewArticleScreen} />
             <Stack.Screen name="SearchScreen" component={SearchScreen} />
             <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
+            <Stack.Screen name="ListOfArtifclesByCatgories" component={ListOfArtifclesByCatgories} />
         </Stack.Navigator>
 
     )

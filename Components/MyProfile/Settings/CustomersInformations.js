@@ -40,7 +40,7 @@ const CustomersInformations = () => {
                         paddingLeft: 10,
                         fontWeight: "600",
                         color: "black"
-                    }}>CustomersInformations</Text>
+                    }}>Informations clients</Text>
             </View>
 
             <View

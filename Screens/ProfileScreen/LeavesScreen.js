@@ -5,7 +5,7 @@ import axios from 'axios';
 import { APP_API_URL } from '@env'; // Pas besoin de CUSTOMER_KEY / SECRET_KEY car on utilise JWT
 import { AuthContext } from '../../Context/AuthContext';
 
-const DEFAULT_IMAGE = "https://via.placeholder.com/150";
+const DEFAULT_IMAGE = "../../assets/image/1.jpg";
 
 const LeavesScreen = () => {
     const [articles, setArticles] = useState([]);

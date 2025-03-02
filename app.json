@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/image/1.jpg",
+    "newArchEnabled": false,
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/image/backApp2.png",
@@ -22,7 +23,8 @@
           "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51HkxQLL8LbtybM2P85iaBiz9xVNmhb2raOSTCsQWMJyeJi6e2wI2l0cwQBhpfSeb6ZDzA8eNV6NTOy2MuxI0s9yi0059fikaP0",
           "enableGooglePlay": true
         }
-      ]
+      ],
+      "expo-router"
     ],
     "ios": {
       "supportsTablet": true,

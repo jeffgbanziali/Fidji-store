@@ -1,9 +1,11 @@
 import { View, Text, SafeAreaView, Dimensions, ScrollView, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import SearchBar from '../../Components/HomeScreen/SearchBar';
 import CarouselHeader from '../../Components/Eshopping.js/CarouselHeader.jjs/CarouselHeader';
 import ListsOfArticles from '../../Components/Eshopping.js/ListsOfArticles/ListsOfArticles';
 import { Platform } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories } from '../../ReduxActions/category.actions';
 
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
@@ -13,7 +15,13 @@ const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 
 const EShoppingScreen = () => {
+    const dispatch = useDispatch();
+    const { categories, loading, error } = useSelector(state => state.categories);
+    console.log("Mes catégories selon les cas", categories)
 
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
     return (
         <SafeAreaView
@@ -22,7 +30,7 @@ const EShoppingScreen = () => {
                 backgroundColor: "#f5e1ce",
                 width: windowWidth,
                 height: windowHeight,
-              //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+                //  paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
             }}>
             <ScrollView
                 style={{
@@ -31,7 +39,11 @@ const EShoppingScreen = () => {
                 }}>
                 <SearchBar />
                 <CarouselHeader />
-                <ListsOfArticles />
+                <ListsOfArticles
+                    categories={categories}
+                    loading={loading}
+                    error={error}
+                />
 
             </ScrollView>
 

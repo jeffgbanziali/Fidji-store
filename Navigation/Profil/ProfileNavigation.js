@@ -4,6 +4,7 @@ import React from 'react'
 import Profile from '../../Screens/ProfileScreen/ProfileScreen';
 import SettingScreen from '../../Screens/ProfileScreen/SettingScreen';
 import CustomerInformationScreen from '../../Screens/ProfileScreen/CustomerInformationScreen';
+import AdressBookScreen from '../../Screens/ProfileScreen/AdressBookScreen';
 
 
 
@@ -25,6 +26,7 @@ const ProfileNavigation = () => {
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="Settings" component={SettingScreen} />
             <Stack.Screen name="CustomerInfo" component={CustomerInformationScreen} />
+            <Stack.Screen name="AddressBookScreen" component={AdressBookScreen} />
 
         </Stack.Navigator>
     )

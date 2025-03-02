@@ -1,10 +1,11 @@
 import { View, Text, Animated, Pressable, Easing, Image, SafeAreaView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SimpleLineIcons, AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UserData } from "../../DataFictifs/UserData"
 import Modal from "react-native-modal";
 import BasketScreen from '../../Screens/BasketScreen/BasketScreen';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 
@@ -16,7 +17,7 @@ const Header = () => {
 
     const [basketHeight, setBasketHeight] = useState(new Animated.Value(0));
     const [showBasket, setShowBasket] = useState(false);
-
+    const { cart } = useContext(AuthContext)
 
     const retourned = () => {
         navigation.goBack("Start")
@@ -112,7 +113,7 @@ const Header = () => {
                             fontWeight: "500",
                             color: "white"
                         }} >
-                        {UserData.cart.length}
+                        {cart.length}
                     </Text>
                 </View>
 
