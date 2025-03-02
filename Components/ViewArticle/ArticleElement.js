@@ -139,7 +139,7 @@ const ArticleElement = ({ article }) => {
         <>
             <View
                 style={{
-                    height: 480,
+                    height: windowHeight * 0.55,
                     width: windowWidth,
                     position: "relative",
                     justifyContent: "center",
@@ -147,22 +147,32 @@ const ArticleElement = ({ article }) => {
 
 
                 }}>
-                <FlatList
-                    data={article.images}
-                    horizontal
-                    pagingEnabled
-                    snapToAlignment="center"
-                    showsHorizontalScrollIndicator={false}
-                    onScroll={handleOnScroll}
-                    contentContainerStyle={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        flexGrow: 1
-                    }}
-                    onViewableItemsChanged={handleOnViewableItemsChanged}
-                    viewabilityConfig={viewabilityConfig}
-                    keyExtractor={(item, index) => item.id.toString()}
-                    renderItem={renderItem} />
+
+                <View style={{
+                    width: windowWidth * 0.9,
+                    height: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 50,
+                }}>
+
+                    <FlatList
+                        data={article.images}
+                        horizontal
+                        pagingEnabled
+                        snapToAlignment="center"
+                        showsHorizontalScrollIndicator={false}
+                        onScroll={handleOnScroll}
+                        contentContainerStyle={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexGrow: 1
+                        }}
+                        onViewableItemsChanged={handleOnViewableItemsChanged}
+                        viewabilityConfig={viewabilityConfig}
+                        keyExtractor={(item, index) => item.id.toString()}
+                        renderItem={renderItem} />
+                </View>
             </View>
 
 

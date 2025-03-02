@@ -48,7 +48,10 @@ const ViewArticleScreen = () => {
                     width: '100%',
                     height: "100%",
                     paddingTop: 20,
-                }}>
+                }}
+                showsVerticalScrollIndicator={false}
+            >
+
 
 
 
@@ -58,7 +61,7 @@ const ViewArticleScreen = () => {
 
 
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 

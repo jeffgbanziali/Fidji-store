@@ -40,7 +40,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
             <View
                 style={{
                     width: "100%",
-                    height: 60,
+                    height: 50,
                     flexDirection: "row",
                 }}>
                 <View
@@ -55,7 +55,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                 >
                     <Text
                         style={{
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: "600",
                         }}
                     >
@@ -105,7 +105,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                                         }}>
                                             <Text style={{
                                                 color: 'white',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight: "600"
                                             }}>{color.label}</Text>
                                         </View>
@@ -117,7 +117,7 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                         }} >
-                                            <Text style={{ color: 'gray', fontWeight: "600", fontSize: 16 }}>{color.label}</Text>
+                                            <Text style={{ color: 'gray', fontWeight: "600", fontSize: 14 }}>{color.label}</Text>
                                         </View>
                                     )}
 
@@ -131,8 +131,8 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                                         onColorChange(color.label);
                                     }}
                                     style={{
-                                        width: 26,
-                                        height: 26,
+                                        width: 24,
+                                        height: 24,
                                         borderRadius: 30,
                                         marginRight: 10,
                                         justifyContent: 'center',
@@ -143,15 +143,15 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                                 >
                                     {selectedColor === color.value ? (
                                         <View style={{
-                                            width: 16,
-                                            height: 16,
+                                            width: 14,
+                                            height: 14,
                                             backgroundColor: selectedColor === color.value ? color.value : 'transparent',
                                             borderRadius: 30,
                                         }} />
                                     ) : (
                                         <View style={{
-                                            width: 18,
-                                            height: 18,
+                                            width: 16,
+                                            height: 16,
                                             borderRadius: 30,
                                             backgroundColor: color.value,
                                         }} />
@@ -165,24 +165,21 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                 </View>
 
 
-
             </View>
 
             <View
                 style={{
                     width: "100%",
-                    height: 80,
+                    height: 60,
                     justifyContent: "center",
-                }}>
 
+                }}>
 
                 <Text
                     style={{
                         paddingLeft: 20,
-
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: '500',
-                        marginBottom: 10
                     }}>Sizes</Text>
                 <View
                     style={
@@ -190,7 +187,6 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                             justifyContent: "space-between",
                             flexDirection: "row",
                             paddingRight: 10,
-
                         }
                     }>
 
@@ -230,14 +226,12 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                     <View
                         style={{
                             width: 100,
-                            height: 30,
+                            height: 25,
                             margin: 4,
                             borderRadius: 10,
                             flexDirection: "row",
                             paddingLeft: 2,
                             paddingRight: 2,
-                            borderWidth: 2,
-                            borderColor: "gray",
                             alignItems: "center",
                             justifyContent: "space-between",
                         }}>
@@ -245,13 +239,15 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                         <Pressable
                             onPress={decreaseQuantity}
                             style={{
-                                width: 40,
-                                height: 40,
+                                width: 25,
+                                height: 25,
+                                borderRadius: 100,
+                                backgroundColor: "black",
                                 justifyContent: "center",
                                 alignItems: "center"
 
                             }}>
-                            <AntDesign name="minus" size={16} color="black" />
+                            <AntDesign name="minus" size={16} color="white" />
 
                         </Pressable>
 
@@ -268,13 +264,15 @@ const InformationChoice = ({ article, quantity, setQuantity, onColorChange, onSi
                         <Pressable
                             onPress={increaseQuantity}
                             style={{
-                                width: 40,
-                                height: 40,
+                                width: 25,
+                                height: 25,
+                                borderRadius: 100,
+                                backgroundColor: "black",
                                 justifyContent: "center",
-                                alignItems: "center",
+                                alignItems: "center"
 
                             }}>
-                            <AntDesign name="plus" size={16} color="black" />
+                            <AntDesign name="plus" size={15} color="white" />
                         </Pressable>
 
                     </View>

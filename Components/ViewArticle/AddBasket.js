@@ -65,12 +65,11 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
         <View
             style={{
                 width: "100%",
-                height: 80,
+                height: 60,
                 alignItems: "center",
                 justifyContent: "space-evenly",
                 flexDirection: "row",
             }}>
-
 
             <View
                 style={{
@@ -79,10 +78,10 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
                     alignItems: "center",
 
                 }}>
-                <AntDesign name="tag" size={24} color="black" />
+                <AntDesign name="tag" size={20} color="black" />
                 <Text
                     style={{
-                        fontSize: 30,
+                        fontSize: 26,
                         paddingLeft: 10,
                         fontWeight: "500",
                     }}>
@@ -95,9 +94,9 @@ const AddBasket = ({ article, quantity, setQuantity, selectedColor, selectedSize
                 onPress={handleAddCartArticle}
                 style={{
                     width: 180,
-                    height: 50,
+                    height: 40,
                     margin: 4,
-                    borderRadius: 20,
+                    borderRadius: 15,
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "black"
