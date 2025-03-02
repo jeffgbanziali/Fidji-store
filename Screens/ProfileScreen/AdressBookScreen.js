@@ -1,40 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Modal, TextInput, SafeAreaView, Dimensions, Platform, Pressable, StatusBar } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, FlatList, TouchableOpacity, SafeAreaView, Dimensions, Platform, Pressable, StatusBar, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useSelector } from 'react-redux';
-import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
 import AddNewAdress from '../../Components/MyProfile/Address/AddNewAdress';
 import AddNewPickLocation from '../../Components/MyProfile/Address/AddNewPickLocation';
+import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
+import { updateUserShippingAddress } from '../../ReduxActions/user.actions';
+import { AuthContext } from '../../Context/AuthContext';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
 const AddressBookScreen = () => {
     const navigation = useNavigation();
+    const bottomTabHeight = useBottomTabBarHeight();
+    const dispatch = useDispatch();
+
+    const userData = useSelector((state) => state.userReducer);
+
+    const { shippingAddresses, addShippingAddress, deleteShippingAddress } = useContext(ShippingAddressContext);
+    const { userToken } = useContext(AuthContext);
+
     const [modalVisible, setModalVisible] = useState(false);
     const [modalAddressVisible, setModalAddressVisible] = useState(false);
-    const bottomTabHeight = useBottomTabBarHeight();
-    const userData = useSelector((state) => state.userReducer);
-    const dataAddress = userData?.customerData?.shipping ? [userData.customerData.shipping] : [];
+
 
     const retourned = () => {
         navigation.goBack();
     };
 
     const addNewAddress = (newAddress) => {
+        addShippingAddress(newAddress);
         setModalVisible(false);
+        console.log("Nouvelle adresse ajoutée :", newAddress);
+
+        dispatch(updateUserShippingAddress(userToken, newAddress));
     };
 
-    const addNewPickLocation = (newAddress) => {
-        setModalAddressVisible(false);
+    const handleDeleteAddress = (addressId) => {
+        deleteShippingAddress(addressId);
     };
 
     const renderItem = ({ item }) => {
         return (
             <View
                 style={{
-                    width: 300,
-                    height: 200,
+                    width: windowWidth * 0.86,
+                    height: 250,
                     borderWidth: 1,
                     borderRadius: 10,
                     padding: 10,
@@ -45,7 +58,7 @@ const AddressBookScreen = () => {
                     style={{
                         fontWeight: '400',
                         color: "gray",
-                        fontSize: 12,
+                        fontSize: 16,
                     }}>Adresse par defaut</Text>
                 <View
                     style={{
@@ -57,14 +70,14 @@ const AddressBookScreen = () => {
                     }} />
                 <Text
                     style={{
-                        fontWeight: 'bold',
-                        fontSize: 18,
+                        fontWeight: '500',
+                        fontSize: 24,
                     }}>{item.first_name} {item.last_name}</Text>
-                <Text>{item.address_1}</Text>
-                {item.address_2 && <Text>{item.address_2}</Text>}
-                <Text>{item.city}, {item.postcode}</Text>
-                <Text>{item.country}</Text>
-                <Text>Téléphone: {item.phone || 'Non renseigné'}</Text>
+                <Text style={styles.adressText}>{item.address_1}</Text>
+                {item.address_2 && <Text style={styles.adressText}>{item.address_2}</Text>}
+                <Text style={styles.adressText}>{item.city}, {item.postcode}</Text>
+                <Text style={styles.adressText}>{item.country}</Text>
+                <Text style={styles.adressText}>Téléphone: {item.phone || 'Non renseigné'}</Text>
                 <View style={{
                     width: '100%',
                     marginTop: 5,
@@ -203,26 +216,34 @@ const AddressBookScreen = () => {
 
                 }}>
                 <FlatList
-                    data={dataAddress}
+                    data={shippingAddresses}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={renderItem} />
             </View>
 
             <AddNewAdress
                 modalVisible={modalVisible}
-                addNewAddress={addNewPickLocation}
+                addNewAddress={addNewAddress}
                 setModalVisible={setModalVisible}
             />
 
             <AddNewPickLocation
                 modalVisible={modalAddressVisible}
-                addNewAddress={addNewAddress}
+
                 setModalVisible={setModalAddressVisible}
             />
 
         </SafeAreaView>
     );
 };
+
+const styles = StyleSheet.create({
+    adressText: {
+        fontWeight: '400',
+        fontSize: 18,
+
+    }
+})
 
 
 

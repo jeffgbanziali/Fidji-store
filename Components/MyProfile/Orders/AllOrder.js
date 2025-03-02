@@ -35,7 +35,6 @@ const AllOrder = () => {
 
     const renderItem = ({ item: order }) => {
 
-        console.log("le statut de ma commande ", order)
         return (
             <Pressable style={styles.card} onPress={() => console.log('Redirection vers la commande', order.id)}>
                 <Text style={styles.orderDate}>{formatOrderDate(order.date_created)} | {order.line_items.length} articles</Text>

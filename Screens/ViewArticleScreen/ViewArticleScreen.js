@@ -9,6 +9,7 @@ import AddBasket from '../../Components/ViewArticle/AddBasket';
 import MoreInformationsArticles from '../../Components/ViewArticle/MoreInformationsArticles';
 import PaymentTools from '../../Components/ViewArticle/PaymentTools';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import axios from 'axios';
 
 
 
@@ -24,6 +25,18 @@ const ViewArticleScreen = () => {
     const { article } = route.params;
 
     const bottomTabHeight = useBottomTabBarHeight();
+
+
+    const getCart = async () => {
+        try {
+            const response = await axios.get('https://ton-site.com/wp-json/wc/v1/cart', {
+                withCredentials: true, // Nécessaire pour conserver la session utilisateur
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération du panier :", error);
+        }
+    };
 
 
 

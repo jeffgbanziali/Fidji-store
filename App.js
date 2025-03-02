@@ -13,6 +13,7 @@ import rootReducer from './reducers';
 import LoadingScreen from './Components/SignInScreen/LoadingScreen';
 import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/NativeDevSettings';
 import { Entypo } from '@expo/vector-icons';
+import ShippingAddressProvider from './Context/ShippingAddressContext';
 
 
 
@@ -35,7 +36,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <AppContent />
+        <ShippingAddressProvider>
+          <AppContent />
+        </ShippingAddressProvider>
       </AuthProvider>
     </Provider>
   );
