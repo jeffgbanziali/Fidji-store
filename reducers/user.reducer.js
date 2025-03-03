@@ -2,6 +2,9 @@ import {
     GET_USER,
     UPDATE_SHIPPING_ADDRESS,
     UPDATE_BILLING_ADDRESS,
+    UPDATE_BILLING_ADDRESS_REQUEST,
+    UPDATE_BILLING_ADDRESS_SUCCESS,
+    UPDATE_BILLING_ADDRESS_FAILURE,
 } from '../ReduxActions/user.actions';
 
 const initialState = {
@@ -32,17 +35,24 @@ export default function userReducer(state = initialState, action) {
                 },
             };
 
-        case UPDATE_BILLING_ADDRESS:
+        case UPDATE_BILLING_ADDRESS_REQUEST:
+            return { ...state, loading: true, error: null };
+
+        case UPDATE_BILLING_ADDRESS_SUCCESS:
             return {
                 ...state,
                 user: {
                     ...state.user,
                     customerData: {
                         ...state.user.customerData,
-                        billing: action.payload,
-                    },
+                        billing: action.payload
+                    }
                 },
+                loading: false
             };
+
+        case UPDATE_BILLING_ADDRESS_FAILURE:
+            return { ...state, loading: false, error: action.payload };
 
 
         default:

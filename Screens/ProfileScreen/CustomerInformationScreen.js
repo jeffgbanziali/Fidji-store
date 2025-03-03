@@ -23,9 +23,10 @@ const CustomerInformationScreen = () => {
 
     }
 
-    const userData = useSelector((state) => state.userReducer)
+    const userData = useSelector((state) => state.userReducer.user)
 
     const data = userData.customerData
+
 
 
 

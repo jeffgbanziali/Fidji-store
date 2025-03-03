@@ -3,11 +3,14 @@ import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing, Pressable }
 import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import Modal from "react-native-modal";
-import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
+import DeliveryStoreDetails from './DeliveryStoreDetails';
+import ChooseAdressBilling from './ChooseAdressBilling';
+import ChooseAdressShipping from './ChooseAdressShipping';
+import DeliveryShippingDetails from './DeliveryShippingDetails';
 
 
 
-const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAddress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
+const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selectedShippingAddress, selectedBillingAddress, homeDelivery, setSelectedBillingAddress, setSelectedShippingAddress, slectedAdress, isSameAddress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
 }) => {
 
     const [heightAnimation] = useState(new Animated.Value(0));
@@ -17,11 +20,8 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
 
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
     const [showAdress, setShowAdress] = useState(false);
-
-    const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
-
-
-    console.log("Mon addresse", shippingAddresses)
+    const [adressShippingHeight, setAdressShippingHeight] = useState(new Animated.Value(0));
+    const [showAdressShipping, setShowAdressShipping] = useState(false);
 
 
 
@@ -44,6 +44,24 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
         }
     };
 
+    const changeAdressSipping = () => {
+        if (showAdressShipping) {
+            Animated.timing(adressShippingHeight, {
+                toValue: 0,
+                duration: 200,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start(() => setShowAdressShipping(false));
+        } else {
+            setShowAdressShipping(true);
+            Animated.timing(adressShippingHeight, {
+                toValue: 200,
+                duration: 300,
+                easing: Easing.linear,
+                useNativeDriver: true
+            }).start();
+        }
+    };
 
     useEffect(() => {
         Animated.timing(
@@ -67,6 +85,9 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
         ).start();
     }, [storeDelivery, homeDelivery]);
 
+
+    console.log("Mes addresses sont ", shippingAddress)
+
     return (
 
         <>
@@ -88,214 +109,14 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
 
                 </TouchableOpacity>
 
-                <Animated.View
-                    style={[
-                        styles.deliveryDetails,
-                        {
-                            height: heightAnimation,
-                            opacity: iconAnimation,
-                        },
-                        storeDelivery && styles.show
-                    ]}
-                >
-                    <View
-                        style={{
-                            width: "100%",
-                            paddingLeft: 20,
+                <DeliveryStoreDetails
+                    heightAnimation={heightAnimation}
+                    iconAnimation={iconAnimation}
+                    storeDelivery={storeDelivery}
+                    handleViewAdress={handleViewAdress}
+                    billingAddress={selectedBillingAddress || billingAddress[0]}
 
-                        }}>
-                        <Text
-                            style={{
-                                fontSize: 20,
-                                fontWeight: '500',
-                                color: 'black',
-                            }}>
-                            Boutique FIDJI - Paris
-                        </Text>
-                        <Text
-                            style={{
-                                fontSize: 14,
-                                paddingTop: 4,
-                                fontWeight: '500',
-                                color: 'black',
-                            }}>
-                            25 rue des martyrs, Paris 75009
-                            livraisn en 1h à la boutique
-                        </Text>
-
-                    </View>
-
-                    {
-                        userData?.customerData?.billing.length === 0 ? (
-                            <View
-                                style={{
-                                    width: "100%",
-                                    paddingTop: 14,
-
-                                }}>
-
-                                <Text
-                                    style={{
-                                        fontSize: 20,
-                                        paddingLeft: 20,
-                                        fontWeight: '500',
-                                        color: 'black',
-                                    }}>
-                                    Adresse de facturation
-                                </Text>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        height: 80,
-                                        backgroundColor: "red",
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}>
-                                    <Pressable
-                                        onPress={handleViewAdress}
-                                        style={{
-                                            width: 320,
-                                            height: 40,
-                                            borderRadius: 10,
-                                            backgroundColor: "black",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                fontWeight: '500',
-                                                color: 'white',
-                                            }}>
-                                            Ajouter une adresse
-                                        </Text>
-                                    </Pressable>
-                                </View>
-
-                            </View>
-                        ) : (
-                            <View
-                                style={{
-                                    width: "100%",
-                                    paddingTop: 14,
-
-
-
-
-                                }}>
-                                <Text
-                                    style={{
-                                        fontSize: 20,
-                                        paddingLeft: 20,
-                                        fontWeight: '500',
-                                        color: 'black',
-                                    }}>
-                                    Adresse de facturation
-                                </Text>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        flexDirection: "row",
-
-                                    }}>
-
-                                    <View
-                                        style={{
-                                            width: "85%",
-                                            height: 80,
-                                            paddingLeft: 30,
-                                            justifyContent: "center"
-                                        }}>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {userData?.customerData?.billing.first_name} {userData?.customerData?.billing.last_name}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {userData?.customerData?.billing.address_1} {userData?.customerData?.billing.address_2}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {userData?.customerData?.billing.postcode} {userData?.customerData?.billing.city} - {userData?.customerData?.billing.country}
-                                        </Text>
-                                    </View>
-                                    <View
-                                        style={{
-                                            width: "15%",
-                                            height: 80,
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}>
-                                        <View
-                                            style={{
-                                                width: 30,
-                                                height: 30,
-                                                borderRadius: 30,
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                            }}>
-                                            <AntDesign name="check" size={24} color="black" />
-                                        </View>
-
-                                    </View>
-                                </View>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        height: 60,
-                                        borderBottomWidth: 1,
-                                        marginLeft: 20,
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }}>
-                                    <Pressable
-                                        onPress={handleViewAdress}
-                                        style={{
-                                            width: 280,
-                                            height: 40,
-                                            borderRadius: 10,
-                                            backgroundColor: "black",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                        <Text
-                                            style={{
-                                                fontSize: 14,
-                                                fontWeight: '500',
-                                                color: 'white',
-                                            }}>
-                                            Changer d'adresse
-                                        </Text>
-                                    </Pressable>
-                                </View>
-
-                            </View>
-                        )
-                    }
-
-
-
-                </Animated.View >
-
-
+                />
                 <TouchableOpacity
                     style={styles.option}
                     onPress={() => handleSelectOption(2)}
@@ -310,255 +131,43 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                     <Text style={styles.optionText}>Livraison à domicile - 8 €</Text>
                 </TouchableOpacity>
 
-                <Animated.View
-                    style={[
-                        styles.deliveryDetails,
-                        {
-                            height: heightAnimation,
-                            opacity: iconAnimation,
-                        },
-                        homeDelivery && styles.show
-                    ]}
-                >
-                    {
-                        shippingAddresses.length === 0 ? (
-
-                            <View
-                                style={{
-                                    width: "100%",
-                                    height: 80,
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }}>
-                                <Pressable
-                                    onPress={handleViewAdress}
-                                    style={{
-                                        width: 320,
-                                        height: 50,
-                                        borderRadius: 10,
-                                        backgroundColor: "black",
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}>
-                                    <Text
-                                        style={{
-                                            fontSize: 16,
-                                            fontWeight: '500',
-                                            color: 'white',
-                                        }}>
-                                        Ajouter une adresse
-                                    </Text>
-                                </Pressable>
-
-
-                            </View>
-                        ) : (
-                            <View
-                                style={{
-                                    width: "100%",
-                                    paddingTop: 14,
-
-                                }}>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        flexDirection: "row",
-                                    }}>
-
-                                    <View
-                                        style={{
-                                            width: "85%",
-                                            height: 80,
-                                            paddingLeft: 30,
-                                            justifyContent: "center"
-                                        }}>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {shippingAddresses.first_name} {shippingAddresses.last_name}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {shippingAddresses.address_1} {shippingAddresses.address_2}
-                                        </Text>
-                                        <Text
-                                            style={{
-                                                fontSize: 16,
-                                                paddingLeft: 20,
-                                                fontWeight: '500',
-                                                color: 'black',
-                                            }}>
-                                            {shippingAddresses.postcode} {shippingAddresses.city} - {shippingAddresses.country}
-                                        </Text>
-                                    </View>
-                                    <View
-                                        style={{
-                                            width: "15%",
-                                            height: 80,
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}>
-                                        <View
-                                            style={{
-                                                width: 30,
-                                                height: 30,
-                                                borderRadius: 30,
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                            }}>
-                                            <AntDesign name="check" size={24} color="black" />
-                                        </View>
-
-                                    </View>
-                                </View>
-
-                                <View
-                                    style={{
-                                        width: "100%",
-                                        height: 60,
-                                        marginLeft: 20,
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }}>
-                                    <Pressable
-                                        onPress={handleViewAdress}
-                                        style={{
-                                            width: 280,
-                                            height: 40,
-                                            borderRadius: 10,
-                                            backgroundColor: "black",
-                                            alignItems: "center",
-                                            justifyContent: "center"
-                                        }}>
-                                        <Text
-                                            style={{
-                                                fontSize: 14,
-                                                fontWeight: '500',
-                                                color: 'white',
-                                            }}>
-                                            Changer d'adresse
-                                        </Text>
-                                    </Pressable>
-                                </View>
-
-                            </View>
-                        )}
 
 
 
-                    <Pressable
-                        onPress={useSameAddress}
-                        style={{
-                            width: "100%",
-                            height: 60,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            flexDirection: "row",
-                        }}>
-                        {
-                            useAddressCustomer ? (
-                                <View
-                                    style={{
-                                        width: 30,
-                                        height: 30,
-                                        borderRadius: 30,
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}>
-                                    <AntDesign name="checkcircle" size={24} color="black" />
-                                </View>
-                            ) : (
-                                <View
-                                    style={{
-                                        width: 20,
-                                        height: 20,
-                                        borderRadius: 30,
-                                        borderWidth: 1,
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}>
+                <DeliveryShippingDetails
+                    shippingAddress={shippingAddress}
+                    heightAnimation={heightAnimation}
+                    iconAnimation={iconAnimation}
+                    homeDelivery={homeDelivery}
+                    selectedShippingAddress={selectedShippingAddress}
+                    useSameAddress={useSameAddress}
+                    useAddressCustomer={useAddressCustomer}
+                    isSameAddress={useAddressCustomer}
+                    handleViewAdress={handleViewAdress}
+                    changeAdressSipping={changeAdressSipping}
 
-                                </View>
-                            )
-                        }
+                />
 
-                        <Text
-                            style={{
-                                fontSize: 16,
-                                fontWeight: '500',
-                                paddingLeft: 10
-
-                            }}>Utiliser cette adresse comme adresse de facturation</Text>
-                    </Pressable>
-
-                    {!isSameAddress && <Animated.View
-                        style={{
-                            width: "100%",
-                            height: 80,
-                            alignItems: "center",
-                            justifyContent: "center"
-                        }}>
-                        <Pressable
-                            onPress={handleViewAdress}
-                            style={{
-                                width: 320,
-                                height: 50,
-                                borderRadius: 10,
-                                backgroundColor: "black",
-                                alignItems: "center",
-                                justifyContent: "center"
-                            }}>
-                            <Text
-                                style={{
-                                    fontSize: 16,
-                                    fontWeight: '500',
-                                    color: 'white',
-                                }}>
-                                Ajouter une adresse
-                            </Text>
-                        </Pressable>
-
-
-                    </Animated.View>}
-
-
-                </Animated.View>
 
 
 
             </View >
 
+            <ChooseAdressBilling
+                showAdress={showAdress}
+                setSelectedBillingAddress={setSelectedBillingAddress}
+                handleViewAdress={handleViewAdress}
+                billingAddress={billingAddress}
 
-            <Modal
-                isVisible={showAdress}
-                onBackdropPress={handleViewAdress}
-                style={{ margin: 0, justifyContent: "flex-end" }}
-                backdropOpacity={0.5}
-                animationIn="slideInUp"
-                animationOut="slideOutDown"
-                useNativeDriverForBackdrop
-            >
-                <View
-                    style={{
-                        width: "100%",
-                        height: "80%",
-                        borderTopLeftRadius: 20,
-                        borderTopRightRadius: 20,
-                        backgroundColor: "#f5e1ce"
-                    }}>
+            />
 
-                </View>
-            </Modal>
+            <ChooseAdressShipping
+                showAdress={showAdressShipping}
+                handleViewAdress={changeAdressSipping}
+                setSelectedShippingAddress={setSelectedShippingAddress}
+            />
+
+
         </>
 
     );

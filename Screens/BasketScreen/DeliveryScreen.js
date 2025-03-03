@@ -7,6 +7,7 @@ import DeliveryOptions from '../../Components/DeliveryTools/DeliveryOptions';
 import DeliveryValidate from '../../Components/DeliveryTools/DeliveryValidate';
 import { useSelector } from 'react-redux';
 import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
+import { BillingAddressContext } from '../../Context/BillingAddressContext';
 
 
 
@@ -20,7 +21,10 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const [storeDelivery, setStoreDelivery] = useState(false)
     const [homeDelivery, setHomeDelivery] = useState(false);
     const userData = useSelector((state) => state.userReducer)
-    const [useAddressCustomer, setUSeSameAddressCustomer] = useState(null)
+    const [useAddressCustomer, setUseSameAddressCustomer] = useState(null)
+    const [selectedBillingAddress, setSelectedBillingAddress] = useState(null);
+    const [selectedShippingAddress, setSelectedShippingAddress] = useState(null);
+
     const navigation = useNavigation()
 
 
@@ -57,25 +61,23 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
     const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
+    const { billingAddresses, addBillingAddress, deleteBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
+
+
 
 
 
 
     const addressShipping = selectedOption === 2 ? shippingAddresses : storeAdress
 
-    //  console.log("Mon adresse de livraisaon", addressShipping)
-
 
 
 
     const shippingAddress = shippingAddresses
-    const billingAddress = userData.customerData?.billing
-
-    console.log('Bliingi', userData)
-    console.log('shiiping', shippingAddress)
+    const billingAddress = billingAddresses
 
     const sameAddress =
-        billingAddress?.first_name === shippingAddress.first_name &&
+        billingAddresses?.first_name === shippingAddress.first_name &&
         billingAddress?.last_name === shippingAddress.last_name &&
         billingAddress?.company === shippingAddress.company &&
         billingAddress?.address_1 === shippingAddress.address_1 &&
@@ -97,7 +99,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
     const useSameAddress = () => {
-        setUSeSameAddressCustomer(!useAddressCustomer)
+        setUseSameAddressCustomer(!useAddressCustomer)
     }
 
 
@@ -173,6 +175,12 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                     setHomeDelivery={setHomeDelivery}
                     setStoreDelivery={setStoreDelivery}
                     selectedOption={selectedOption}
+                    selectedBillingAddress={selectedBillingAddress}
+                    setSelectedBillingAddress={setSelectedBillingAddress}
+                    setSelectedShippingAddress={setSelectedShippingAddress}
+                    selectedShippingAddress={selectedShippingAddress}
+                    billingAddress={billingAddress}
+                    shippingAddress={shippingAddress}
                     handleSelectOption={handleSelectOption}
                     useAddressCustomer={useAddressCustomer}
                     slectedAdress={slectedAdress}
