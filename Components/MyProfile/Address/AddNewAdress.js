@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Modal, TextInput, SafeAreaView, Dimensions, Platform, Pressable, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Modal, TextInput, SafeAreaView, Dimensions, Platform, Pressable, StatusBar, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
@@ -51,20 +51,19 @@ const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
 
     return (
         <Modal visible={modalVisible} animationType="slide" transparent>
-            <View style={styles.modalContainer}>
+            <SafeAreaView style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <Text style={styles.title}>Ajouter une nouvelle adresse</Text>
-
                     <TextInput
                         placeholder="Prénom(s)"
                         style={styles.input}
-                        value={fullName}
+                        value={firstName}
                         onChangeText={setFirstName}
                     />
                     <TextInput
                         placeholder="Nom(s)"
                         style={styles.input}
-                        value={fullName}
+                        value={lastName}
                         onChangeText={setLastName}
                     />
                     <TextInput
@@ -109,13 +108,33 @@ const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
                     <TouchableOpacity style={styles.saveButton} onPress={handleSaveAddress}>
                         <Text style={styles.saveButtonText}>Enregistrer l'adresse</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setModalVisible(false)}
+                        style={{
+                            textAlign: 'center',
+                            color: 'red',
+                            fontSize: 16,
+                            padding: 15,
+                            backgroundColor: 'green',
+                            padding: 15,
+                            borderRadius: 5,
+                            marginTop: 20,
+                            width: '100%',
+                        }} >
+                        <Text style={{
+                            color: 'white',
+                            textAlign: 'center',
+                            fontWeight: 'bold',
+                            fontSize: 16,
+                        }}>Utiliser ma location</Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.cancelButton}>
                         <Text style={styles.cancelButtonText}>Annuler</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-        </Modal>
+            </SafeAreaView>
+
+        </Modal >
     );
 };
 
@@ -124,6 +143,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: "100%",
+        width: "100%",
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {

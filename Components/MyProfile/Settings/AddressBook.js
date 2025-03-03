@@ -42,7 +42,7 @@ const AddressBook = () => {
 
                         fontWeight: "600",
                         color: "black"
-                    }}>AddressBook</Text>
+                    }}>Vos addresses</Text>
             </View>
             <View
                 style={{

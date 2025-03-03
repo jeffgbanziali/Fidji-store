@@ -23,7 +23,6 @@ export const getUser = (userToken) => {
                 customerData: matchingCustomer || null,
             };
 
-            console.log("Mon client est :", mergedUserData);
 
             dispatch({ type: GET_USER, payload: mergedUserData });
         } catch (error) {
@@ -51,7 +50,6 @@ export const updateUserShippingAddress = (userToken, updatedShipping) => {
                 throw new Error("Réponse API invalide");
             }
 
-            console.log("Adresse de livraison mise à jour :", response.data.shipping);
 
             dispatch({ type: UPDATE_SHIPPING_ADDRESS, payload: response.data.shipping });
 

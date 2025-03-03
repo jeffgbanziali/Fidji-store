@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { View, Text, FlatList, TouchableOpacity, SafeAreaView, Dimensions, Platform, Pressable, StatusBar, StyleSheet } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, SafeAreaView, Dimensions, Platform, Pressable, StatusBar, StyleSheet, Switch } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import AddNewPickLocation from '../../Components/MyProfile/Address/AddNewPickLoc
 import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
 import { updateUserShippingAddress } from '../../ReduxActions/user.actions';
 import { AuthContext } from '../../Context/AuthContext';
+import CheckBox from '@react-native-community/checkbox';
 
 const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
 
@@ -19,7 +20,7 @@ const AddressBookScreen = () => {
 
     const userData = useSelector((state) => state.userReducer);
 
-    const { shippingAddresses, addShippingAddress, deleteShippingAddress } = useContext(ShippingAddressContext);
+    const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
     const { userToken } = useContext(AuthContext);
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -29,6 +30,13 @@ const AddressBookScreen = () => {
     const retourned = () => {
         navigation.goBack();
     };
+
+    const handleSetDefault = (addressId) => {
+        setDefaultShippingAddress(addressId);
+    };
+
+
+    console.log("Mes adresses ", shippingAddresses)
 
     const addNewAddress = (newAddress) => {
         addShippingAddress(newAddress);
@@ -43,40 +51,52 @@ const AddressBookScreen = () => {
     };
 
     const renderItem = ({ item }) => {
+
+
+        const isDefault = item.isDefault;
+
         return (
             <View
                 style={{
                     width: windowWidth * 0.86,
-                    height: 250,
+                    height: 260,
                     borderWidth: 1,
                     borderRadius: 10,
                     padding: 10,
+                    marginBottom: 10,
                     borderColor: 'lightgray'
                 }}>
+                {item.isDefault && (
+                    <>
+                        <Text
+                            style={{
+                                fontWeight: '400',
+                                color: "gray",
+                                fontSize: 16,
+                            }}>Adresse par defaut</Text>
+                        <View
+                            style={{
+                                width: "100%",
+                                height: 1,
+                                marginTop: 10,
+                                marginBottom: 5,
+                                backgroundColor: "lightgray",
+                            }} />
+                    </>
 
-                <Text
-                    style={{
-                        fontWeight: '400',
-                        color: "gray",
-                        fontSize: 16,
-                    }}>Adresse par defaut</Text>
-                <View
-                    style={{
-                        width: "100%",
-                        height: 1,
-                        marginTop: 10,
-                        marginBottom: 5,
-                        backgroundColor: "lightgray",
-                    }} />
+                )
+                }
                 <Text
                     style={{
                         fontWeight: '500',
-                        fontSize: 24,
+                        fontSize: 18,
+                        marginBottom: 5,
                     }}>{item.first_name} {item.last_name}</Text>
                 <Text style={styles.adressText}>{item.address_1}</Text>
                 {item.address_2 && <Text style={styles.adressText}>{item.address_2}</Text>}
                 <Text style={styles.adressText}>{item.city}, {item.postcode}</Text>
                 <Text style={styles.adressText}>{item.country}</Text>
+
                 <Text style={styles.adressText}>Téléphone: {item.phone || 'Non renseigné'}</Text>
                 <View style={{
                     width: '100%',
@@ -86,6 +106,8 @@ const AddressBookScreen = () => {
                     justifyContent: "space-evenly",
                     alignItems: "center"
                 }}>
+
+
                     <Pressable style={{
                         width: 80,
                         marginTop: 5,
@@ -102,16 +124,18 @@ const AddressBookScreen = () => {
                             fontSize: 12,
                         }}>Modifier</Text>
                     </Pressable>
-                    <Pressable style={{
-                        width: 80,
-                        marginTop: 5,
-                        borderWidth: 2,
-                        borderColor: "lightgray",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: 10,
-                        height: 30,
-                    }}>
+                    <Pressable
+                        onPress={() => handleDeleteAddress(item.id)}
+                        style={{
+                            width: 80,
+                            marginTop: 5,
+                            borderWidth: 2,
+                            borderColor: "lightgray",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderRadius: 10,
+                            height: 30,
+                        }}>
                         <Text style={{
                             fontWeight: '400',
                             color: "black",
@@ -120,7 +144,22 @@ const AddressBookScreen = () => {
                     </Pressable>
 
                 </View>
-            </View>
+
+                {!isDefault && (
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: "center",
+                        margin: 12,
+                    }}>
+                        <Switch
+                            value={isDefault}
+                            onValueChange={() => handleSetDefault(item.id)}
+                            style={{ transform: [{ scale: 0.7 }] }}
+                        />
+                        <Text style={{ marginLeft: 10 }}>Définir par défaut</Text>
+                    </View>
+                )}
+            </View >
         )
 
     }
@@ -240,8 +279,8 @@ const AddressBookScreen = () => {
 const styles = StyleSheet.create({
     adressText: {
         fontWeight: '400',
-        fontSize: 18,
-
+        fontSize: 16,
+        marginBottom: 5,
     }
 })
 

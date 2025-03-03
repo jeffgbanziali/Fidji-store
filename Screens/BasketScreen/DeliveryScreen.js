@@ -6,6 +6,7 @@ import DeliveryTools from '../../Components/DeliveryTools/DeliveryTools';
 import DeliveryOptions from '../../Components/DeliveryTools/DeliveryOptions';
 import DeliveryValidate from '../../Components/DeliveryTools/DeliveryValidate';
 import { useSelector } from 'react-redux';
+import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
 
 
 
@@ -55,30 +56,35 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
 
-
-
-
-    const addressShipping = selectedOption === 2 ? userData.customerData?.shipping : storeAdress
-
-    console.log("Mon adresse de livraisaon", addressShipping)
+    const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
 
 
 
 
-    console.log('Selectedopyion', selectedOption)
-    const shippingAddress = userData.customerData?.shipping
+    const addressShipping = selectedOption === 2 ? shippingAddresses : storeAdress
+
+    //  console.log("Mon adresse de livraisaon", addressShipping)
+
+
+
+
+    const shippingAddress = shippingAddresses
     const billingAddress = userData.customerData?.billing
 
+    console.log('Bliingi', userData)
+    console.log('shiiping', shippingAddress)
+
     const sameAddress =
-        billingAddress.first_name === shippingAddress.first_name &&
-        billingAddress.last_name === shippingAddress.last_name &&
-        billingAddress.company === shippingAddress.company &&
-        billingAddress.address_1 === shippingAddress.address_1 &&
-        billingAddress.address_2 === shippingAddress.address_2 &&
-        billingAddress.city === shippingAddress.city &&
-        billingAddress.country === shippingAddress.country &&
-        billingAddress.state === shippingAddress.state &&
-        billingAddress.postcode === shippingAddress.postcode;
+        billingAddress?.first_name === shippingAddress.first_name &&
+        billingAddress?.last_name === shippingAddress.last_name &&
+        billingAddress?.company === shippingAddress.company &&
+        billingAddress?.address_1 === shippingAddress.address_1 &&
+        billingAddress?.address_2 === shippingAddress.address_2 &&
+        billingAddress?.city === shippingAddress.city &&
+        billingAddress?.country === shippingAddress.country &&
+        billingAddress?.state === shippingAddress.state &&
+        billingAddress?.postcode === shippingAddress.postcode;
+
 
 
 
@@ -86,7 +92,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const slectedAdress = sameAddress ? billingAddress : storeAdress
 
 
-    const facturationAdressStore = selectedOption === 1 && userData.customerData.billing
+    const facturationAdressStore = selectedOption === 1 && userData?.customerData?.billing
 
 
 

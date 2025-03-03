@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, Easing, Pressable } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import Modal from "react-native-modal";
+import { ShippingAddressContext } from '../../Context/ShippingAddressContext';
 
 
 
@@ -17,6 +18,10 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
     const [showAdress, setShowAdress] = useState(false);
 
+    const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
+
+
+    console.log("Mon addresse", shippingAddresses)
 
 
 
@@ -121,7 +126,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                     </View>
 
                     {
-                        userData.customerData.billing.length === 0 ? (
+                        userData?.customerData?.billing.length === 0 ? (
                             <View
                                 style={{
                                     width: "100%",
@@ -210,7 +215,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.billing.first_name} {userData.customerData.billing.last_name}
+                                            {userData?.customerData?.billing.first_name} {userData?.customerData?.billing.last_name}
                                         </Text>
                                         <Text
                                             style={{
@@ -219,7 +224,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.billing.address_1} {userData.customerData.billing.address_2}
+                                            {userData?.customerData?.billing.address_1} {userData?.customerData?.billing.address_2}
                                         </Text>
                                         <Text
                                             style={{
@@ -228,7 +233,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.billing.postcode} {userData.customerData.billing.city} - {userData.customerData.billing.country}
+                                            {userData?.customerData?.billing.postcode} {userData?.customerData?.billing.city} - {userData?.customerData?.billing.country}
                                         </Text>
                                     </View>
                                     <View
@@ -316,7 +321,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                     ]}
                 >
                     {
-                        userData.customerData.shipping.length === 0 ? (
+                        shippingAddresses.length === 0 ? (
 
                             <View
                                 style={{
@@ -375,7 +380,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.shipping.first_name} {userData.customerData.shipping.last_name}
+                                            {shippingAddresses.first_name} {shippingAddresses.last_name}
                                         </Text>
                                         <Text
                                             style={{
@@ -384,7 +389,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.shipping.address_1} {userData.customerData.shipping.address_2}
+                                            {shippingAddresses.address_1} {shippingAddresses.address_2}
                                         </Text>
                                         <Text
                                             style={{
@@ -393,7 +398,7 @@ const DeliveryOptions = ({ storeDelivery, homeDelivery, slectedAdress, isSameAdd
                                                 fontWeight: '500',
                                                 color: 'black',
                                             }}>
-                                            {userData.customerData.shipping.postcode} {userData.customerData.shipping.city} - {userData.customerData.shipping.country}
+                                            {shippingAddresses.postcode} {shippingAddresses.city} - {shippingAddresses.country}
                                         </Text>
                                     </View>
                                     <View
