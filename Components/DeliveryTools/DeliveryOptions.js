@@ -15,7 +15,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
 
     const [heightAnimation] = useState(new Animated.Value(0));
     const [iconAnimation] = useState(new Animated.Value(0));
-    const userData = useSelector((state) => state.userReducer)
+    const userData = useSelector((state) => state.userReducer.user)
 
 
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
@@ -86,8 +86,6 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
     }, [storeDelivery, homeDelivery]);
 
 
-    console.log("Mes addresses sont ", shippingAddress)
-
     return (
 
         <>
@@ -112,6 +110,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
                 <DeliveryStoreDetails
                     heightAnimation={heightAnimation}
                     iconAnimation={iconAnimation}
+                    userData={userData}
                     storeDelivery={storeDelivery}
                     handleViewAdress={handleViewAdress}
                     billingAddress={selectedBillingAddress || billingAddress[0]}
@@ -138,6 +137,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
                     shippingAddress={shippingAddress}
                     heightAnimation={heightAnimation}
                     iconAnimation={iconAnimation}
+                    userData={userData}
                     homeDelivery={homeDelivery}
                     selectedShippingAddress={selectedShippingAddress}
                     useSameAddress={useSameAddress}
@@ -155,6 +155,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
 
             <ChooseAdressBilling
                 showAdress={showAdress}
+                userData={userData}
                 setSelectedBillingAddress={setSelectedBillingAddress}
                 handleViewAdress={handleViewAdress}
                 billingAddress={billingAddress}
@@ -163,6 +164,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
 
             <ChooseAdressShipping
                 showAdress={showAdressShipping}
+                userData={userData}
                 changeAdressSipping={changeAdressSipping}
                 setSelectedShippingAddress={setSelectedShippingAddress}
             />

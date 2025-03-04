@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import Modal from "react-native-modal";
 
-const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, storeDelivery, handleViewAdress }) => {
+const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, userData, storeDelivery, handleViewAdress }) => {
 
     const isBillingAddressValid = billingAddress && billingAddress.address_1;
     return (
@@ -12,7 +12,7 @@ const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, 
             style={[
                 styles.deliveryDetails,
                 {
-                    height: isBillingAddressValid ? heightAnimation : 150,
+                    height: isBillingAddressValid ? heightAnimation : 180,
                     opacity: iconAnimation,
 
                 },
@@ -49,21 +49,38 @@ const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, 
             {
                 isBillingAddressValid ? (
                     // Si l'adresse de facturation existe et contient des infos valides, on affiche les détails et "Changer d'adresse"
-                    <View style={{ width: "100%", paddingTop: 14 }}>
+                    <View style={{
+                        width: "100%",
+                        paddingTop: 16
+                    }}>
                         <Text style={{ fontSize: 20, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
                             Adresse de facturation
                         </Text>
 
-                        <View style={{ width: "100%", flexDirection: "row" }}>
-                            <View style={{ width: "85%", height: 80, paddingLeft: 30, justifyContent: "center" }}>
+                        <View
+                            style={{
+                                width: "100%",
+                                flexDirection: "row"
+                            }}>
+                            <View style={{ width: "85%", height: 100, paddingLeft: 30, justifyContent: "center" }}>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
                                     {billingAddress.first_name} {billingAddress.last_name}
+                                </Text>
+                                <Text style={{
+                                    fontSize: 16, paddingLeft: 20,
+                                    fontWeight: '600',
+                                    color: 'black'
+                                }}>
+                                    {billingAddress.email}
                                 </Text>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
                                     {billingAddress.address_1} {billingAddress.address_2}
                                 </Text>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
                                     {billingAddress.postcode} {billingAddress.city} - {billingAddress.country}
+                                </Text>
+                                <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
+                                    {billingAddress.phone || "Phone non renseigné"}
                                 </Text>
                             </View>
                             <View style={{ width: "15%", height: 80, justifyContent: "center", alignItems: "center" }}>

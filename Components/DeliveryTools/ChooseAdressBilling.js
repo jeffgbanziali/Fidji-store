@@ -4,13 +4,14 @@ import Modal from "react-native-modal";
 import { AntDesign } from '@expo/vector-icons';
 import { BillingAddressContext } from '../../Context/BillingAddressContext';
 
-const ChooseAdressBilling = ({ showAdress, handleViewAdress, setSelectedBillingAddress }) => {
-    const { billingAddresses, addBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
+const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelectedBillingAddress }) => {
+    const { billingAddresses, addBillingAddress, deleteBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
     const [isAdding, setIsAdding] = useState(false);
     const [newBilling, setNewBilling] = useState({
         first_name: '',
         last_name: '',
         company: '',
+        email: "",
         address_1: '',
         address_2: '',
         city: '',
@@ -73,6 +74,7 @@ const ChooseAdressBilling = ({ showAdress, handleViewAdress, setSelectedBillingA
                         >
                             <View style={styles.addressDetails}>
                                 <Text style={styles.addressText}>{item.first_name} {item.last_name}</Text>
+                                <Text style={styles.addressText}>{item.email}</Text>
                                 <Text style={styles.addressText}>{item.address_1} {item.address_2}</Text>
                                 <Text style={styles.addressText}>{item.postcode}, {item.city}, {item.country}</Text>
                             </View>
@@ -103,9 +105,21 @@ const ChooseAdressBilling = ({ showAdress, handleViewAdress, setSelectedBillingA
                         />
                         <TextInput
                             style={styles.input}
+                            placeholder="Email"
+                            value={newBilling.email}
+                            onChangeText={(text) => setNewBilling({ ...newBilling, email: text })}
+                        />
+                        <TextInput
+                            style={styles.input}
                             placeholder="Adresse"
                             value={newBilling.address_1}
                             onChangeText={(text) => setNewBilling({ ...newBilling, address_1: text })}
+                        />
+                         <TextInput
+                            style={styles.input}
+                            placeholder="Complement d'adresse"
+                            value={newBilling.address_2}
+                            onChangeText={(text) => setNewBilling({ ...newBilling, address_2: text })}
                         />
                         <TextInput
                             style={styles.input}

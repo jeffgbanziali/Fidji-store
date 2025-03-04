@@ -3,37 +3,49 @@ import React from 'react'
 import { SimpleLineIcons } from '@expo/vector-icons';
 
 
-const DeliveryAdress = ({ addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption }) => {
+const DeliveryAdress = ({ userData, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption }) => {
+
+    console.log("addressShipping ", addressShipping)
+
+
     return (
         <View
             style={{
                 width: "100%",
-                height: 120,
+                height: 180,
                 borderBottomWidth: 1,
                 borderColor: "gray",
-                justifyContent: "center"
+                justifyContent: "center",
 
             }}>
 
             {
                 selectedOption === 2 ? (
                     <>
-
-                        <Text
+                        <View
                             style={{
-                                fontSize: 20,
-                                fontWeight: "600",
-                                color: "black",
-                                paddingLeft: 20,
-                            }}>
-                            Livraison à domicile
-                        </Text>
+                                width: "100%",
+                                height: "20%",
+                                flexDirection: "row",
+                                alignItems: "center"
+                            }} >
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    fontWeight: "600",
+                                    color: "black",
+                                    paddingLeft: 20,
+                                }}>
+                                Livraison à domicile
+                            </Text>
 
+                        </View>
 
 
                         <View
                             style={{
                                 width: "100%",
+                                height: "80%",
                                 flexDirection: "row",
                                 paddingLeft: 20,
                                 alignItems: "center"
@@ -51,6 +63,7 @@ const DeliveryAdress = ({ addressShipping, facturationAdressStore, isSameAddress
                                         fontSize: 18,
                                         fontWeight: '500',
                                         color: 'black',
+                                        marginTop: 2,
                                     }}>
                                     {addressShipping.first_name} {addressShipping.last_name}
                                 </Text>
@@ -59,16 +72,37 @@ const DeliveryAdress = ({ addressShipping, facturationAdressStore, isSameAddress
                                         fontSize: 18,
                                         fontWeight: '500',
                                         color: 'black',
+                                        marginTop: 2,
                                     }}>
-                                    {addressShipping.address_1} {addressShipping.address_2}
+                                    {userData.customerData.email}
                                 </Text>
                                 <Text
                                     style={{
                                         fontSize: 18,
                                         fontWeight: '500',
                                         color: 'black',
+                                        marginTop: 2,
+                                    }}>
+                                    {addressShipping.address_1} {addressShipping.address_2}
+                                </Text>
+
+                                <Text
+                                    style={{
+                                        fontSize: 18,
+                                        fontWeight: '500',
+                                        color: 'black',
+                                        marginTop: 2,
                                     }}>
                                     {addressShipping.postcode} {addressShipping.city} - {addressShipping.country}
+                                </Text>
+                                <Text
+                                    style={{
+                                        fontSize: 18,
+                                        fontWeight: '500',
+                                        color: 'black',
+                                        marginTop: 2,
+                                    }}>
+                                    {addressShipping.phone || 'Phone non renseigné'}
                                 </Text>
                             </View>
                             <View
@@ -135,7 +169,7 @@ const DeliveryAdress = ({ addressShipping, facturationAdressStore, isSameAddress
                                     fontWeight: '500',
                                     color: 'black',
                                 }}>
-                                livraisn en 1h à la boutique
+                                livraison en 1h à la boutique
                             </Text>
 
                         </View>

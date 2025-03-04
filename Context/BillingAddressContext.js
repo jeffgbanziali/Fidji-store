@@ -20,6 +20,7 @@ const BillingAddressProvider = ({ children }) => {
                 if (userData?.customerData?.billing?.address_1?.trim()) {
                     const defaultAddress = {
                         ...userData.customerData.billing,
+                        email: userData.customerData.email,
                         id: userData.customerData.billing.id || Date.now(), // Générer un ID unique si nécessaire
                         isDefault: parsedAddresses.length === 0 // Première adresse = par défaut
                     };

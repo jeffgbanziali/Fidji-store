@@ -4,10 +4,9 @@ import Modal from "react-native-modal";
 import { AntDesign } from '@expo/vector-icons';
 import { ShippingAddressContext } from "../../Context/ShippingAddressContext";
 
-const ChooseAdressShipping = ({ showAdress, changeAdressSipping, setSelectedShippingAddress }) => {
+const ChooseAdressShipping = ({ showAdress, userData, changeAdressSipping, setSelectedShippingAddress }) => {
     const { shippingAddresses } = useContext(ShippingAddressContext);
     const [isAdding, setIsAdding] = useState(false);
-
 
 
     const handleSelectShippingAddress = (address) => {
@@ -46,6 +45,7 @@ const ChooseAdressShipping = ({ showAdress, changeAdressSipping, setSelectedShip
                         >
                             <View style={styles.addressDetails}>
                                 <Text style={styles.addressText}>{item.first_name} {item.last_name}</Text>
+                                <Text style={styles.addressText}>{userData.customerData.email}</Text>
                                 <Text style={styles.addressText}>{item.address_1} {item.address_2}</Text>
                                 <Text style={styles.addressText}>{item.city}, {item.country} {item.postcode}</Text>
                                 <Text style={styles.addressText}>{item.phone || 'Phone non renseigné'}</Text>

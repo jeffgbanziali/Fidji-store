@@ -13,6 +13,7 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
     const handlePaiement = calculateTotal() + shippingCost;
 
 
+    console.log("Mon adresse de livraison", addressShipping)
 
 
 

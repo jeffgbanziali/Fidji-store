@@ -10,6 +10,7 @@ const DeliveryShippingDetails = ({
     heightAnimation,
     iconAnimation,
     homeDelivery,
+    userData,
     handleViewAdress,
     changeAdressSipping,
     selectedShippingAddress,
@@ -41,6 +42,7 @@ const DeliveryShippingDetails = ({
                             <Text style={styles.addressText}>
                                 {addressToShow.first_name} {addressToShow.last_name}
                             </Text>
+                            <Text style={styles.addressText}>{userData.customerData.email}</Text>
                             <Text style={styles.addressText}>
                                 {addressToShow.address_1}, {addressToShow.address_2}
                             </Text>

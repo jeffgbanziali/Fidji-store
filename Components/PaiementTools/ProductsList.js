@@ -8,29 +8,23 @@ const ProductsList = ({ cart, removeFromCart }) => {
     const [isLoading, setIsLoading] = useState(true);
 
 
-    const [cartItems, setCartItems] = useState(cart);
-
-    useEffect(() => {
-        setCartItems([...cart]);
-    }, [cart]);
-
 
     const removeProduct = (productId) => {
         removeFromCart(productId);
         console.log("Il est supprimé", productId)
     }
     useEffect(() => {
-        if (!isEmpty(cartItems)) {
+        if (!isEmpty(cart)) {
             setIsLoading(false);
         }
-    }, [cartItems]);
+    }, [cart]);
 
 
 
     let totalStockQuantity = 0;
 
-    for (let i = 0; i < cartItems.length; i++) {
-        let product = cartItems[i];
+    for (let i = 0; i < cart.length; i++) {
+        let product = cart[i];
         totalStockQuantity += product.stock_quantity;
     }
 
@@ -61,7 +55,7 @@ const ProductsList = ({ cart, removeFromCart }) => {
                     flexDirection: "row",
                 }}>
                 <FlatList
-                    data={cartItems}
+                    data={cart}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(cart) => cart.id.toString()}

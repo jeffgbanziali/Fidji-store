@@ -12,6 +12,7 @@ import LoadingValidation from '../../Components/PaiementTools/PaiementMode/Loadi
 import ChoosePaymentMethode from '../../Components/PaiementTools/PaiementMode/ChoosePaymentMethode';
 import BankCardMode from '../../Components/PaiementTools/PaiementMode/BankCardMode';
 import { StripeProvider, useStripe } from '@stripe/stripe-react-native';
+import { useSelector } from 'react-redux';
 
 
 
@@ -22,7 +23,8 @@ const PaiementScreen = ({ }) => {
     const [paymentMethod, setPaymentMethod] = useState("stripe");
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
     const [paymentProcess, setPaymentProcess] = useState(null);
-    const [showBankCardModal, setShowBankCardModal] = useState(null);
+    const userData = useSelector((state) => state.userReducer.user)
+
 
     const stripe = useStripe();
 
@@ -41,10 +43,15 @@ const PaiementScreen = ({ }) => {
 
     const route = useRoute()
 
-    const shipping = isSameAddress ? addressShipping : facturationAdressStore;
 
 
     const { cart, removeFromCart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption } = route.params
+
+
+
+    const shipping = isSameAddress ? addressShipping : facturationAdressStore;
+
+
 
     const createOrder = async () => {
         const orderData = {
@@ -56,7 +63,7 @@ const PaiementScreen = ({ }) => {
                 product_id: item.id,
                 quantity: item.quantity
             })),
-            shipping: addressShipping
+            shipping: shipping
         };
 
         console.log("Données de la commande : ", orderData);
@@ -103,6 +110,7 @@ const PaiementScreen = ({ }) => {
     const shippingCost = calculateTotal() > 200 ? 0 : delivery;
 
     const handlePaiement = calculateTotal() + shippingCost
+
     const fetchPaymentIntent = async () => {
         try {
             const response = await axios.post('http://localhost:3000/create-payment-intent', {
@@ -277,6 +285,7 @@ const PaiementScreen = ({ }) => {
                     removeFromCart={removeFromCart}
                 />
                 <DeliveryAdress
+                    userData={userData}
                     addressShipping={addressShipping}
                     facturationAdressStore={facturationAdressStore}
                     isSameAddress={isSameAddress}
