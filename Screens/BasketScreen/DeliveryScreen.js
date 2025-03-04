@@ -16,7 +16,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
     const route = useRoute()
 
-    const { cart, calculateTotal, totalStockQuantity } = route.params
+    const { cart, removeFromCart, calculateTotal, totalStockQuantity } = route.params
     const [selectedOption, setSelectedOption] = useState(null);
     const [storeDelivery, setStoreDelivery] = useState(false)
     const [homeDelivery, setHomeDelivery] = useState(false);
@@ -198,6 +198,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                 storeAdress={storeAdress}
                 facturationAdressStore={facturationAdressStore}
                 cart={cart}
+                removeFromCart={removeFromCart}
                 calculateTotal={calculateTotal}
                 slectedAdress={slectedAdress}
                 totalStockQuantity={totalStockQuantity}

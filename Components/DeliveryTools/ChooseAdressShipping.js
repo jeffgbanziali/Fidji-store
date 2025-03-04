@@ -6,6 +6,9 @@ import { ShippingAddressContext } from "../../Context/ShippingAddressContext";
 
 const ChooseAdressShipping = ({ showAdress, changeAdressSipping, setSelectedShippingAddress }) => {
     const { shippingAddresses } = useContext(ShippingAddressContext);
+    const [isAdding, setIsAdding] = useState(false);
+
+
 
     const handleSelectShippingAddress = (address) => {
         setSelectedShippingAddress(address);
@@ -22,19 +25,44 @@ const ChooseAdressShipping = ({ showAdress, changeAdressSipping, setSelectedShip
             animationOut="slideOutDown"
             useNativeDriverForBackdrop
         >
-            <View style={{ width: "100%", height: "80%", backgroundColor: "#f5e1ce" }}>
-                <Text style={{ fontSize: 18, fontWeight: "bold", padding: 20 }}>Sélectionner une adresse</Text>
-                {shippingAddresses.map((address, index) => (
-                    <TouchableOpacity
-                        key={index}
-                        onPress={() => handleSelectShippingAddress(address)}
-                        style={{ padding: 15, borderBottomWidth: 1, borderColor: "#ddd" }}
-                    >
-                        <Text>{address.first_name} {address.last_name}</Text>
-                        <Text>{address.address_1} {address.address_2}</Text>
-                        <Text>{address.city}, {address.country} {address.postcode}</Text>
-                    </TouchableOpacity>
-                ))}
+            <View style={styles.container}>
+                <View style={styles.header}>
+
+                    <Text style={styles.title}>Sélectionner une adresse</Text>
+
+                    <Pressable onPress={changeAdressSipping}>
+                        <AntDesign name="close" size={24} color="black" />
+                    </Pressable>
+                </View>
+
+                {/* 🔹 Utilisation de `FlatList` */}
+                <FlatList
+                    data={shippingAddresses}
+                    keyExtractor={(item) => item.id.toString()} // ✅ Clé unique pour chaque élément
+                    renderItem={({ item }) => (
+                        <TouchableOpacity
+                            style={styles.addressItem}
+                            onPress={() => handleSelectShippingAddress(item)}
+                        >
+                            <View style={styles.addressDetails}>
+                                <Text style={styles.addressText}>{item.first_name} {item.last_name}</Text>
+                                <Text style={styles.addressText}>{item.address_1} {item.address_2}</Text>
+                                <Text style={styles.addressText}>{item.city}, {item.country} {item.postcode}</Text>
+                                <Text style={styles.addressText}>{item.phone || 'Phone non renseigné'}</Text>
+                            </View>
+                            {item.isDefault && <AntDesign name="checkcircle" size={20} color="green" />}
+                        </TouchableOpacity>
+                    )}
+                    ListEmptyComponent={
+                        <Text style={styles.emptyText}>Aucune adresse enregistrée.</Text>
+                    }
+                />
+
+
+                {/* 🔹 Ajouter une nouvelle adresse */}
+                <TouchableOpacity style={styles.addButton} onPress={() => setIsAdding(true)}>
+                    <Text style={styles.addButtonText}>+ Ajouter une nouvelle adresse</Text>
+                </TouchableOpacity>
             </View>
         </Modal>
     );

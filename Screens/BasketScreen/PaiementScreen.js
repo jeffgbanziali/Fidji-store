@@ -44,7 +44,7 @@ const PaiementScreen = ({ }) => {
     const shipping = isSameAddress ? addressShipping : facturationAdressStore;
 
 
-    const { cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption } = route.params
+    const { cart, removeFromCart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption } = route.params
 
     const createOrder = async () => {
         const orderData = {
@@ -98,7 +98,9 @@ const PaiementScreen = ({ }) => {
 
 
 
-    const shippingCost = calculateTotal() > 200 ? 0 : 8;
+
+    const delivery = selectedOption === 2 ? 8 : 0;
+    const shippingCost = calculateTotal() > 200 ? 0 : delivery;
 
     const handlePaiement = calculateTotal() + shippingCost
     const fetchPaymentIntent = async () => {
@@ -270,7 +272,9 @@ const PaiementScreen = ({ }) => {
 
                 </View>
 
-                <ProductsList cart={cart}
+                <ProductsList
+                    cart={cart}
+                    removeFromCart={removeFromCart}
                 />
                 <DeliveryAdress
                     addressShipping={addressShipping}
@@ -281,6 +285,7 @@ const PaiementScreen = ({ }) => {
                 />
                 <TotalCalculate
                     handlePaiement={handlePaiement}
+                    shippingCost={shippingCost}
                     calculateTotal={calculateTotal}
                 />
 

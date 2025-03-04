@@ -67,9 +67,10 @@ export const AuthProvider = ({ children }) => {
         setCart(prevCart => {
             const updatedCart = prevCart.filter(item => item.id !== productId);
             saveCartToStorage(updatedCart);
-            return updatedCart;
+            return [...updatedCart]; // 🔥 Crée un nouvel array pour forcer le re-render
         });
     };
+
 
     useEffect(() => {
         const checkUserToken = async () => {

@@ -1,10 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const TotalCalculate = ({ calculateTotal }) => {
+const TotalCalculate = ({ shippingCost, calculateTotal }) => {
 
-
-    const shippingCost = calculateTotal() > 200 ? 0 : 8;
 
 
 

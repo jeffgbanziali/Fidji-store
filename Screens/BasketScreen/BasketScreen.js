@@ -35,8 +35,6 @@ const BasketScreen = ({ handleViewBasket }) => {
     };
 
 
-    const navigation = useNavigation()
-    
 
 
 
@@ -113,6 +111,7 @@ const BasketScreen = ({ handleViewBasket }) => {
 
                         <BasketValidate
                             cart={cart}
+                            removeFromCart={removeFromCart}
                             calculateTotal={calculateTotal}
                             handleViewBasket={handleViewBasket} />
 

@@ -2,13 +2,13 @@ import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const BasketValidate = ({ cart, calculateTotal, handleViewBasket }) => {
+const BasketValidate = ({ cart, removeFromCart, calculateTotal, handleViewBasket }) => {
 
     const navigation = useNavigation()
 
 
-    const handleChoice = (cart, calculateTotal, totalStockQuantity) => {
-        navigation.navigate("Delivery", { cart, calculateTotal, totalStockQuantity })
+    const handleChoice = (cart, removeFromCart, calculateTotal, totalStockQuantity) => {
+        navigation.navigate("Delivery", { cart, removeFromCart, calculateTotal, totalStockQuantity })
         handleViewBasket()
     }
 
@@ -34,6 +34,7 @@ const BasketValidate = ({ cart, calculateTotal, handleViewBasket }) => {
             <Pressable
                 onPress={() => handleChoice(
                     cart,
+                    removeFromCart,
                     calculateTotal,
                     totalStockQuantity,
                 )}

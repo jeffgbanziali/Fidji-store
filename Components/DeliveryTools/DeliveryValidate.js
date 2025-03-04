@@ -2,26 +2,28 @@ import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
+const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
 
     const navigation = useNavigation()
 
 
-   
 
-    const shippingCost = calculateTotal() > 200 ? 0 : 8;
+    const delivery = selectedOption === 2 ? 8 : 0;
+    const shippingCost = calculateTotal() > 200 ? 0 : delivery;
     const handlePaiement = calculateTotal() + shippingCost;
 
-    
 
 
 
 
 
-    const handleChoice = (cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption) => {
 
 
-        navigation.navigate("BuyScreen", { cart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption })
+
+    const handleChoice = (cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, delivery) => {
+
+
+        navigation.navigate("BuyScreen", { cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, delivery })
     }
 
     return (
@@ -108,6 +110,7 @@ const DeliveryValidate = ({ cart, calculateTotal, totalStockQuantity, addressShi
                 <Pressable
                     onPress={() => handleChoice(
                         cart,
+                        removeFromCart,
                         handlePaiement,
                         calculateTotal,
                         totalStockQuantity,

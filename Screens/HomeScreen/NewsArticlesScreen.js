@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TextInput, Pressable, KeyboardAvoidingView, Platform, Image, ScrollView, Dimensions, FlatList, Animated, Easing, ActivityIndicator, StatusBar } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import { SimpleLineIcons, AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import CardsArticles from '../../Components/Eshopping.js/CardsArticles/CardsArticles';
 import Modal from "react-native-modal";

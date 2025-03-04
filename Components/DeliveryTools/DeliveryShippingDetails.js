@@ -42,10 +42,13 @@ const DeliveryShippingDetails = ({
                                 {addressToShow.first_name} {addressToShow.last_name}
                             </Text>
                             <Text style={styles.addressText}>
-                                {addressToShow.address_1} {addressToShow.address_2}
+                                {addressToShow.address_1}, {addressToShow.address_2}
                             </Text>
                             <Text style={styles.addressText}>
                                 {addressToShow.postcode} {addressToShow.city} - {addressToShow.country}
+                            </Text>
+                            <Text style={styles.addressText}>
+                                {addressToShow.phone || "Phone non renseigné"}
                             </Text>
                         </View>
                         <View style={styles.iconContainer}>

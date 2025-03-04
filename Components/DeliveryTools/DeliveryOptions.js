@@ -163,7 +163,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
 
             <ChooseAdressShipping
                 showAdress={showAdressShipping}
-                handleViewAdress={changeAdressSipping}
+                changeAdressSipping={changeAdressSipping}
                 setSelectedShippingAddress={setSelectedShippingAddress}
             />
 
