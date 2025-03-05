@@ -5,7 +5,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 const ViewOrderHeader = ({ formattedOrder, retourned }) => {
     return (
-        <View>
+        <View style={{
+            width: "100%",
+        }} >
             <View
                 style={{
                     width: "100%",
@@ -28,17 +30,16 @@ const ViewOrderHeader = ({ formattedOrder, retourned }) => {
                     }}>
                     <AntDesign name="left" size={24} color="black" />
                 </TouchableOpacity>
+
+
                 <Text
                     style={{
                         fontSize: 24,
                         fontWeight: "500",
                         color: "black"
                     }} >
-                    Livré
+                    {formattedOrder.status === "processing" ? "En préparation" : 'Expédiée'}
                 </Text>
-
-
-
             </View>
 
 

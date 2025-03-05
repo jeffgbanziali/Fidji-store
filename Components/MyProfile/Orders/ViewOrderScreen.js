@@ -18,7 +18,7 @@ const ViewOrderScreen = () => {
     console.log("Données de la commande :", order);
 
     const formattedOrder = {
-        status: order.status === "completed" ? "Livrée" : "En cours de livraison",
+        status: order.status ,
         address: `${order.shipping.address_1}, ${order.shipping.city}, ${order.shipping.country} ${order.shipping.postcode}`,
         recipient: `${order.billing.first_name} ${order.billing.last_name}`,
         phone: order.billing.phone || "Not provided",
@@ -42,7 +42,7 @@ const ViewOrderScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                <ViewOrderHeader formattedOrder={formattedOrder} />
+                <ViewOrderHeader formattedOrder={formattedOrder} retourned={retourned} />
 
                 <ShipTopComponent formattedOrder={formattedOrder} />
                 <OrderViewCardList formattedOrder={formattedOrder} />

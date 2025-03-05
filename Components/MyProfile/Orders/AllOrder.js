@@ -56,11 +56,11 @@ const AllOrder = ({ handleViewOrder }) => {
                         }}>
 
                             <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' ? 'lightblue' : '#F8D7DA' }]}>
-                                <Text style={styles.deliveryStatus}>Livraison : {order.status || 'En cours'}</Text>
+                                <Text style={styles.deliveryStatus}> {order.status === "processing" ? "En préparation" : 'Expédiée'}</Text>
                             </View>
-                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' ? '#D4EDDA' : '#F8D7DA' }]}>
-                                <Text style={[styles.statusText, { color: order.status === 'completed' ? '#155724' : '#721C24' }]}>
-                                    {order.status === 'completed' ? 'Payé' : 'En attente'}
+                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' || "processing" ? '#D4EDDA' : '#F8D7DA' }]}>
+                                <Text style={[styles.statusText, { color: order.status === 'completed' || "processing" ? '#155724' : '#721C24' }]}>
+                                    {order.status === 'completed' || "processing" ? 'Payé' : 'En attente'}
                                 </Text>
                             </View>
                         </View>

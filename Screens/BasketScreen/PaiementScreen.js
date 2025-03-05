@@ -144,7 +144,7 @@ const PaiementScreen = ({ }) => {
         try {
             const response = await axios.put(url, {
                 set_paid: true,
-                status: "completed"
+                status: "processing"
             }, {
                 params: {
                     consumer_key: CUSTOMER_KEY,
