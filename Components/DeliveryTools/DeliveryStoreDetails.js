@@ -4,9 +4,10 @@ import { AntDesign } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
 import Modal from "react-native-modal";
 
-const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, userData, storeDelivery, handleViewAdress }) => {
+const DeliveryStoreDetails = ({ myBillingSelected, heightAnimation, iconAnimation, userData, storeDelivery, handleViewAddress }) => {
 
-    const isBillingAddressValid = billingAddress && billingAddress.address_1;
+    const isBillingAddressValid = myBillingSelected && myBillingSelected.address_1;
+
     return (
         <Animated.View
             style={[
@@ -64,23 +65,23 @@ const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, 
                             }}>
                             <View style={{ width: "85%", height: 100, paddingLeft: 30, justifyContent: "center" }}>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
-                                    {billingAddress.first_name} {billingAddress.last_name}
+                                    {myBillingSelected.first_name} {myBillingSelected.last_name}
                                 </Text>
                                 <Text style={{
                                     fontSize: 16, paddingLeft: 20,
                                     fontWeight: '600',
                                     color: 'black'
                                 }}>
-                                    {billingAddress.email}
+                                    {myBillingSelected.email}
                                 </Text>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
-                                    {billingAddress.address_1} {billingAddress.address_2}
+                                    {myBillingSelected.address_1} {myBillingSelected.address_2}
                                 </Text>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
-                                    {billingAddress.postcode} {billingAddress.city} - {billingAddress.country}
+                                    {myBillingSelected.postcode} {myBillingSelected.city} - {myBillingSelected.country}
                                 </Text>
                                 <Text style={{ fontSize: 16, paddingLeft: 20, fontWeight: '500', color: 'black' }}>
-                                    {billingAddress.phone || "Phone non renseigné"}
+                                    {myBillingSelected.phone || "Phone non renseigné"}
                                 </Text>
                             </View>
                             <View style={{ width: "15%", height: 80, justifyContent: "center", alignItems: "center" }}>
@@ -91,7 +92,7 @@ const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, 
                         </View>
 
                         <View style={{ width: "100%", height: 60, borderBottomWidth: 1, marginLeft: 20, alignItems: "center", justifyContent: "center" }}>
-                            <Pressable onPress={handleViewAdress} style={{ width: 280, height: 40, borderRadius: 10, backgroundColor: "black", alignItems: "center", justifyContent: "center" }}>
+                            <Pressable onPress={handleViewAddress} style={{ width: 280, height: 40, borderRadius: 10, backgroundColor: "black", alignItems: "center", justifyContent: "center" }}>
                                 <Text style={{ fontSize: 14, fontWeight: '500', color: 'white' }}>
                                     Changer d'adresse
                                 </Text>
@@ -106,7 +107,7 @@ const DeliveryStoreDetails = ({ billingAddress, heightAnimation, iconAnimation, 
                         </Text>
 
                         <View style={{ width: "100%", height: 80, alignItems: "center", justifyContent: "center" }}>
-                            <Pressable onPress={handleViewAdress} style={{ width: 320, height: 40, borderRadius: 10, backgroundColor: "black", alignItems: "center", justifyContent: "center" }}>
+                            <Pressable onPress={handleViewAddress} style={{ width: 320, height: 40, borderRadius: 10, backgroundColor: "black", alignItems: "center", justifyContent: "center" }}>
                                 <Text style={{ fontSize: 16, fontWeight: '500', color: 'white' }}>
                                     Ajouter une adresse
                                 </Text>

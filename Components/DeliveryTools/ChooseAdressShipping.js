@@ -4,20 +4,20 @@ import Modal from "react-native-modal";
 import { AntDesign } from '@expo/vector-icons';
 import { ShippingAddressContext } from "../../Context/ShippingAddressContext";
 
-const ChooseAdressShipping = ({ showAdress, userData, changeAdressSipping, setSelectedShippingAddress }) => {
+const ChooseAdressShipping = ({ showAdress, userData, changeAdressShipping, setSelectedShippingAddress }) => {
     const { shippingAddresses } = useContext(ShippingAddressContext);
     const [isAdding, setIsAdding] = useState(false);
 
 
     const handleSelectShippingAddress = (address) => {
         setSelectedShippingAddress(address);
-        changeAdressSipping();
+        changeAdressShipping();
     };
 
     return (
         <Modal
             isVisible={showAdress}
-            onBackdropPress={changeAdressSipping}
+            onBackdropPress={changeAdressShipping}
             style={{ margin: 0, justifyContent: "flex-end" }}
             backdropOpacity={0.5}
             animationIn="slideInUp"
@@ -29,7 +29,7 @@ const ChooseAdressShipping = ({ showAdress, userData, changeAdressSipping, setSe
 
                     <Text style={styles.title}>Sélectionner une adresse</Text>
 
-                    <Pressable onPress={changeAdressSipping}>
+                    <Pressable onPress={changeAdressShipping}>
                         <AntDesign name="close" size={24} color="black" />
                     </Pressable>
                 </View>

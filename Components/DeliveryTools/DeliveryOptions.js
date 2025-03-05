@@ -10,7 +10,7 @@ import DeliveryShippingDetails from './DeliveryShippingDetails';
 
 
 
-const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selectedShippingAddress, selectedBillingAddress, homeDelivery, setSelectedBillingAddress, setSelectedShippingAddress, slectedAdress, isSameAddress, useAddressCustomer, useSameAddress, setHomeDelivery, setStoreDelivery, selectedOption, handleSelectOption
+const DeliveryOptions = ({ billingAddress, myBillingSelected, shippingAddresses, myShippingSelected, storeDelivery, selectedShippingAddress, selectedBillingAddress, homeDelivery, setSelectedShippingAddress, setSelectedBillingAddress, useAddressCustomer, useSameAddress, selectedOption, handleSelectOption
 }) => {
 
     const [heightAnimation] = useState(new Animated.Value(0));
@@ -18,14 +18,18 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
     const userData = useSelector((state) => state.userReducer.user)
 
 
+
+
+
     const [adressHeight, setAdressHeight] = useState(new Animated.Value(0));
     const [showAdress, setShowAdress] = useState(false);
     const [adressShippingHeight, setAdressShippingHeight] = useState(new Animated.Value(0));
     const [showAdressShipping, setShowAdressShipping] = useState(false);
 
+    const isShippingAddressValid = myShippingSelected && myShippingSelected.address_1;
 
 
-    const handleViewAdress = () => {
+    const handleViewAddress = () => {
         if (showAdress) {
             Animated.timing(adressHeight, {
                 toValue: 0,
@@ -44,7 +48,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
         }
     };
 
-    const changeAdressSipping = () => {
+    const changeAdressShipping = () => {
         if (showAdressShipping) {
             Animated.timing(adressShippingHeight, {
                 toValue: 0,
@@ -67,7 +71,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
         Animated.timing(
             heightAnimation,
             {
-                toValue: storeDelivery || homeDelivery ? 246 : 0,
+                toValue: storeDelivery || homeDelivery ? (isShippingAddressValid ? 600 : 246) : 0,
                 duration: 300,
                 easing: Easing.linear,
                 useNativeDriver: false,
@@ -112,8 +116,8 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
                     iconAnimation={iconAnimation}
                     userData={userData}
                     storeDelivery={storeDelivery}
-                    handleViewAdress={handleViewAdress}
-                    billingAddress={selectedBillingAddress || billingAddress[0]}
+                    handleViewAddress={handleViewAddress}
+                    myBillingSelected={myBillingSelected}
 
                 />
                 <TouchableOpacity
@@ -134,17 +138,19 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
 
 
                 <DeliveryShippingDetails
-                    shippingAddress={shippingAddress}
                     heightAnimation={heightAnimation}
                     iconAnimation={iconAnimation}
-                    userData={userData}
                     homeDelivery={homeDelivery}
+                    userData={userData}
+                    selectedBillingAddress={selectedBillingAddress}
                     selectedShippingAddress={selectedShippingAddress}
+                    myBillingSelected={myBillingSelected}
+                    myShippingSelected={myShippingSelected}
                     useSameAddress={useSameAddress}
                     useAddressCustomer={useAddressCustomer}
                     isSameAddress={useAddressCustomer}
-                    handleViewAdress={handleViewAdress}
-                    changeAdressSipping={changeAdressSipping}
+                    handleViewAddress={handleViewAddress}
+                    changeAdressShipping={changeAdressShipping}
 
                 />
 
@@ -157,7 +163,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
                 showAdress={showAdress}
                 userData={userData}
                 setSelectedBillingAddress={setSelectedBillingAddress}
-                handleViewAdress={handleViewAdress}
+                handleViewAddress={handleViewAddress}
                 billingAddress={billingAddress}
 
             />
@@ -165,7 +171,7 @@ const DeliveryOptions = ({ billingAddress, shippingAddress, storeDelivery, selec
             <ChooseAdressShipping
                 showAdress={showAdressShipping}
                 userData={userData}
-                changeAdressSipping={changeAdressSipping}
+                changeAdressShipping={changeAdressShipping}
                 setSelectedShippingAddress={setSelectedShippingAddress}
             />
 
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         paddingLeft: 20,
         borderBottomWidth: 1,
-        height: 60,
+        height: 40,
         // backgroundColor: "red"
 
     },

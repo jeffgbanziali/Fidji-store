@@ -4,7 +4,7 @@ import Modal from "react-native-modal";
 import { AntDesign } from '@expo/vector-icons';
 import { BillingAddressContext } from '../../Context/BillingAddressContext';
 
-const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelectedBillingAddress }) => {
+const ChooseAdressBilling = ({ userData, showAdress, handleViewAddress, setSelectedBillingAddress }) => {
     const { billingAddresses, addBillingAddress, deleteBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
     const [isAdding, setIsAdding] = useState(false);
     const [newBilling, setNewBilling] = useState({
@@ -22,7 +22,7 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelect
     // 🔹 Fonction pour sélectionner une adresse de facturation
     const handleSelectBillingAddress = (address) => {
         setSelectedBillingAddress(address); // ✅ Mise à jour de l'adresse sélectionnée
-        handleViewAdress(); // ✅ Fermer le modal
+        handleViewAddress(); // ✅ Fermer le modal
     };
 
     // 🔹 Fonction pour ajouter une nouvelle adresse
@@ -33,6 +33,7 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelect
                 first_name: '',
                 last_name: '',
                 company: '',
+                email: "",
                 address_1: '',
                 address_2: '',
                 city: '',
@@ -48,7 +49,7 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelect
     return (
         <Modal
             isVisible={showAdress}
-            onBackdropPress={handleViewAdress}
+            onBackdropPress={handleViewAddress}
             style={{ margin: 0, justifyContent: "flex-end" }}
             backdropOpacity={0.5}
             animationIn="slideInUp"
@@ -58,7 +59,7 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelect
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Choisir une adresse de facturation</Text>
-                    <Pressable onPress={handleViewAdress}>
+                    <Pressable onPress={handleViewAddress}>
                         <AntDesign name="close" size={24} color="black" />
                     </Pressable>
                 </View>
@@ -108,14 +109,16 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAdress, setSelect
                             placeholder="Email"
                             value={newBilling.email}
                             onChangeText={(text) => setNewBilling({ ...newBilling, email: text })}
+                            autoCapitalize="none"
                         />
+
                         <TextInput
                             style={styles.input}
                             placeholder="Adresse"
                             value={newBilling.address_1}
                             onChangeText={(text) => setNewBilling({ ...newBilling, address_1: text })}
                         />
-                         <TextInput
+                        <TextInput
                             style={styles.input}
                             placeholder="Complement d'adresse"
                             value={newBilling.address_2}

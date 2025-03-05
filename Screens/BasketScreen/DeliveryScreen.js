@@ -20,9 +20,9 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [storeDelivery, setStoreDelivery] = useState(false)
     const [homeDelivery, setHomeDelivery] = useState(false);
-    const userData = useSelector((state) => state.userReducer)
     const [selectedBillingAddress, setSelectedBillingAddress] = useState(null);
     const [selectedShippingAddress, setSelectedShippingAddress] = useState(null);
+    const [useShippingAsBilling, setUseShippingAsBilling] = useState(false);
 
     const navigation = useNavigation()
 
@@ -60,42 +60,17 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const { billingAddresses, addBillingAddress, deleteBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
 
 
-    const addressShipping = selectedOption === 2 ? shippingAddresses : storeAdress
+    const myBillingSelected = selectedBillingAddress || billingAddresses[0]
+    const myShippingSelected = selectedShippingAddress || shippingAddresses[0]
 
-    const defaultBillingAddress = Array.isArray(billingAddresses) && billingAddresses.length > 0
-        ? billingAddresses[0]
-        : null;
 
-    const defaultShippingAddress = Array.isArray(shippingAddresses) && shippingAddresses.length > 0
-        ? shippingAddresses[0]
-        : null;
 
-    const sameAddress = defaultBillingAddress && defaultShippingAddress &&
-        defaultBillingAddress.first_name === defaultShippingAddress.first_name &&
-        defaultBillingAddress.last_name === defaultShippingAddress.last_name &&
-        defaultBillingAddress.company === defaultShippingAddress.company &&
-        defaultBillingAddress.address_1 === defaultShippingAddress.address_1 &&
-        defaultBillingAddress.address_2 === defaultShippingAddress.address_2 &&
-        defaultBillingAddress.city === defaultShippingAddress.city &&
-        defaultBillingAddress.country === defaultShippingAddress.country &&
-        defaultBillingAddress.state === defaultShippingAddress.state &&
-        defaultBillingAddress.postcode === defaultShippingAddress.postcode;
-
-    const [useShippingAsBilling, setUseShippingAsBilling] = useState(false);
-
-    const selectedBillingAddressFinal = useShippingAsBilling ? defaultShippingAddress : (selectedBillingAddress || defaultBillingAddress);
-
-    const slectedAdress = selectedBillingAddressFinal || storeAdress;
-
-    const facturationAdressStore = selectedOption === 1 ? userData?.customerData?.billing : null;
 
     const useSameAddress = () => {
         setUseShippingAsBilling(!useShippingAsBilling);
     };
 
-    const isSameAddress = useShippingAsBilling ? selectedBillingAddressFinal : null;
 
-    console.log('userData', userData)
 
 
     return (
@@ -163,20 +138,21 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                 <DeliveryOptions
                     storeDelivery={storeDelivery}
                     homeDelivery={homeDelivery}
-                    setHomeDelivery={setHomeDelivery}
-                    setStoreDelivery={setStoreDelivery}
+
                     selectedOption={selectedOption}
+                    billingAddress={billingAddresses}
+                    shippingAddresses={shippingAddresses}
+                    myBillingSelected={myBillingSelected}
+                    myShippingSelected={myShippingSelected}
                     selectedBillingAddress={selectedBillingAddress}
+                    selectedShippingAddress={selectedShippingAddress}
+                    useAddressCustomer={useShippingAsBilling}
+
                     setSelectedBillingAddress={setSelectedBillingAddress}
                     setSelectedShippingAddress={setSelectedShippingAddress}
-                    selectedShippingAddress={selectedShippingAddress}
-                    billingAddress={billingAddresses}
-                    shippingAddress={shippingAddresses}
-                    addressShipping={addressShipping}
+                    setHomeDelivery={setHomeDelivery}
+                    setStoreDelivery={setStoreDelivery}
                     handleSelectOption={handleSelectOption}
-                    useAddressCustomer={useShippingAsBilling}
-                    slectedAdress={slectedAdress}
-                    storeAdress={storeAdress}
                     useSameAddress={useSameAddress}
 
                 />
@@ -184,15 +160,13 @@ const DeliveryScreen = ({ handleViewBasket }) => {
 
 
             <DeliveryValidate
-                isSameAddress={isSameAddress}
-                addressShipping={selectedShippingAddress}
+                selectedShippingAddress={selectedShippingAddress}
+                selectedBillingAddress={selectedBillingAddress}
                 selectedOption={selectedOption}
                 storeAdress={storeAdress}
-                facturationAdressStore={facturationAdressStore}
                 cart={cart}
                 removeFromCart={removeFromCart}
                 calculateTotal={calculateTotal}
-                slectedAdress={slectedAdress}
                 totalStockQuantity={totalStockQuantity}
             />
 

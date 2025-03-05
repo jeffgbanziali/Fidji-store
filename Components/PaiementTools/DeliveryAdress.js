@@ -5,9 +5,6 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 
 const DeliveryAdress = ({ userData, addressShipping, facturationAdressStore, isSameAddress, storeAdress, selectedOption }) => {
 
-    console.log("addressShipping ", addressShipping)
-
-
     return (
         <View
             style={{

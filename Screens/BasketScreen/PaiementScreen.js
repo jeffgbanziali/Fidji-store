@@ -49,7 +49,7 @@ const PaiementScreen = ({ }) => {
 
 
 
-    const shipping = isSameAddress ? addressShipping : facturationAdressStore;
+    const shipping = isSameAddress ? addressShipping : storeAdress;
 
 
 
