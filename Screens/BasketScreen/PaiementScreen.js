@@ -48,10 +48,12 @@ const PaiementScreen = ({ }) => {
     const { cart, removeFromCart, storeAdress, selectedOption, myShippingSelected, myBillingSelected } = route.params
 
 
+
+    const myShippingAddressFinal = selectedOption === 2 ? myShippingSelected : storeAdress
+
+
     console.log("My billing address :", myBillingSelected);
-    console.log("My shipping ohh is address :", myBillingSelected);
-
-
+    console.log("My shipping ohh is address :", myShippingAddressFinal);
 
 
 
@@ -65,7 +67,7 @@ const PaiementScreen = ({ }) => {
                 product_id: item.id,
                 quantity: item.quantity
             })),
-            shipping: myShippingSelected
+            shipping: myShippingAddressFinal
         };
 
         console.log("Données de la commande : ", orderData);
@@ -288,7 +290,7 @@ const PaiementScreen = ({ }) => {
                 />
                 <DeliveryAdress
                     userData={userData}
-                    addressShipping={myShippingSelected}
+                    addressShipping={myShippingAddressFinal}
                     storeAdress={storeAdress}
                     selectedOption={selectedOption}
                 />

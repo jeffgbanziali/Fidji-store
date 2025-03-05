@@ -53,7 +53,7 @@ const DeliveryScreen = ({ handleViewBasket }) => {
         city: "Paris",
         postcode: "75009",
         country: "France",
-        phone: "00000000000"
+        phone: "+33 6 58 18 85 94"
     }
 
     const { shippingAddresses, addShippingAddress, deleteShippingAddress, setDefaultShippingAddress } = useContext(ShippingAddressContext);
