@@ -4,7 +4,7 @@ import axios from 'axios';
 import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
 import { Ionicons } from '@expo/vector-icons';
 
-const AllOrder = () => {
+const AllOrder = ({ handleViewOrder }) => {
     const [orders, setOrders] = useState([]);
 
     const formatOrderDate = (dateString) => {
@@ -36,7 +36,9 @@ const AllOrder = () => {
     const renderItem = ({ item: order }) => {
 
         return (
-            <Pressable style={styles.card} onPress={() => console.log('Redirection vers la commande', order.id)}>
+            <Pressable
+
+                style={styles.card} onPress={() => handleViewOrder(order)}>
                 <Text style={styles.orderDate}>{formatOrderDate(order.date_created)} | {order.line_items.length} articles</Text>
                 <View style={styles.cardContent}>
                     {order.line_items[0]?.image && (

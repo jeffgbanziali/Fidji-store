@@ -18,10 +18,15 @@ const MyOrders = () => {
         setActiveTab(tab);
     };
 
+
+    const handleViewOrder = (order) => {
+        navigation.navigate("ViewOrderScreen", { order })
+    }
+
     const renderTabContent = () => {
         switch (activeTab) {
             case 'All orders':
-                return <AllOrder />;
+                return <AllOrder handleViewOrder={handleViewOrder} />;
             case 'Processing':
                 return <ProcessingOrder />;
             case 'Shipped':
