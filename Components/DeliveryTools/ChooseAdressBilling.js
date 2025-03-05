@@ -19,13 +19,12 @@ const ChooseAdressBilling = ({ userData, showAdress, handleViewAddress, setSelec
         country: ''
     });
 
-    // 🔹 Fonction pour sélectionner une adresse de facturation
     const handleSelectBillingAddress = (address) => {
-        setSelectedBillingAddress(address); // ✅ Mise à jour de l'adresse sélectionnée
-        handleViewAddress(); // ✅ Fermer le modal
+        setSelectedBillingAddress(address);
+        setDefaultBillingAddress(address.id)
+        handleViewAddress();
     };
 
-    // 🔹 Fonction pour ajouter une nouvelle adresse
     const handleAddBilling = () => {
         if (newBilling.address_1.trim() !== '' && newBilling.city.trim() !== '' && newBilling.country.trim() !== '') {
             addBillingAddress(newBilling);

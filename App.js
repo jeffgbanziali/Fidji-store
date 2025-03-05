@@ -15,6 +15,7 @@ import NativeDevSettings from 'react-native/Libraries/NativeModules/specs/Native
 import { Entypo } from '@expo/vector-icons';
 import ShippingAddressProvider from './Context/ShippingAddressContext';
 import BillingAddressProvider from './Context/BillingAddressContext';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -39,6 +40,7 @@ const App = () => {
       <AuthProvider>
         <ShippingAddressProvider>
           <BillingAddressProvider>
+            <Toast />
             <AppContent />
           </BillingAddressProvider>
         </ShippingAddressProvider>
@@ -71,7 +73,6 @@ const AppContent = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <StatusBar style="auto" />
-
         {
           isConnected ? (
             userToken ? (

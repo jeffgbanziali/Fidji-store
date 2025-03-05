@@ -1,6 +1,8 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Alert, Pressable, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import Toast from 'react-native-toast-message';
+
 
 const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuantity, storeAdress, selectedOption, myShippingSelected, myBillingSelected }) => {
 
@@ -13,11 +15,90 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
     const handlePaiement = calculateTotal() + shippingCost;
 
 
-    const handleChoice = (cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, storeAdress, selectedOption, delivery, myShippingSelected, myBillingSelected) => {
 
 
-        navigation.navigate("BuyScreen", { cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, storeAdress, selectedOption, delivery, myShippingSelected, myBillingSelected })
-    }
+    const handleChoice = (
+        cart,
+        removeFromCart,
+        handlePaiement,
+        calculateTotal,
+        totalStockQuantity,
+        storeAdress,
+        selectedOption,
+        delivery,
+        myShippingSelected,
+        myBillingSelected
+    ) => {
+        try {
+            if (!cart || cart.length === 0) {
+                Alert.alert(
+                    "Erreur",
+                    "Votre panier est vide.",
+                    [{ text: "OK" }]
+                );
+                return;
+            }
+
+            if (!myShippingSelected || Object.keys(myShippingSelected).length === 0) {
+                Alert.alert(
+                    "Erreur",
+                    "Veuillez sélectionner une adresse de livraison.",
+                    [{ text: "OK" }]
+                );
+                return;
+            }
+
+            if (!myBillingSelected || Object.keys(myBillingSelected).length === 0) {
+                Alert.alert(
+                    "Erreur",
+                    "Veuillez sélectionner une adresse de facturation.",
+                    [{ text: "OK" }]
+                );
+                return;
+            }
+
+            if (selectedOption === null) {
+                Alert.alert(
+                    "Erreur",
+                    "Veuillez choisir un mode de livraison.",
+                    [{ text: "OK" }]
+                );
+                return;
+            }
+
+            if (totalStockQuantity <= 0) {
+                Alert.alert(
+                    "Erreur",
+                    "Stock insuffisant pour finaliser l'achat.",
+                    [{ text: "OK" }]
+                );
+                return;
+            }
+
+            // ✅ Si tout est valide, navigation vers BuyScreen
+            navigation.navigate("BuyScreen", {
+                cart,
+                removeFromCart,
+                handlePaiement,
+                calculateTotal,
+                totalStockQuantity,
+                storeAdress,
+                selectedOption,
+                delivery,
+                myShippingSelected,
+                myBillingSelected
+            });
+
+        } catch (error) {
+            Alert.alert(
+                "Erreur",
+                error.message,
+                [{ text: "OK" }]
+            );
+        }
+    };
+
+
 
     return (
         <View
@@ -100,7 +181,7 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
                     borderTopWidth: 1,
                     borderColor: "gray",
                 }}>
-                <Pressable
+                <TouchableOpacity
                     onPress={() => handleChoice(
                         cart,
                         removeFromCart,
@@ -131,7 +212,7 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
                         }}>
                         Commander - {handlePaiement} €
                     </Text>
-                </Pressable>
+                </TouchableOpacity>
             </View>
 
         </View>

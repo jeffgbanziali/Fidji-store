@@ -5,14 +5,21 @@ import { AntDesign } from '@expo/vector-icons';
 import { ShippingAddressContext } from "../../Context/ShippingAddressContext";
 
 const ChooseAdressShipping = ({ showAdress, userData, changeAdressShipping, setSelectedShippingAddress }) => {
-    const { shippingAddresses } = useContext(ShippingAddressContext);
+    const { shippingAddresses, setDefaultShippingAddress } = useContext(ShippingAddressContext);
     const [isAdding, setIsAdding] = useState(false);
 
 
     const handleSelectShippingAddress = (address) => {
         setSelectedShippingAddress(address);
+        setDefaultShippingAddress(address.id);
         changeAdressShipping();
     };
+
+
+
+
+
+    console.log("Mon adresse default", shippingAddresses)
 
     return (
         <Modal
