@@ -60,15 +60,22 @@ const DeliveryScreen = ({ handleViewBasket }) => {
     const { billingAddresses, addBillingAddress, deleteBillingAddress, setDefaultBillingAddress } = useContext(BillingAddressContext);
 
 
-    const myBillingSelected = selectedBillingAddress || billingAddresses[0]
-    const myShippingSelected = selectedShippingAddress || shippingAddresses[0]
 
+    const myShippingSelected = selectedShippingAddress || shippingAddresses[0];
+
+    const myBillingSelected = useShippingAsBilling
+        ? {
+            ...myShippingSelected,
+            email: selectedBillingAddress?.email || "",
+        }
+        : selectedBillingAddress || billingAddresses[0];
 
 
 
     const useSameAddress = () => {
-        setUseShippingAsBilling(!useShippingAsBilling);
+        setUseShippingAsBilling(prevState => !prevState);
     };
+
 
 
 
@@ -164,6 +171,8 @@ const DeliveryScreen = ({ handleViewBasket }) => {
                 selectedBillingAddress={selectedBillingAddress}
                 selectedOption={selectedOption}
                 storeAdress={storeAdress}
+                myShippingSelected={myShippingSelected}
+                myBillingSelected={myBillingSelected}
                 cart={cart}
                 removeFromCart={removeFromCart}
                 calculateTotal={calculateTotal}

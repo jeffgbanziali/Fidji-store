@@ -71,7 +71,7 @@ const DeliveryOptions = ({ billingAddress, myBillingSelected, shippingAddresses,
         Animated.timing(
             heightAnimation,
             {
-                toValue: storeDelivery || homeDelivery ? (isShippingAddressValid ? 600 : 246) : 0,
+                toValue: storeDelivery || !homeDelivery ? 246 : 600,
                 duration: 300,
                 easing: Easing.linear,
                 useNativeDriver: false,

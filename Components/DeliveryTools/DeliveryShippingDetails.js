@@ -89,6 +89,7 @@ const DeliveryShippingDetails = ({
                 )}
                 <Text style={styles.useSameAddressText}>Utiliser cette adresse comme adresse de facturation</Text>
             </Pressable>
+
             <Text
                 style={{
                     fontSize: 18,

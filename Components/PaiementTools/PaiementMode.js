@@ -10,7 +10,7 @@ import LoadingValidation from './PaiementMode/LoadingValidation';
 import { useNavigation } from '@react-navigation/native';
 
 
-const PaiementMode = ({ handlePaiementMethod, setSelectedPaymentMethod, paymentProcess, calculateTotal, handlePaiement, cart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
+const PaiementMode = ({ handlePaiementMethod, setSelectedPaymentMethod, cart }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);

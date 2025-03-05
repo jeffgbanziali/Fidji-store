@@ -2,7 +2,7 @@ import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption }) => {
+const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuantity, storeAdress, selectedOption, myShippingSelected, myBillingSelected }) => {
 
     const navigation = useNavigation()
 
@@ -13,10 +13,10 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
     const handlePaiement = calculateTotal() + shippingCost;
 
 
-    const handleChoice = (cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, delivery) => {
+    const handleChoice = (cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, storeAdress, selectedOption, delivery, myShippingSelected, myBillingSelected) => {
 
 
-        navigation.navigate("BuyScreen", { cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption, delivery })
+        navigation.navigate("BuyScreen", { cart, removeFromCart, handlePaiement, calculateTotal, totalStockQuantity, storeAdress, selectedOption, delivery, myShippingSelected, myBillingSelected })
     }
 
     return (
@@ -107,12 +107,11 @@ const DeliveryValidate = ({ cart, removeFromCart, calculateTotal, totalStockQuan
                         handlePaiement,
                         calculateTotal,
                         totalStockQuantity,
-                        addressShipping,
-                        facturationAdressStore,
-                        isSameAddress,
-                        slectedAdress,
                         storeAdress,
-                        selectedOption
+                        selectedOption,
+                        delivery,
+                        myShippingSelected,
+                        myBillingSelected
                     )}
 
                     style={{

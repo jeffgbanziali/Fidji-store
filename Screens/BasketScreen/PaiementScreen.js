@@ -45,11 +45,13 @@ const PaiementScreen = ({ }) => {
 
 
 
-    const { cart, removeFromCart, addressShipping, facturationAdressStore, isSameAddress, slectedAdress, storeAdress, selectedOption } = route.params
+    const { cart, removeFromCart, storeAdress, selectedOption, myShippingSelected, myBillingSelected } = route.params
 
 
+    console.log("My billing address :", myBillingSelected);
+    console.log("My shipping ohh is address :", myBillingSelected);
 
-    const shipping = isSameAddress ? addressShipping : storeAdress;
+
 
 
 
@@ -58,12 +60,12 @@ const PaiementScreen = ({ }) => {
             payment_method: paymentMethod,
             payment_method_title: selectedPaymentMethod,
             set_paid: false, // Laisser en attente de paiement
-            billing: slectedAdress,
+            billing: myBillingSelected,
             line_items: cart.map(item => ({
                 product_id: item.id,
                 quantity: item.quantity
             })),
-            shipping: shipping
+            shipping: myShippingSelected
         };
 
         console.log("Données de la commande : ", orderData);
@@ -286,9 +288,7 @@ const PaiementScreen = ({ }) => {
                 />
                 <DeliveryAdress
                     userData={userData}
-                    addressShipping={addressShipping}
-                    facturationAdressStore={facturationAdressStore}
-                    isSameAddress={isSameAddress}
+                    addressShipping={myShippingSelected}
                     storeAdress={storeAdress}
                     selectedOption={selectedOption}
                 />
@@ -313,11 +313,6 @@ const PaiementScreen = ({ }) => {
                     handleBankCardMethod={openPaymentSheet}
                     openPaymentSheet={openPaymentSheet}
                     cart={cart}
-                    addressShipping={addressShipping}
-                    facturationAdressStore={facturationAdressStore}
-                    isSameAddress={isSameAddress}
-                    slectedAdress={slectedAdress}
-                    storeAdress={storeAdress}
                 />
             </SafeAreaView >
 
