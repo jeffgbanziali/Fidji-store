@@ -18,8 +18,8 @@ const ProfilTabNavigation = () => {
 
 
         <Tab.Navigator>
-            <Tab.Screen name="Mes envies" component={MyDesiresScreen} />
             <Tab.Screen name="Mes commandes" component={MyOrders} />
+            <Tab.Screen name="Mes envies" component={MyDesiresScreen} />
             <Tab.Screen name="À propos" component={AboutScreen} />
         </Tab.Navigator>
 

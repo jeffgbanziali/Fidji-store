@@ -33,7 +33,9 @@ const ViewOrderDetailsScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <ScrollView style={styles.container}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={styles.container}>
                 {/* 🛡 En-tête Sécurité */}
 
                 <View
