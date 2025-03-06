@@ -1,117 +1,75 @@
-import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-const OrderViewFooter = ({ formattedOrder }) => {
+const OrderViewFooter = ({ formattedOrder, handleViewPaiementDetails }) => {
     return (
-        <View>
-            <View style={styles.totalContainer}>
-                <Text style={styles.totalText}>Total: {formattedOrder.total.toFixed(2)}€</Text>
-            </View>
+        <View style={styles.footerContainer}>
+            {/* Bouton "Acheter encore" */}
             <TouchableOpacity style={styles.buyAgainButton}>
-                <Text style={styles.buyAgainText}>Buy this again</Text>
+                <Text style={styles.buyAgainText}>Acheter encore</Text>
+            </TouchableOpacity>
+
+            {/* Détails de paiement */}
+            <TouchableOpacity
+                onPress={handleViewPaiementDetails}
+                style={styles.paymentDetailsContainer}>
+                <AntDesign name="creditcard" size={20} color="#333" />
+                <Text style={styles.paymentDetailsText}>Détails de paiement</Text>
+                <Text style={styles.paymentAmount}>{formattedOrder.items.length} total : {formattedOrder.total.toFixed(2)}€</Text>
+                <MaterialIcons name="keyboard-arrow-right" size={20} color="black" />
+
             </TouchableOpacity>
         </View>
-    )
-}
-
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        padding: 15,
-    },
-    header: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
-    },
-    sectionContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-    },
-    orderId: {
-        fontSize: 14,
-        color: '#333',
-    },
-    viewReceipt: {
-        fontSize: 14,
-        color: '#007AFF',
-    },
-    statusContainer: {
-        backgroundColor: '#E5F8E0',
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
-    },
-    deliveredText: {
-        color: 'green',
-        fontWeight: 'bold',
-    },
-    addressContainer: {
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    recipientText: {
-        fontWeight: 'bold',
-    },
-    addressText: {
-        color: '#333',
-    },
-    itemContainer: {
+    footerContainer: {
+        marginTop: 20,
         width: "100%",
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderColor: '#ddd',
-    },
-    itemImage: {
-        width: 80,
-        height: 120,
-        borderRadius: 20,
-        marginRight: 10,
-    },
-    itemDetails: {
-        width: 300,
-        height: 100,
-    },
-    itemName: {
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    itemSize: {
-        fontSize: 14,
-        fontWeight: '600',
-        color: '#666',
-    },
-    totalContainer: {
-        padding: 10,
-        alignItems: 'center',
-    },
-    totalText: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        height: 80,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
     },
     buyAgainButton: {
         backgroundColor: '#FFA500',
-        padding: 12,
         alignItems: 'center',
-        borderRadius: 5,
-        marginVertical: 10,
+        width: 200,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 10,
+        marginBottom: 15,
     },
     buyAgainText: {
         color: '#fff',
         fontWeight: 'bold',
+        fontSize: 16,
+    },
+    paymentDetailsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: "#ddd",
+    },
+    paymentDetailsText: {
+        fontSize: 15,
+        fontWeight: '400',
+        color: '#333',
+        flex: 1,
+        marginLeft: 10,
+    },
+    paymentAmount: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#333',
     },
 });
 
-export default OrderViewFooter
+export default OrderViewFooter;

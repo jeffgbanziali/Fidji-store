@@ -3,21 +3,39 @@ import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 
-const ViewOrderHeader = ({ formattedOrder, retourned }) => {
+const ViewOrderHeader = ({ formattedOrder, orderDetails, retourned }) => {
+
+
+    // Déterminer le statut de la commande
+    const getStatusText = () => {
+        switch (formattedOrder.status) {
+            case "processing":
+                return "En préparation";
+            case "completed":
+                return "Expédiée";
+            case "delivered":
+                return "Livrée";
+            default:
+                return "Statut inconnu";
+        }
+    };
+
     return (
-        <View style={{
-            width: "100%",
-        }} >
+        <View
+            style={{
+                width: "100%",
+
+            }}>
+            {/* Header */}
             <View
                 style={{
                     width: "100%",
                     height: 50,
                     alignItems: "center",
+                    borderBottomWidth: 1,
+                    borderColor: "lightgray",
                     justifyContent: "center",
-
-
                 }}>
-
                 <TouchableOpacity
                     onPress={retourned}
                     style={{
@@ -31,30 +49,38 @@ const ViewOrderHeader = ({ formattedOrder, retourned }) => {
                     <AntDesign name="left" size={24} color="black" />
                 </TouchableOpacity>
 
-
-                <Text
-                    style={{
-                        fontSize: 24,
-                        fontWeight: "500",
-                        color: "black"
-                    }} >
-                    {formattedOrder.status === "processing" ? "En préparation" : 'Expédiée'}
+                {/* Affichage du statut de la commande */}
+                <Text style={{
+                    fontSize: 24,
+                    fontWeight: "500",
+                    color: formattedOrder.status === "delivered" ? "green" : "black"
+                }}>
+                    {getStatusText()}
                 </Text>
             </View>
 
-
+            {/* Détails de la commande */}
             <View style={styles.sectionContainer}>
-                <Text style={styles.orderId}>Order ID: #{formattedOrder.orderId}</Text>
-                <TouchableOpacity>
+                <Text style={styles.orderId}>Numéro de la commande: #{formattedOrder.orderId}</Text>
+                <TouchableOpacity
+                    onPress={orderDetails}
+                    style={{
+                        backgroundColor: "#f5e1ce",
+                        padding: 10,
+                        borderRadius: 10,
+                    }}>
                     <Text style={styles.viewReceipt}>View receipt</Text>
                 </TouchableOpacity>
             </View>
+
             <View style={styles.statusContainer}>
-                <Text style={styles.deliveredText}>✅ Delivered on {formattedOrder.shippingTime}</Text>
+                <Text style={styles.deliveredText}>
+                    Commande effectuée le {formattedOrder.purchaseTime}
+                </Text>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -70,6 +96,8 @@ const styles = StyleSheet.create({
     },
     sectionContainer: {
         flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: "lightgray",
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
@@ -80,7 +108,7 @@ const styles = StyleSheet.create({
     },
     viewReceipt: {
         fontSize: 14,
-        color: '#007AFF',
+        color: 'black',
     },
     statusContainer: {
         backgroundColor: '#E5F8E0',

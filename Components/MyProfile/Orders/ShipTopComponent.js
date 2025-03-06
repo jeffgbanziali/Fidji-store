@@ -1,114 +1,100 @@
-import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
 
-const ShipTopComponent = ({ formattedOrder }) => {
+const ShipTopComponent = ({ formattedOrder, order }) => {
+
+    const isPickup = order?.shipping?.company === "Boutique FIDJI";
+    const isDelivered = formattedOrder.status === "completed";
+    const isShipped = formattedOrder.status === "completed";
+
+
     return (
-        <View style={styles.addressContainer}>
-            <Text style={styles.recipientText}>Ship to {formattedOrder.recipient}</Text>
-            <Text style={styles.addressText}>{formattedOrder.address}</Text>
+        <View>
+            {/* Affichage de l'adresse de livraison ou retrait */}
+            {isShipped || isDelivered ? (
+                isPickup ? (
+                    // 🏬 Retrait en boutique
+                    <View style={styles.addressContainer}>
+                        <Text style={styles.recipientText}>Retrait en boutique : {order?.shipping?.company}</Text>
+                        <Text style={styles.addressText}>{formattedOrder.address.street}</Text>
+                        {formattedOrder.address.additionalAddress ? (
+                            <Text style={styles.addressText}>{formattedOrder.address.additionalAddress}</Text>
+                        ) : null}
+                        <Text style={styles.addressText}>{formattedOrder.address.city}, {formattedOrder.address.postcode}, {formattedOrder.address.country}</Text>
+                    </View>
+                ) : (
+                    // 🏠 Livraison à domicile
+                    <View style={styles.addressContainer}>
+                        <Text style={styles.recipientText}>Livrée à {formattedOrder.recipient}</Text>
+                        <Text style={styles.addressText}>{formattedOrder.address.street}, {formattedOrder.address.additionalAddress ? (
+                            <Text style={styles.addressText}>{formattedOrder.address.additionalAddress}</Text>
+                        ) : null}
+                        </Text>
+
+                        <Text style={styles.addressText}>{formattedOrder.address.city}, {formattedOrder.address.postcode}, {formattedOrder.address.country}</Text>
+                    </View>
+
+                )
+            ) : (
+                // 📦 En attente d'expédition
+                <View style={styles.pendingContainer}>
+                    <Text style={styles.pendingText}>
+                        📦 Votre commande est en préparation. L'adresse sera affichée une fois expédiée.
+                    </Text>
+                </View>
+            )}
+
+
         </View>
-    )
-}
-
-
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        padding: 15,
-    },
-    header: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
-    },
-    sectionContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-    },
-    orderId: {
-        fontSize: 14,
-        color: '#333',
-    },
-    viewReceipt: {
-        fontSize: 14,
-        color: '#007AFF',
-    },
-    statusContainer: {
-        backgroundColor: '#E5F8E0',
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
-    },
-    deliveredText: {
-        color: 'green',
-        fontWeight: 'bold',
-    },
     addressContainer: {
+        paddingLeft: 10,
+        height: 80,
+        justifyContent: "center",
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 5,
+        marginBottom: 10,
+        backgroundColor: "white", // Fond vert clair pour livraison confirmée
+    },
+    recipientText: {
+        fontWeight: '600',
+        fontSize: 16,
+    },
+    addressText: {
+        color: '#333',
+        fontSize: 15,
+        fontWeight: "500",
+        fontStyle: "italic",
+    },
+    pendingContainer: {
         padding: 10,
         borderWidth: 1,
         borderColor: '#ddd',
         borderRadius: 5,
         marginBottom: 10,
+        backgroundColor: "#FDEEDC", // Fond orange clair pour attente
     },
-    recipientText: {
-        fontWeight: 'bold',
-    },
-    addressText: {
-        color: '#333',
-    },
-    itemContainer: {
-        width: "100%",
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderColor: '#ddd',
-    },
-    itemImage: {
-        width: 80,
-        height: 120,
-        borderRadius: 20,
-        marginRight: 10,
-    },
-    itemDetails: {
-        width: 300,
-        height: 100,
-    },
-    itemName: {
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    itemSize: {
+    pendingText: {
+        color: "#D35400",
+        fontWeight: "bold",
+        textAlign: "center",
         fontSize: 14,
-        fontWeight: '600',
-        color: '#666',
     },
-    totalContainer: {
-        padding: 10,
-        alignItems: 'center',
-    },
-    totalText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    buyAgainButton: {
-        backgroundColor: '#FFA500',
+    trackButton: {
+        backgroundColor: '#007AFF',
         padding: 12,
         alignItems: 'center',
         borderRadius: 5,
         marginVertical: 10,
     },
-    buyAgainText: {
+    trackButtonText: {
         color: '#fff',
         fontWeight: 'bold',
     },
 });
 
-export default ShipTopComponent
+export default ShipTopComponent;

@@ -26,12 +26,23 @@ const OrderViewCardList = ({ formattedOrder }) => {
     }
 
     return (
-        <FlatList
-            data={formattedOrder.items}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={orderRenderItems}
-            scrollEnabled={false}
-        />
+        <View>
+            <Text style={{
+                paddingLeft: 10,
+                fontSize: 16,
+                fontWeight: '600',
+            }}>
+                {formattedOrder.items.length} article(s)
+            </Text>
+
+            <FlatList
+                data={formattedOrder.items}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={orderRenderItems}
+                scrollEnabled={false}
+            />
+        </View >
+
     )
 }
 
