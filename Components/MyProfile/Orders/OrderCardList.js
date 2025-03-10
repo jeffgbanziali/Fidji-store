@@ -1,0 +1,141 @@
+import { View, Text, SafeAreaView, FlatList, Image, StyleSheet, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
+
+const OrderCardList = ({ order, formatOrderDate, handleViewOrder }) => {
+    return (
+        <Pressable
+
+            style={styles.card} onPress={() => handleViewOrder(order)}>
+            <Text style={styles.orderDate}>{formatOrderDate(order.date_created)} | {order.line_items.length} articles</Text>
+            <View style={styles.cardContent}>
+                {order.line_items[0]?.image && (
+                    <Image
+                        source={{ uri: order.line_items[0].image.src }}
+                        style={styles.productImage}
+                    />
+                )}
+                <View style={styles.orderInfo}>
+                    <Text style={styles.productName}>{order.line_items[0]?.name}</Text>
+                    <Text style={styles.price}>{order.total}€</Text>
+                    <View style={{
+                        flexDirection: 'row',
+                        marginTop: 5,
+                    }}>
+                        {/* Statut de livraison */}
+                        <View style={[
+                            styles.statusContainer,
+                            {
+                                backgroundColor:
+                                    order.status === 'completed'
+                                        ? 'lightblue'
+                                        : order.status === 'delivered'
+                                            ? 'lightgreen'
+                                            : '#F8D7DA'
+                            }
+                        ]}>
+                            <Text style={styles.deliveryStatus}>
+                                {order.status === "processing"
+                                    ? "En préparation"
+                                    : order.status === "delivered"
+                                        ? "Livrée"
+                                        : "Expédiée"}
+                            </Text>
+                        </View>
+
+                        {/* Statut de paiement */}
+                        <View style={[
+                            styles.statusContainer,
+                            {
+                                backgroundColor:
+                                    order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                        ? '#D4EDDA'
+                                        : '#F8D7DA'
+                            }
+                        ]}>
+                            <Text style={[
+                                styles.statusText,
+                                {
+                                    color:
+                                        order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                            ? '#155724'
+                                            : '#721C24'
+                                }
+                            ]}>
+                                {order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                    ? 'Payé'
+                                    : 'En attente'}
+                            </Text>
+                        </View>
+                    </View>
+
+                </View>
+                <Ionicons name="chevron-forward" size={24} color="#888" style={styles.arrowIcon} />
+            </View>
+        </Pressable>
+    )
+}
+
+const styles = StyleSheet.create({
+    card: {
+        backgroundColor: 'white',
+        borderRadius: 15,
+        padding: 15,
+        marginBottom: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 3,
+    },
+    orderDate: {
+        fontSize: 12,
+        color: '#888',
+        marginBottom: 10,
+    },
+    cardContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    productImage: {
+        width: 70,
+        height: 70,
+        borderRadius: 10,
+        marginRight: 15,
+    },
+    orderInfo: {
+        flex: 1,
+        justifyContent: 'space-between',
+    },
+    productName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    price: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#333',
+        marginVertical: 5,
+    },
+    deliveryStatus: {
+        fontSize: 12,
+        color: '#555',
+    },
+    statusContainer: {
+        paddingVertical: 5,
+        marginLeft: 2,
+        paddingHorizontal: 10,
+        borderRadius: 8,
+        alignSelf: 'flex-start',
+    },
+    statusText: {
+        fontSize: 12,
+    },
+    arrowIcon: {
+        marginLeft: 10,
+    }
+});
+
+export default OrderCardList

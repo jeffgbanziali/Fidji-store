@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, FlatList, Image, StyleSheet, Pressable } from
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
+import OrderCardList from './OrderCardList';
 
 const ShippedOrder = ({ orders, handleViewOrder }) => {
     const formatOrderDate = (dateString) => {
@@ -15,39 +16,10 @@ const ShippedOrder = ({ orders, handleViewOrder }) => {
     const renderItem = ({ item: order }) => {
 
         return (
-            <Pressable
-
-                style={styles.card} onPress={() => handleViewOrder(order)}>
-                <Text style={styles.orderDate}>{formatOrderDate(order.date_created)} | {order.line_items.length} articles</Text>
-                <View style={styles.cardContent}>
-                    {order.line_items[0]?.image && (
-                        <Image
-                            source={{ uri: order.line_items[0].image.src }}
-                            style={styles.productImage}
-                        />
-                    )}
-                    <View style={styles.orderInfo}>
-                        <Text style={styles.productName}>{order.line_items[0]?.name}</Text>
-                        <Text style={styles.price}>{order.total}€</Text>
-                        <View style={{
-                            flexDirection: 'row',
-                            marginTop: 5,
-                        }}>
-
-                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' ? 'lightblue' : '#F8D7DA' }]}>
-                                <Text style={styles.deliveryStatus}> {order.status === "processing" ? "En préparation" : 'Expédiée'}</Text>
-                            </View>
-                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' || "processing" ? '#D4EDDA' : '#F8D7DA' }]}>
-                                <Text style={[styles.statusText, { color: order.status === 'completed' || "processing" ? '#155724' : '#721C24' }]}>
-                                    {order.status === 'completed' || "processing" ? 'Payé' : 'En attente'}
-                                </Text>
-                            </View>
-                        </View>
-
-                    </View>
-                    <Ionicons name="chevron-forward" size={24} color="#888" style={styles.arrowIcon} />
-                </View>
-            </Pressable>
+            <OrderCardList
+                order={order}
+                formatOrderDate={formatOrderDate}
+                handleViewOrder={handleViewOrder} />
         )
     };
 
