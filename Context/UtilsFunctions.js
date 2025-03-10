@@ -1,3 +1,5 @@
+
+
 export const isEmpty = (value) => {
     return (
         value === undefined ||
@@ -6,3 +8,5 @@ export const isEmpty = (value) => {
         (typeof value === "string" && value.trim().length === 0)
     );
 };
+
+

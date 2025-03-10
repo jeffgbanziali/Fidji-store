@@ -1,39 +1,79 @@
 import { View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const ShipTopComponent = ({ formattedOrder, order }) => {
 
     const isPickup = order?.shipping?.company === "Boutique FIDJI";
-    const isDelivered = formattedOrder.status === "completed";
-    const isShipped = formattedOrder.status === "completed";
+    const isDelivered = formattedOrder.status === "delivered";
+    const isShipped = formattedOrder.status === "shipped" || formattedOrder.status === "completed";
 
+    const navigation = useNavigation();
+
+    const handleTrackPackage = () => {
+        navigation.navigate("OrderTracking", { order });
+    };
 
     return (
         <View>
-            {/* Affichage de l'adresse de livraison ou retrait */}
+            {/* Gestion des statuts : En préparation, Expédiée, Livrée */}
             {isShipped || isDelivered ? (
                 isPickup ? (
                     // 🏬 Retrait en boutique
                     <View style={styles.addressContainer}>
-                        <Text style={styles.recipientText}>Retrait en boutique : {order?.shipping?.company}</Text>
+                        <Text style={styles.recipientText}>🏬 Retrait en boutique : {order?.shipping?.company}</Text>
                         <Text style={styles.addressText}>{formattedOrder.address.street}</Text>
-                        {formattedOrder.address.additionalAddress ? (
+                        {formattedOrder.address.additionalAddress && (
                             <Text style={styles.addressText}>{formattedOrder.address.additionalAddress}</Text>
-                        ) : null}
+                        )}
                         <Text style={styles.addressText}>{formattedOrder.address.city}, {formattedOrder.address.postcode}, {formattedOrder.address.country}</Text>
                     </View>
                 ) : (
                     // 🏠 Livraison à domicile
-                    <View style={styles.addressContainer}>
-                        <Text style={styles.recipientText}>Expédiée à {formattedOrder.recipient}</Text>
-                        <Text style={styles.addressText}>{formattedOrder.address.street}, {formattedOrder.address.additionalAddress ? (
-                            <Text style={styles.addressText}>{formattedOrder.address.additionalAddress}</Text>
-                        ) : null}
-                        </Text>
+                    <View style={[
+                        styles.addressContainer,
+                        {
+                            flexDirection: "row",
+                            alignItems: "center",
+                            backgroundColor: isDelivered
+                                ? "#D4EDDA"
+                                : "#CCE5FF",
+                        }
+                    ]}>
+                        <View>
+                            <Text style={styles.recipientText}>
+                                {isDelivered
+                                    ? "📦 Livrée à " + formattedOrder.recipient
+                                    : "🚚 Expédiée à " + formattedOrder.recipient}
+                            </Text>
 
-                        <Text style={styles.addressText}>{formattedOrder.address.city}, {formattedOrder.address.postcode}, {formattedOrder.address.country}</Text>
+                            <Text style={styles.addressText}>
+                                {formattedOrder.address.street}
+                                {formattedOrder.address.additionalAddress && (
+                                    <Text>, {formattedOrder.address.additionalAddress}</Text>
+                                )}
+                            </Text>
+
+                            <Text style={styles.addressText}>
+                                {formattedOrder.address.city}, {formattedOrder.address.postcode}, {formattedOrder.address.country}
+                            </Text>
+                        </View>
+
+                        <TouchableOpacity
+                            onPress={handleTrackPackage}
+                            style={[
+                                styles.trackButton,
+                                { backgroundColor: isDelivered ? "#A3CFBB" : "#f5e1ce" } // Vert clair si livré
+                            ]}
+                        >
+                            <Text style={[
+                                styles.trackButtonText,
+                                { color: isDelivered ? "#155724" : "#000" } // Texte vert si livré
+                            ]}>
+                                {isDelivered ? "Commande livrée" : "Suivre votre colis"}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
-
                 )
             ) : (
                 // 📦 En attente d'expédition
@@ -43,30 +83,30 @@ const ShipTopComponent = ({ formattedOrder, order }) => {
                     </Text>
                 </View>
             )}
-
-
-        </View>
+        </View >
     );
 };
 
 const styles = StyleSheet.create({
     addressContainer: {
         paddingLeft: 10,
-        height: 80,
-        justifyContent: "center",
+        justifyContent: "space-between",
+        paddingRight: 10,
+        height: 90,
         borderWidth: 1,
         borderColor: '#ddd',
         borderRadius: 5,
         marginBottom: 10,
-        backgroundColor: "white", // Fond vert clair pour livraison confirmée
+        backgroundColor: "white",
+        padding: 10,
     },
     recipientText: {
         fontWeight: '600',
-        fontSize: 16,
+        fontSize: 14,
     },
     addressText: {
         color: '#333',
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: "500",
         fontStyle: "italic",
     },
@@ -76,7 +116,7 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         borderRadius: 5,
         marginBottom: 10,
-        backgroundColor: "#FDEEDC", // Fond orange clair pour attente
+        backgroundColor: "#FDEEDC",
     },
     pendingText: {
         color: "#D35400",
@@ -85,15 +125,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     trackButton: {
-        backgroundColor: '#007AFF',
-        padding: 12,
-        alignItems: 'center',
-        borderRadius: 5,
-        marginVertical: 10,
+        width: 140,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 10,
     },
     trackButtonText: {
-        color: '#fff',
-        fontWeight: 'bold',
+        fontWeight: '500',
     },
 });
 

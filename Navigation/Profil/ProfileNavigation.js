@@ -8,6 +8,7 @@ import AdressBookScreen from '../../Screens/ProfileScreen/AdressBookScreen';
 import ViewOrderScreen from '../../Components/MyProfile/Orders/ViewOrderScreen';
 import ViewOrderDetailsScreen from '../../Components/MyProfile/Orders/ViewOrderDetailsScreen';
 import OrderSummary from '../../Components/MyProfile/Orders/OrderSummary';
+import OrderTracking from '../../Components/MyProfile/Orders/OrderTracking';
 
 
 
@@ -33,6 +34,7 @@ const ProfileNavigation = () => {
             <Stack.Screen name='ViewOrderScreen' component={ViewOrderScreen} />
             <Stack.Screen name='ViewOrderDetailsScreen' component={ViewOrderDetailsScreen} />
             <Stack.Screen name='OrderSummary' component={OrderSummary} />
+            <Stack.Screen name='OrderTracking' component={OrderTracking} />
 
 
         </Stack.Navigator>

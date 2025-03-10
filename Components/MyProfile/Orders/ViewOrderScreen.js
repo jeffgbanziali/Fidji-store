@@ -80,67 +80,68 @@ const ViewOrderScreen = () => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <ViewOrderHeader
+      
+            <SafeAreaView style={styles.container}>
+                <ScrollView>
+                    <ViewOrderHeader
 
-                    formattedOrder={formattedOrder}
-                    order={order}
-                    orderDetails={orderDetails}
-                    formatDate={formatDate}
-                    retourned={retourned}
-                />
+                        formattedOrder={formattedOrder}
+                        order={order}
+                        orderDetails={orderDetails}
+                        formatDate={formatDate}
+                        retourned={retourned}
+                    />
 
-                <ShipTopComponent
-                    formattedOrder={formattedOrder}
-                    order={order}
-                />
-                <OrderViewCardList formattedOrder={formattedOrder} />
-                <OrderViewFooter
-                    formattedOrder={formattedOrder}
-                    handleViewPaiementDetails={handleViewPaiementDetails}
-                />
-            </ScrollView>
-        </SafeAreaView>
-    );
+                    <ShipTopComponent
+                        formattedOrder={formattedOrder}
+                        order={order}
+                    />
+                    <OrderViewCardList formattedOrder={formattedOrder} />
+                    <OrderViewFooter
+                        formattedOrder={formattedOrder}
+                        handleViewPaiementDetails={handleViewPaiementDetails}
+                    />
+                </ScrollView>
+            </SafeAreaView>
+            );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        padding: 15,
+            const styles = StyleSheet.create({
+                container: {
+                flex: 1,
+            backgroundColor: '#fff',
+            padding: 15,
     },
-    header: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 10,
+            header: {
+                fontSize: 22,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: 10,
     },
-    sectionContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
+            sectionContainer: {
+                flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 10,
     },
-    orderId: {
-        fontSize: 14,
-        color: '#333',
+            orderId: {
+                fontSize: 14,
+            color: '#333',
     },
-    viewReceipt: {
-        fontSize: 14,
-        color: '#007AFF',
+            viewReceipt: {
+                fontSize: 14,
+            color: '#007AFF',
     },
-    statusContainer: {
-        backgroundColor: '#E5F8E0',
-        padding: 10,
-        borderRadius: 5,
-        marginVertical: 10,
+            statusContainer: {
+                backgroundColor: '#E5F8E0',
+            padding: 10,
+            borderRadius: 5,
+            marginVertical: 10,
     },
-    deliveredText: {
-        color: 'green',
-        fontWeight: 'bold',
+            deliveredText: {
+                color: 'green',
+            fontWeight: 'bold',
     },
 });
 
-export default ViewOrderScreen;
+            export default ViewOrderScreen;

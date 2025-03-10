@@ -65,11 +65,11 @@ const ViewOrderHeader = ({ formattedOrder, orderDetails, retourned }) => {
                 <TouchableOpacity
                     onPress={orderDetails}
                     style={{
-                        backgroundColor: "#f5e1ce",
+                        backgroundColor: "green",
                         padding: 10,
                         borderRadius: 10,
                     }}>
-                    <Text style={styles.viewReceipt}>View receipt</Text>
+                    <Text style={styles.viewReceipt}>Afficher le reçu</Text>
                 </TouchableOpacity>
             </View>
 
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
         color: '#333',
     },
     viewReceipt: {
-        fontSize: 14,
-        color: 'black',
+        fontSize: 12,
+        color: 'white',
     },
     statusContainer: {
         backgroundColor: '#E5F8E0',

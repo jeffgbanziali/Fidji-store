@@ -57,11 +57,6 @@ const PaiementScreen = ({ }) => {
     console.log("My billing address :", myBillingSelected);
     console.log("My shipping ohh is address :", myShippingAddressFinal);
 
-    const shippingMethod = {
-        id: "flat_rate",
-        title: "Livraison Standard",
-        total: "8.00"
-    };
 
     const createOrder = async () => {
         const orderData = {
@@ -77,13 +72,22 @@ const PaiementScreen = ({ }) => {
                 quantity: item.quantity
             })),
 
-            shipping_lines: [
-                {
-                    method_id: shippingMethod.id,
-                    method_title: shippingMethod.title,
-                    total: shippingMethod.total
-                }
-            ]
+
+            shipping_lines: myShippingAddressFinal === storeAdress
+                ? [
+                    {
+                        method_id: "local_pickup",
+                        method_title: "Retrait en boutique",
+                        total: "0.00"
+                    }
+                ]
+                : [
+                    {
+                        method_id: "flat_rate",
+                        method_title: "Livraison Standard",
+                        total: "8.00"
+                    }
+                ]
         };
 
         console.log("Données de la commande : ", orderData);
@@ -105,6 +109,7 @@ const PaiementScreen = ({ }) => {
             return null;
         }
     };
+
 
 
 

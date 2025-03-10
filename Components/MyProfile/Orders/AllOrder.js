@@ -34,13 +34,49 @@ const AllOrder = ({ orders, handleViewOrder }) => {
                             flexDirection: 'row',
                             marginTop: 5,
                         }}>
-
-                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' ? 'lightblue' : '#F8D7DA' }]}>
-                                <Text style={styles.deliveryStatus}> {order.status === "processing" ? "En préparation" : 'Expédiée'}</Text>
+                            {/* Statut de livraison */}
+                            <View style={[
+                                styles.statusContainer,
+                                {
+                                    backgroundColor:
+                                        order.status === 'completed'
+                                            ? 'lightblue'
+                                            : order.status === 'delivered'
+                                                ? 'lightgreen'
+                                                : '#F8D7DA'
+                                }
+                            ]}>
+                                <Text style={styles.deliveryStatus}>
+                                    {order.status === "processing"
+                                        ? "En préparation"
+                                        : order.status === "delivered"
+                                            ? "Livrée"
+                                            : "Expédiée"}
+                                </Text>
                             </View>
-                            <View style={[styles.statusContainer, { backgroundColor: order.status === 'completed' || "processing" ? '#D4EDDA' : '#F8D7DA' }]}>
-                                <Text style={[styles.statusText, { color: order.status === 'completed' || "processing" ? '#155724' : '#721C24' }]}>
-                                    {order.status === 'completed' || "processing" ? 'Payé' : 'En attente'}
+
+                            {/* Statut de paiement */}
+                            <View style={[
+                                styles.statusContainer,
+                                {
+                                    backgroundColor:
+                                        order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                            ? '#D4EDDA'
+                                            : '#F8D7DA'
+                                }
+                            ]}>
+                                <Text style={[
+                                    styles.statusText,
+                                    {
+                                        color:
+                                            order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                                ? '#155724'
+                                                : '#721C24'
+                                    }
+                                ]}>
+                                    {order.status === 'completed' || order.status === 'processing' || order.status === 'delivered'
+                                        ? 'Payé'
+                                        : 'En attente'}
                                 </Text>
                             </View>
                         </View>
