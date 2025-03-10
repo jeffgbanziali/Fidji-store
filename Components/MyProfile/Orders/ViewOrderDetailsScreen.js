@@ -10,6 +10,8 @@ const ViewOrderDetailsScreen = () => {
 
     const { order } = route.params;
 
+    console.log('Ma méthode de paiement', order.shipping_lines[0].total)
+
     // Fonction pour formater la date
     const formatDate = (dateString) => {
         if (!dateString) return "Not available";
@@ -91,7 +93,8 @@ const ViewOrderDetailsScreen = () => {
 
                         <View style={styles.row}>
                             <Text style={styles.detailText}>Expédition :</Text>
-                            <Text style={styles.greenText}>Gratuit</Text>
+                            <Text style={styles.greenText}>{order.shipping_lines.length > 0 ? order.shipping_lines[0].total + "€" : "Gratuit"}
+                            </Text>
                         </View>
 
                         <View style={styles.divider} />

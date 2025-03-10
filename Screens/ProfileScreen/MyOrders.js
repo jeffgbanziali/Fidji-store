@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import AllOrder from '../../Components/MyProfile/Orders/AllOrder';
@@ -7,10 +7,14 @@ import ProcessingOrder from '../../Components//MyProfile/Orders/ProcessingOrder'
 import ShippedOrder from '../../Components//MyProfile/Orders/ShippedOrder';
 import DeliveredOrder from '../../Components//MyProfile/Orders/DeliveredOrder';
 import ReturnedOrder from '../../Components//MyProfile/Orders/ReturnedOrder';
+import axios from 'axios';
+import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
+import { useSelector } from 'react-redux';
 
 const MyOrders = () => {
     const navigation = useNavigation();
     const [activeTab, setActiveTab] = useState('All orders');
+    const [orders, setOrders] = useState([]);
 
     const tabs = ['All orders', 'Processing', 'Shipped', 'Delivered', 'Returned'];
 
@@ -23,22 +27,77 @@ const MyOrders = () => {
         navigation.navigate("ViewOrderScreen", { order })
     }
 
-    const renderTabContent = () => {
-        switch (activeTab) {
-            case 'All orders':
-                return <AllOrder handleViewOrder={handleViewOrder} />;
-            case 'Processing':
-                return <ProcessingOrder />;
-            case 'Shipped':
-                return <ShippedOrder />;
-            case 'Delivered':
-                return <DeliveredOrder />;
-            case 'Returned':
-                return <ReturnedOrder />;
-            default:
-                return <AllOrder />;
+
+    const user = useSelector(state => state.userReducer.user);
+    const customerId = user?.customerData?.id;
+
+
+
+
+
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);
+
+    const fetchOrders = async () => {
+        try {
+            const response = await axios.get(`${APP_API_URL}/wc/v3/orders`, {
+                params: {
+                    consumer_key: CUSTOMER_KEY,
+                    consumer_secret: SECRET_KEY,
+                    customer: customerId,
+                },
+            });
+
+            console.log(`Commandes du client ${customerId} :`, response.data);
+
+            setOrders(response.data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des commandes :", error.response ? error.response.data : error.message);
         }
     };
+
+
+
+
+    const filterOrders = (status) => {
+        if (status === 'All orders') {
+            return orders;
+        }
+        return orders.filter(order => order.status.toLowerCase() === status.toLowerCase());
+    };
+
+
+
+
+
+    const renderTabContent = () => {
+        const filteredOrdersByStatus = filterOrders(activeTab);
+
+        switch (activeTab) {
+            case 'All orders':
+                return <AllOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+            case 'Processing':
+                return <ProcessingOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+            case 'Shipped':
+                return <ShippedOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+            case 'Delivered':
+                return <DeliveredOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+            case 'Returned':
+                return <ReturnedOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+            default:
+                return <AllOrder orders={filteredOrdersByStatus} handleViewOrder={handleViewOrder} />;
+        }
+    };
+
+
+
+
+
+
+
+
 
     return (
         <SafeAreaView style={{

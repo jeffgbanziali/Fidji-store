@@ -84,7 +84,7 @@ const OrderSummary = () => {
                     <View style={styles.row}>
 
                         <Text style={styles.detailText}>Shipping:</Text>
-                        <Text style={styles.greenText}>GRATUIT</Text>
+                        <Text style={styles.greenText}>{order.shipping_lines.length > 0 ? order.shipping_lines[0].total + "€" : "Gratuit"}</Text>
 
                     </View>
 

@@ -24,7 +24,9 @@ const PaiementScreen = ({ }) => {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
     const [paymentProcess, setPaymentProcess] = useState(null);
     const userData = useSelector((state) => state.userReducer.user)
+    const customerId = userData.customerData?.id;
 
+    console.log('Mon user est ', userData)
 
     const stripe = useStripe();
 
@@ -55,19 +57,33 @@ const PaiementScreen = ({ }) => {
     console.log("My billing address :", myBillingSelected);
     console.log("My shipping ohh is address :", myShippingAddressFinal);
 
-
+    const shippingMethod = {
+        id: "flat_rate",
+        title: "Livraison Standard",
+        total: "8.00"
+    };
 
     const createOrder = async () => {
         const orderData = {
             payment_method: paymentMethod,
             payment_method_title: selectedPaymentMethod,
-            set_paid: false, // Laisser en attente de paiement
+            set_paid: false,
             billing: myBillingSelected,
+            shipping: myShippingAddressFinal,
+            customer_id: customerId,
+
             line_items: cart.map(item => ({
                 product_id: item.id,
                 quantity: item.quantity
             })),
-            shipping: myShippingAddressFinal
+
+            shipping_lines: [
+                {
+                    method_id: shippingMethod.id,
+                    method_title: shippingMethod.title,
+                    total: shippingMethod.total
+                }
+            ]
         };
 
         console.log("Données de la commande : ", orderData);
@@ -79,6 +95,7 @@ const PaiementScreen = ({ }) => {
                     consumer_secret: SECRET_KEY,
                 },
             });
+
             console.log("Commande créée avec succès :", response.data);
 
             setPaymentProcess(response.data); // ✅ Stocker l'objet de la commande

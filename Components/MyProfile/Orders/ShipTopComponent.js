@@ -25,7 +25,7 @@ const ShipTopComponent = ({ formattedOrder, order }) => {
                 ) : (
                     // 🏠 Livraison à domicile
                     <View style={styles.addressContainer}>
-                        <Text style={styles.recipientText}>Livrée à {formattedOrder.recipient}</Text>
+                        <Text style={styles.recipientText}>Expédiée à {formattedOrder.recipient}</Text>
                         <Text style={styles.addressText}>{formattedOrder.address.street}, {formattedOrder.address.additionalAddress ? (
                             <Text style={styles.addressText}>{formattedOrder.address.additionalAddress}</Text>
                         ) : null}

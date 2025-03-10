@@ -1,11 +1,9 @@
 import { View, Text, SafeAreaView, FlatList, Image, StyleSheet, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
 import { Ionicons } from '@expo/vector-icons';
 
-const AllOrder = ({ handleViewOrder }) => {
-    const [orders, setOrders] = useState([]);
+const AllOrder = ({ orders, handleViewOrder }) => {
 
     const formatOrderDate = (dateString) => {
         const date = new Date(dateString);
@@ -13,24 +11,6 @@ const AllOrder = ({ handleViewOrder }) => {
         const month = date.toLocaleString('fr-FR', { month: 'long' });
         const year = date.getFullYear();
         return `${day === 1 ? '1er' : day} ${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
-    };
-
-    useEffect(() => {
-        fetchOrders();
-    }, []);
-
-    const fetchOrders = async () => {
-        try {
-            const response = await axios.get(`${APP_API_URL}/wc/v3/orders`, {
-                params: {
-                    consumer_key: CUSTOMER_KEY,
-                    consumer_secret: SECRET_KEY,
-                },
-            });
-            setOrders(response.data);
-        } catch (error) {
-            console.error("Erreur lors de la récupération des commandes :", error);
-        }
     };
 
     const renderItem = ({ item: order }) => {
