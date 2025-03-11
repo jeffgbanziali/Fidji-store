@@ -7,7 +7,7 @@ import { UserData } from '../../DataFictifs/UserData';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import SignOutButton from '../../Components/MyProfile/Settings/SignOutButton';
 import LoadingScreen from '../../Components/SignInScreen/LoadingScreen';
-import CustomersInformations from '../../Components/MyProfile/Settings/CustomersInformations';
+import CustomersInformations from '../../Components/MyProfile/Settings/CustomInfoTools/CustomersInformations';
 import PaymentMode from '../../Components/MyProfile/Settings/PaymentMode';
 import AddressBook from '../../Components/MyProfile/Settings/AddressBook';
 import DeliveryCountry from '../../Components/MyProfile/Settings/DeliveryCountry';

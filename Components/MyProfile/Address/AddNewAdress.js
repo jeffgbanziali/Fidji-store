@@ -59,27 +59,36 @@ const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
                         style={styles.input}
                         value={firstName}
                         onChangeText={setFirstName}
+                        placeholderTextColor={"black"}
+
                     />
                     <TextInput
                         placeholder="Nom(s)"
                         style={styles.input}
                         value={lastName}
                         onChangeText={setLastName}
+                        placeholderTextColor={"black"}
+
                     />
                     <TextInput
-                        placeholder="Adresse"
+                        placeholder="Numéro et nom de la rue"
                         style={styles.input}
                         value={address}
                         onChangeText={setAddress}
+                        placeholderTextColor={"black"}
+
                     />
                     <TextInput
                         placeholder="Infos supplémentaires (Optionnel)"
                         style={styles.input}
                         value={additionalInfo}
                         onChangeText={setAdditionalInfo}
+                        placeholderTextColor={"black"}
+
                     />
                     <TextInput
                         placeholder="Ville"
+                        placeholderTextColor={"black"}
                         style={styles.input}
                         value={city}
                         onChangeText={setCity}
@@ -87,6 +96,7 @@ const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
                     <TextInput
                         placeholder="Code Postal"
                         style={styles.input}
+                        placeholderTextColor={"black"}
                         value={postcode}
                         onChangeText={setPostcode}
                         keyboardType="numeric"
@@ -94,12 +104,14 @@ const AddNewAddress = ({ addNewAddress, modalVisible, setModalVisible }) => {
                     <TextInput
                         placeholder="Pays"
                         style={styles.input}
+                        placeholderTextColor={"black"}
                         value={country}
                         onChangeText={setCountry}
                     />
                     <TextInput
                         placeholder="Numéro de téléphone"
                         style={styles.input}
+                        placeholderTextColor={"black"}
                         value={phone}
                         onChangeText={setPhone}
                         keyboardType="phone-pad"
