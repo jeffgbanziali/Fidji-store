@@ -1,4 +1,4 @@
-# WooCommerce Mobile App
+# Fidji Store Mobile App
 
 ## Description
 Cette application mobile permet de gérer une boutique en ligne basée sur WooCommerce. Elle offre aux utilisateurs une interface intuitive pour naviguer, acheter des produits, suivre leurs commandes et effectuer des paiements sécurisés via **Stripe**.
