@@ -3,7 +3,6 @@ import React from 'react'
 import DeliveryScreen from '../../Screens/BasketScreen/DeliveryScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import BasketScreen from '../../Screens/BasketScreen/BasketScreen';
-import DétailsCommande from '../../Components/PaiementTools/DétailsCommande';
 
 
 const Stack = createStackNavigator();

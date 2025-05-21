@@ -31,7 +31,10 @@
       "bundleIdentifier": "com.flaj16.FidjiStoreApp",
       "infoPlist": {
         "NSCameraUsageDescription": "Cette application nécessite l'accès à la caméra pour permettre la prise de photos et de vidéos.",
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
       }
     },
     "android": {

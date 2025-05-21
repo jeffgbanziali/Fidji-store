@@ -117,7 +117,7 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                             fontWeight: "bold",
                             color: "gray"
                         }}>
-                        Couleur : {cart.attributes[0].options}
+                        Couleur : {cart?.attributes[0]?.options ? cart?.attributes[0]?.options : "Non spécifié"}
                     </Text>
                     <Text style={{
                         fontSize: 14,
@@ -125,7 +125,7 @@ const BasketSelection = ({ cart, removeFromCart }) => {
                         fontWeight: "bold",
                         color: "gray"
                     }}>
-                        Taille : {cart.attributes[1].options}
+                        Taille : {cart?.attributes[1]?.options ? cart?.attributes[1]?.options : "Non spécifié"}
                     </Text>
                 </View>
 

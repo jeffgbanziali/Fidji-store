@@ -12,6 +12,13 @@
       },
       "ios": {
         "simulator": true
+      },
+      "env": {
+        "APP_API_URL": "https://boutiquefidji.com/wp-json",
+        "CUSTOMER_KEY": "ck_4e1c139fcd74d8cc197f8fd4a97c1ea8314e196b",
+        "SECRET_KEY": "cs_bdf88751adca7f232358ebf633c3afec2f65c94c",
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51HkxQLL8LbtybM2P85iaBiz9xVNmhb2raOSTCsQWMJyeJi6e2wI2l0cwQBhpfSeb6ZDzA8eNV6NTOy2MuxI0s9yi0059fikaP0",
+        "TEST_STRIPE_PUBLIC_KAY": "pk_test_51HkxQLL8LbtybM2PjmVAlCgArto5AC0Bt8jdqjpZjavwksEXmf5mL1LIB68BQLelfhftX6FlcJJLqSEX3schGn7u00dWGgvibr"
       }
     },
     "preview": {
@@ -23,6 +30,13 @@
       "autoIncrement": true,
       "android": {
         "buildType": "app-bundle"
+      },
+      "env": {
+        "APP_API_URL": "https://boutiquefidji.com/wp-json",
+        "CUSTOMER_KEY": "ck_4e1c139fcd74d8cc197f8fd4a97c1ea8314e196b",
+        "SECRET_KEY": "cs_bdf88751adca7f232358ebf633c3afec2f65c94c",
+        "EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51HkxQLL8LbtybM2P85iaBiz9xVNmhb2raOSTCsQWMJyeJi6e2wI2l0cwQBhpfSeb6ZDzA8eNV6NTOy2MuxI0s9yi0059fikaP0",
+        "TEST_STRIPE_PUBLIC_KAY": "pk_test_51HkxQLL8LbtybM2PjmVAlCgArto5AC0Bt8jdqjpZjavwksEXmf5mL1LIB68BQLelfhftX6FlcJJLqSEX3schGn7u00dWGgvibr"
       }
     }
   },

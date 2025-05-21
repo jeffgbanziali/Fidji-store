@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const DétailsCommande = () => {
+const CommandeDetails = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { orderId } = route.params; // Récupération de l'ID de la commande
@@ -43,4 +43,4 @@ const DétailsCommande = () => {
     );
 };
 
-export default DétailsCommande;
+export default CommandeDetails;

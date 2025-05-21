@@ -25,13 +25,15 @@ const SearchScreen = () => {
                     data={searchResults}
                     keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => (
-                        <Pressable style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            padding: 10,
-                            borderBottomWidth: 1,
-                            borderBottomColor: '#ddd'
-                        }}>
+                        <Pressable
+                            onPress={() => navigation.navigate('ViewArticleScreen', { article: item })}
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                padding: 10,
+                                borderBottomWidth: 1,
+                                borderBottomColor: '#ddd'
+                            }}>
                             {/* Afficher l'image du produit */}
                             {item.images.length > 0 && (
                                 <Image source={{ uri: item.images[0].src }} style={{ width: 50, height: 50, marginRight: 10 }} />

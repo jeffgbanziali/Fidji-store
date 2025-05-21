@@ -18,10 +18,10 @@ import EShoppingScreen from '../../Screens/EShoppingScreen/EShoppingScreen';
 import DeliveryScreen from '../../Screens/BasketScreen/DeliveryScreen';
 import PaiementScreen from '../../Screens/BasketScreen/PaiementScreen';
 import OrderValidateScreen from '../../Screens/BasketScreen/OrderValidateScreen';
-import DétailsCommande from '../../Components/PaiementTools/DétailsCommande';
 import SearchScreen from '../../Screens/SearchScreen/SearchScreen';
 import ArticleDetail from '../../Screens/ProfileScreen/ArticleDetail';
 import ListOfArtifclesByCatgories from '../../Screens/EShoppingScreen/ListOfArtifclesByCatgories';
+import CommandeDetails from '../../Components/PaiementTools/CommandeDetails';
 
 
 
@@ -57,7 +57,7 @@ const StackNavigation = () => {
             <Stack.Screen name="PantCategory" component={PantScreen} />
             <Stack.Screen name="SweatCategory" component={SweatshirtScreen} />
             <Stack.Screen name="TshirtCategory" component={TshirtScreen} />
-            <Stack.Screen name='DétailsCommande' component={DétailsCommande} />
+            <Stack.Screen name='DétailsCommande' component={CommandeDetails} />
             <Stack.Screen name="ViewArticleScreen" component={ViewArticleScreen} />
             <Stack.Screen name="SearchScreen" component={SearchScreen} />
             <Stack.Screen name="ArticleDetail" component={ArticleDetail} />
