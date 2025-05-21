@@ -28,7 +28,7 @@ const Coats = () => {
                 backgroundColor: "red"
             }}>
             <Image
-                source={{ uri: "https://boutiquefidji.fr/wp-content/uploads/2024/11/puffer-coat-karly-1.jpg" }}
+                source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2025/05/image11.jpeg" }}
                 style={{
                     width: '100%',
                     height: "100%",

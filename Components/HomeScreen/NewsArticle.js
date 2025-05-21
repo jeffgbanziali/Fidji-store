@@ -21,7 +21,7 @@ const NewsArticle = () => {
                 justifyContent: "center",
             }}>
             <Image
-                source={{ uri: "https://boutiquefidji.fr/wp-content/uploads/2024/11/hoodie-lubin-la-seventies-bleu-3.jpg" }}
+                source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2025/03/NOUR_20CT3057-KAKI_201.webp" }}
                 style={{
                     width: '100%',
                     height: "100%",

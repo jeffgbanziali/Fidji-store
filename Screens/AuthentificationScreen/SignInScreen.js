@@ -6,6 +6,7 @@ import { AuthContext } from '../../Context/AuthContext';
 import LoadingScreen from '../../Components/SignInScreen/LoadingScreen';
 import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
 import { wpApiClient } from '../../ReduxActions/api';
+import axios from 'axios';
 
 const SignInScreen = () => {
 
@@ -39,43 +40,47 @@ const SignInScreen = () => {
 
         try {
             // Étape 1 : Obtenir le token JWT
-            const response = await fetch(`${APP_API_URL}/api/v1/token`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
+            const response = await axios.post(
+                `${APP_API_URL}/api/v1/token`,
+                {
                     username: email,
-                    password: password
-                })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Token JWT récupéré :', data.jwt_token);
-
-                // Étape 2 : Récupérer les détails utilisateur avec axios
-                const userApi = wpApiClient(data.jwt_token);
-                try {
-                    const userResponse = await userApi.get('/users/me'); // Axios déclenche une exception en cas d'erreur HTTP
-                    const userData = userResponse.data; // Axios utilise .data pour accéder au corps de la réponse
-
-                    // Extraire l'ID utilisateur
-                    const userId = userData.id;
-                    console.log('Détails de l\'utilisateur:', userId);
-
-                    // Appel à ta fonction signIn pour continuer
-                    signIn(data.jwt_token, userId);
-                } catch (userError) {
-                    console.error('Erreur lors de la récupération des détails de l\'utilisateur :', userError);
-                    Alert.alert('Erreur', 'Impossible de récupérer les informations utilisateur.');
+                    password: password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 }
-            } else {
-                Alert.alert('Erreur', 'Identifiants incorrects. Veuillez réessayer.');
+            );
+
+            // Avec axios, la réponse réussie est dans response.data
+            const data = response.data;
+
+            // Étape 2 : Récupérer les détails utilisateur avec axios
+            const userApi = wpApiClient(data.jwt_token);
+            console.log('userApi:', userApi);
+            console.log('Détails de la réponse:', data);
+            try {
+                const userResponse = await userApi.get('/users/me');
+                const userData = userResponse.data;
+
+                const userId = userData.id;
+                console.log('Détails de l\'utilisateur:', userId);
+
+                signIn(data.jwt_token, userId);
+            } catch (userError) {
+                console.error('Erreur lors de la récupération des détails de l\'utilisateur :', userError);
+                Alert.alert('Erreur', 'Impossible de récupérer les informations utilisateur.');
             }
+
         } catch (error) {
-            console.error('Erreur lors de la connexion :', error);
-            Alert.alert('Erreur', 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer plus tard.');
+            // axios met l'erreur dans error.response
+            if (error.response && error.response.status === 401) {
+                Alert.alert('Erreur', 'Identifiants incorrects. Veuillez réessayer.');
+            } else {
+                console.error('Erreur lors de la connexion :', error.message);
+                Alert.alert('Erreur', 'Une erreur s\'est produite lors de la connexion. Veuillez réessayer plus tard.');
+            }
         } finally {
             setTimeout(() => {
                 setIsLoadingSignIn(false);
@@ -96,6 +101,8 @@ const SignInScreen = () => {
 
 
     return (
+
+
 
 
         <KeyboardAvoidingView

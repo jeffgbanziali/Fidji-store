@@ -225,7 +225,8 @@ const RegisterScreen = () => {
                                     onChangeText={(text) => setLastName(text)}
                                     value={lastName}
                                     placeholder="Nom"
-                                    placeholderTextColor="black" />
+                                    placeholderTextColor="black"
+                                     />
 
 
                                 <Pressable
@@ -267,7 +268,14 @@ const RegisterScreen = () => {
                                     onChangeText={(text) => setIdentity(text)}
                                     value={identity}
                                     placeholder="Identifiant"
-                                    placeholderTextColor="black" />
+                                    placeholderTextColor="black"
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    textContentType="username"
+                                    autoCompleteType="username"
+                                    autoComplete="username"
+
+                                     />
 
 
                                 <Pressable
@@ -308,7 +316,14 @@ const RegisterScreen = () => {
                                     onChangeText={(text) => setEmail(text)}
                                     value={email}
                                     placeholder="E-mail"
-                                    placeholderTextColor="black" />
+                                    placeholderTextColor="black" 
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    keyboardType="email-address"
+                                    textContentType="emailAddress"
+                                    autoCompleteType="email"
+                                    autoComplete="email"
+                                    />
 
 
                                 <Pressable
@@ -348,6 +363,11 @@ const RegisterScreen = () => {
                                     value={password}
                                     secureTextEntry={!showPass}
                                     placeholder="Mot de passe"
+                                    autoCapitalize='none'
+                                    autoCorrect={false}
+                                    textContentType="password"
+                                    autoCompleteType="password"
+                                    autoComplete="password"
                                     placeholderTextColor="black" />
 
                                 <Pressable

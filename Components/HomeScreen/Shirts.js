@@ -33,7 +33,7 @@ const Shirts = () => {
                 backgroundColor: "red"
             }}>
             <Image
-                source={{ uri: "https://boutiquefidji.fr/wp-content/uploads/2024/11/sweat-jackie-bleu-3.jpg" }}
+                source={{ uri: "https://boutiquefidji.com/wp-content/uploads/2025/03/product_26ba7232-2eaf-4da0-af8f-0e9c4cd1eafa-1.webp" }}
                 style={{
                     width: '100%',
                     height: "100%",

@@ -4,6 +4,7 @@ import { Entypo, Feather } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { APP_API_URL, CUSTOMER_KEY, SECRET_KEY } from '@env';
+import { wooApiClient } from '../../ReduxActions/api';
 
 
 const AfterRegisterScreen = () => {
@@ -94,26 +95,17 @@ const AfterRegisterScreen = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post(
-                `${APP_API_URL}/wc/v3/customers`, 
-                {
-                    ...userData, 
-                    address: adress, 
-                    shipping: shipp 
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Basic ${btoa(`${CUSTOMER_KEY}:${SECRET_KEY}`)}` 
-                    }
-                }
-            );
-    
-            console.log('Client créé avec succès :', response.data);
+            const response = await wooApiClient.post('/customers', {
+                ...userData,
+                billing: adress,
+                shipping: shipp
+            });
+            console.log("Client créé :", response.data);
         } catch (error) {
-            console.error('Erreur lors de la création du client :', error.response ? error.response.data : error.message);
+            console.error("Erreur création client :", error.response?.data || error.message);
         }
     };
+
 
 
     const retourned = () => {

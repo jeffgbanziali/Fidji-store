@@ -2,19 +2,16 @@ import { View, Text, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ArticleTopNews from './ArticleTopNews'
 import { mockData } from '../../DataFictifs/DataNews'
+import { APP_API_URL, CONSUMER_KEY, CONSUMER_SECRET } from '@env';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const TopNews = () => {
 
 
-    const [article, setArticle] = useState([]);
 
-    useEffect(() => {
-        fetch('https://boutiquefidji.com/wp-json/wc/v3/products?per_page=4&consumer_key=ck_0826f0fe6024b7755eab9e9666f5c2349119b7c8&consumer_secret=cs_72dbc2d001c870f1fee182ca1122592f1a1d7abf')
-            .then(response => response.json())
-            .then(data => setArticle(data))
-            .catch(error => console.error('Error fetching articles:', error));
-    }, []);
+    const article = useSelector((state) => state.productsReducer.products);
 
 
 
